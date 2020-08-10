@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-var favSchema = mongoose.Schema({
+var FavSchema = mongoose.Schema({
     name: String,
     adress: String,
     zipCode: Number,
@@ -8,12 +8,14 @@ var favSchema = mongoose.Schema({
     type: String,
 });
 
-var userSchema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
     firstName : String,
     lastName : String,
     email: String,
     password: String,
-    favorites: [favSchema]
+    favorites: [FavSchema]
    });
 
-const userModel = mongoose.model('users', userSchema);
+const UserModel = mongoose.model('users', UserSchema);
+
+module.exports = UserModel
