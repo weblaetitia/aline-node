@@ -49,7 +49,48 @@ router.post('/mobile/adduser', async function(req, res, next) {
     })
   }
 })
+/*^^^^^^^^^^^^ route de test à supprimer en prod ^^^^^^^^^^^^*/
 
+
+
+
+
+router.post('/mobile/sign-in/', async function(req, res, next) {
+  // Check if all inputs are field
+  if ((req.body.email == 'undefined') || (req.body.password == 'undefined')) {
+    res.json({
+      succes: false,
+      alert: 'All fields must be provided'
+    })
+  } else {
+    // all fields are provided now check if user exist
+    var myrequest = await UserModel.find({
+      email: req.body.email
+      })    
+    console.log(myrequest)  
+    if (myrequest.length != 0) {
+      var hash = SHA256(req.body.password + myrequest[0].salt).toString(encBase64)
+      if (hash == myrequest[0].password) {
+        res.json({
+          succes: true,
+          alert: 'all good', 
+          token: myrequest[0].token
+        })
+      } else {
+        res.json({
+          succes: false,
+          alert: 'wrong password'
+        })
+      }
+      
+    } else {
+      res.json({
+        succes: false,
+        alert: 'User not exists'
+      })
+    }
+  }
+})
 
 
 router.post('/sign-up', async function(req,res,next){
