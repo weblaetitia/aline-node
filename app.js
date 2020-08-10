@@ -1,3 +1,4 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,8 +7,22 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var backofficeRouter = require('./routes/backoffice');
+var formRouter = require('./routes/form');
+
+var mongoose = require('./models/connection')
+
+var session = require("express-session");
 
 var app = express();
+
+app.use(
+  session({ 
+   secret: 'a4f8071f-c873-4447-8ee2',
+   resave: false,
+   saveUninitialized: false,
+  })
+ );
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/backoffice', backofficeRouter);
+app.use('/form', formRouter);
 
 
 // catch 404 and forward to error handler

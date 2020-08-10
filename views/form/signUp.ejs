@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <title>Nourrir Aline - Connexion</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- Header Navbar-->
+      <nav class=" header navbar">
+        Aline #pourquellerevienne
+      <a class="logout" href="/">Deconnexion</a>
+      </nav> 
+
+      <div class="signUp">
+
+        <div class="row">
+
+          <div class="col-12 text-center get_started">
+            <h2>Nourrir Aline!</h2>
+          </div>
+
+          <!-- SIGN UP AREA -->
+          <div class="col-12 col-sm-6 text-center">
+            <div class="formArea">
+
+              <h4 class="titleForm">Sign Up</h4>
+
+              <form action="/network/sign-up" method="POST">
+                  <div class="form-group">
+                    <label for="exampleInputFirstname">Votre prénom</label>
+                    <input name="firstnameFromFront" type="text" class="form-control" placeholder="Prénom">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputLastname">Votre nom</label>
+                    <input name="lastnameFromFront" type="text" class="form-control" placeholder="Nom">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputBusinessname">Nom de l'entreprise</label>
+                    <input name="businessnameFromFront" type="text" class="form-control" placeholder="Nom du réseau">
+                  </div>
+
+                  <button type="button" class="btn btn-outline-success">Ajouter votre logo</button>
+
+                  <div class="form-group">
+                    <label for="exampleInputAdress">Adresse</label>
+                    <input name="adressFromFront" type="text" class="form-control" placeholder="121 rue Réaumur">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputZipcode">Code postal</label>
+                    <input name="zipcodeFromFront" type="text" class="form-control" placeholder="75002">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputZipcode">Ville</label>
+                    <input name="zipcodeFromFront" type="text" class="form-control" placeholder="Paris">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputWebsite">Site internet</label>
+                    <input name="websiteFromFront" type="text" class="form-control" placeholder="http//exemple.com">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputWebsite">Type de consigne</label>
+                    <input name="refoundtypeFromFront" type="text" class="form-control" placeholder="bouteilles">
+                    <button type="button" class="btn btn-outline-success">-</button>
+                    <button type="button" class="btn btn-outline-success">+</button>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Votre e-mail</label>
+                    <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Choisissez un mot de passe</label>
+                    <input name="passwordFromFront" type="password" class="form-control"  placeholder="Enter password">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Confirmez votre mot de passe</label>
+                    <input name="passwordFromFront" type="password" class="form-control"  placeholder="Enter password">
+                  </div>
+
+                  <button type="submit" class="btn btn-success">S'inscrire</button>
+                  
+               </form>
+             
+            </div>
+          </div>    
+
+        </div>
+      
+      </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
+
