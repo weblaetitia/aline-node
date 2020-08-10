@@ -15,7 +15,6 @@ router.get('/', function(req, res, next) {
 /* POST user */
 /*$$$$$$$$$$$ route de test à supprimer en prod $$$$$$$$$$*/
 /* a utiliser avec postman pour ajouter des utilisateurs */
-
 router.post('/mobile/adduser', async function(req, res, next) {
   
   // chek if user alredy exist
@@ -51,9 +50,22 @@ router.post('/mobile/adduser', async function(req, res, next) {
 /*^^^^^^^^^^^^ route de test à supprimer en prod ^^^^^^^^^^^^*/
 
 
+/* GET token */
+router.get('/mobile/check-token', async function(req, res, next) {
+  console.log(req.query.token)
+  var myrequest = await UserModel.findOne({
+    token: req.query.token
+    }) 
+  console.log(myrequest)
+  if (myrequest) {
+    res.json({succes: true})
+  } else {
+    res.json({succes: false})
+  }
+})
 
 
-
+/* POST sign-in */
 router.post('/mobile/sign-in/', async function(req, res, next) {
   // Check if all inputs are field
   if ((req.body.email == 'undefined') || (req.body.password == 'undefined')) {
