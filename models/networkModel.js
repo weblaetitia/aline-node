@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-var productShema = mongoose.Schema({
+var productSchema = mongoose.Schema({
     name: String,
     brand: String,
     type: String,
@@ -12,16 +12,19 @@ var productShema = mongoose.Schema({
 });
 
 var networkSchema = mongoose.Schema({
-    name : String,
+    firstName : String,
+    lastName : String,
+    businessName : String,
     phone: Number,
     adress : String,
     zipCode: Number,
+    city : String,
     email: String,
     webSite: String,
-    type: String,
+    refoundType: String,
     imageUrl: String,
-    zoneAction: Buffer,
-    products: [productShema]
+    zoneAction: Array,
+    products: [productSchema]
    });
 
 const networkModel = mongoose.model('networks', networkSchema);
