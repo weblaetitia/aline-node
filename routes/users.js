@@ -103,4 +103,41 @@ router.post('/mobile/sign-in/', async function(req, res, next) {
   }
 })
 
+
+
+/* POST sign-up */
+router.post('/mobile/sign-up', async function(req, res, next) {
+  
+  // chek if user alredy exist
+  var userExist = await UserModel.findOne({
+    email: req.body.email
+  })
+  if (userExist != null) {
+    res.json({
+      succes: false,
+      alert: 'User with this email already exists'
+    })
+  } else {
+    // encrypt password
+    var userSalt = uid2(32)
+    // add user
+    var newUser = await new UserModel({
+      firstName: req.body.firstname,
+      lastName: req.body.lastname,
+      email: req.body.email,
+      password: SHA256(req.body.password + userSalt).toString(encBase64),
+      token: uid2(32),
+      salt: userSalt,
+    })
+    var userSaved = await newUser.save()
+    console.log(userSaved)
+    // send a succes and token
+    res.json({
+      succes: true,
+      alert: 'New user saved',
+      token: userSaved.token 
+    })
+  }
+})
+
 module.exports = router;
