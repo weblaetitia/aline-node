@@ -30,11 +30,12 @@ router.post('/sign-in', async function(req,res,next){
 router.post('/sign-up', async function(req,res,next){
 
   var searchNetwork = await NetworkModel.findOne({
-    email: req.body.emailFromFront
+    email: req.body.emailFromFront 
   })
   
   if(searchNetwork == null){
-    var newNetwork = new NetworkModel({
+    console.log('existe pas')
+    var newNetwork = await new NetworkModel({
       firstName: req.body.firstnameFromFront,
       lastName: req.body.lastnameFromFront,
       businessName : req.body.businessnameFromFront,
@@ -50,17 +51,10 @@ router.post('/sign-up', async function(req,res,next){
     })
   
     var newNetworkSave = await newNetwork.save();
-  
-    req.session.network = {
-      firstName: newNetworkSave.firstName,
-      id: newNetworkSave._id,
-    }
-  
-    console.log(req.session.network)
-  
-    res.redirect('/feedChoice')
+    console.log(newNetworkSave)
+    res.render('form/feedChoice')
   } else {
-    console.log('moche')
+    console.log('existe déjà')
     res.render('form/signUp')
   }
   
