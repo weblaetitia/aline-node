@@ -6,10 +6,6 @@ var request = require('sync-request');
 var networkModel = require('../models/networkModel')
 var placeModel = require('../models/placeModel')
 
-
-// var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ name +'&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyDQaLlOzRuURHp-Hms_PRoh9YI69tCm8nw')
-// var dataAPI = JSON.parse(data.body)
-
 /* GET feed choices page. */
 router.get('/feedChoice', function(req, res, next) {
   res.render('form/feedChoice');
@@ -29,7 +25,7 @@ router.get('/formShop', function(req, res, next) {
 /* GET API for restaurant form. */
 router.post('/update-formRestaurant', async function(req, res, next){
   console.log('placeName', req.body.placeName)
-  var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +'&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyDQaLlOzRuURHp-Hms_PRoh9YI69tCm8nw')
+  var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +`&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
   var dataAPI = JSON.parse(data.getBody())
   console.log('dataGoogle', dataAPI)
 
@@ -40,7 +36,7 @@ router.post('/update-formRestaurant', async function(req, res, next){
 /* GET API for shop form. */
 router.post('/update-formShop', async function(req, res, next){
   console.log('placeName', req.body.placeName)
-  var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +'&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyDQaLlOzRuURHp-Hms_PRoh9YI69tCm8nw')
+  var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +`&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
   var dataAPI = JSON.parse(data.getBody())
   console.log('dataGoogle', dataAPI)
 
