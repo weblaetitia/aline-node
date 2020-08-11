@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.alineInput{
+  background-color: #CDCDCD;
+  border-radius: 32px;
+}

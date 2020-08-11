@@ -24,6 +24,7 @@ var NetworkSchema = mongoose.Schema({
     refoundType: String,
     imageUrl: String,
     zoneAction: Array,
+    password: String,
     products: [ProductSchema]
    });
 
