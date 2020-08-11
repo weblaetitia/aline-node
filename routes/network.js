@@ -48,6 +48,7 @@ router.post('/sign-up', async function(req,res,next){
       refoundType: req.body.refoundtypeFromFront,
       zoneAction: req.body.zoneactionFromFront,
       password: req.body.passwordFromFront,
+      imageUrl : req.body.imageFromFront
     })
   
     var newNetworkSave = await newNetwork.save();
