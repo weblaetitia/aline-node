@@ -13,6 +13,8 @@ var UserSchema = mongoose.Schema({
     lastName : String,
     email: String,
     password: String,
+    token: String,
+    salt: String,
     favorites: [FavSchema]
    });
 

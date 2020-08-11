@@ -14,7 +14,11 @@ var options = {
 mongoose.connect(dbInfo, 
     options,         
     function(err) {
-     console.log(err);
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('********** connection ok **********')
+      }
     }
 );
 

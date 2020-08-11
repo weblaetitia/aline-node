@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 var ProductSchema = mongoose.Schema({
     name: String,
     brand: String,
@@ -12,6 +13,7 @@ var ProductSchema = mongoose.Schema({
 });
 
 var NetworkSchema = mongoose.Schema({
+
     firstName : String,
     lastName : String,
     businessName : String,
