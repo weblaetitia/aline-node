@@ -44,10 +44,12 @@
                     <input name="phoneFromFront" type="text" class="form-control" placeholder="ex : +33145424941" require />
                   </div>
 
+                  <!-- logo   -->
                   <div class="form-group">
                     <div id='myImage'><img src="./images/placeholder-image.jpg" height="100" alt="Votre logo"></div>
                     <label for="">Logo de l'entreprise</label><br />
                     <a id="upload_widget" class="btn btn-outline-secondary">Séléctionner une photo</a>
+                    <input id="imgurl" name="imageFromFront" type="text" class="form-control d-none" value="" />
                   </div>                  
 
                   <div class="form-group">
@@ -125,6 +127,7 @@
             console.log(secureUrl)
             var myImage = document.getElementById("myImage")
             myImage.innerHTML = `<img src="${result.info.thumbnail_url}" alt="${result.info.public_id}">`
+            document.getElementById("imgurl").value = result.info.secure_url
             // ----- this is how result.info looks like ------
             // access_mode: "public"
             // asset_id: "ba97cd4dec2a75cd0228871cafe6f791"
