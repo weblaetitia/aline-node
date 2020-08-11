@@ -20,14 +20,17 @@
 
             <div class="row">
                 
-                <form>
+                <form action="/form/update-formShop" method="POST" >
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Nom du magasin</label>
                       <input type="text" class="form-control" name="placeName" placeholder="ex: Biocoop">
+                      <input type="submit" class="form-control" name="valide">
                     </div>
+                </form>
 
                     <button type="button" class="btn btn-outline-success">Sélectionner une photo</button>
 
+                <form>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Adresse</label>
                         <input type="text" class="form-control" name="placeAdress" placeholder="ex: 123 rue Réaumur">
