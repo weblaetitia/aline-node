@@ -13,7 +13,7 @@ var ProductShema = mongoose.Schema({
 
 var PlaceSchema = mongoose.Schema({
     name : String,
-    phone: Number,
+    phone: String,
     adress : String,
     zipCode: Number,
     city: String,
@@ -25,6 +25,7 @@ var PlaceSchema = mongoose.Schema({
     description: String,
     network: String,
     services: Array,
+    google_place_id: String,
     products: [ProductShema]
    });
 

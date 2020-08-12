@@ -25,7 +25,6 @@
                     <div id="details"></div>
                     
                     <!-- map -->
-                    <div id="map" style="width: 100%; height: 300px;"></div>
                     <img src="https://res.cloudinary.com/alineconsigne/image/upload/v1597221942/exemple_map_doqipr.png" class="img-fluid" alt="Responsive image">
 
                     <!-- debut du form -->
@@ -41,8 +40,8 @@
                         </div> -->
 
                         <div class="form-group">
-                            <label for="adress">Adresse</label>
-                            <input id= "adress" name="adress" type="text" class="form-control" placeholder="ex: 123 rue Réaumur">
+                            <label for="address">Addresse</label>
+                            <input id= "address" name="address" type="text" class="form-control" placeholder="ex: 123 rue Réaumur">
                         </div>
     
                         <!-- <div class="form-group">
@@ -62,30 +61,42 @@
     
                         <div class="form-group">
                             <label for="website">Site Internet</label>
-                            <input name="website" name="website" type="text" class="form-control" placeholder="ex: https://exemple.com">
+                            <input id="website" name="website" type="text" class="form-control" placeholder="ex: https://exemple.com">
                         </div>
                         
+                        <!-- services -->
                         <div class="form-group">
-                            <label for="services">Service de consigne proposé</label>
-                            <input name="service1" name="service1" type="text" class="form-control" placeholder="ex: Boîtes repas en verre">
+                            <label for="">Service de consigne proposé</label>
+                            <input id="service1" name="services[]" type="text" class="form-control" placeholder="ex: Boîtes repas en verre">
+                            <input id="service2" name="services[]" type="text" class="form-control" placeholder="ex: Couverts en métal">
                         </div>
                         
+                        <!-- produits -->
                         <div class="form-check">
                             <p>Produits disponibles</p>
                             <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
                             <div>
-                                <div>
-                                    <input id="produit1" value="produit1" class="form-check-input" type="checkbox"  >
+                                <div class="checkbox">
+                                    <label><input name="products[]" type="checkbox" value="dairy">Dairy</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input name="products[]" type="checkbox" value="meat">Meat</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input name="products[]" type="checkbox" value="fish">Fish</label>
+                                </div>
+                                <!-- <div>
+                                    <input id="produit1" name="products" value="produit1" class="form-check-input" type="checkbox"  >
                                     <label class="form-check-label" for="produit1">Boîte XL (8€)</label>
                                 </div>
                                 <div>
-                                    <input id="produit2" value="produit2" class="form-check-input" type="checkbox"  >
+                                    <input id="produit2" name="products" value="produit2" class="form-check-input" type="checkbox"  >
                                     <label class="form-check-label" for="produit2">Boîte M (6€)</label>
                                 </div>
                                 <div>
-                                    <input id="produit3" value="produit3" class="form-check-input" type="checkbox"  >
+                                    <input id="produit3" name="products" value="produit3" class="form-check-input" type="checkbox"  >
                                     <label class="form-check-label" for="produit3">Couverts (5€)</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
@@ -103,7 +114,7 @@
                         </div>
     
         
-                        <a href="/form/formThanks"><button class="btn btn-success">Envoyer</button></a>
+                        <button type="submit" class="btn btn-success">Envoyer</button>
                     </form>
                 </div>
             </div>    
@@ -152,11 +163,16 @@
             // console.log(place.international_phone_number)
             // console.log(place.formatted_phone_number)
             document.getElementById('name').value = place.name
-            document.getElementById('adress').value = place.address_components[0].long_name + ' ' + place.address_components[1].long_name
+            document.getElementById('address').value = place.address_components[0].long_name + ' ' + place.address_components[1].long_name
             document.getElementById('city').value = place.address_components[2].long_name
             document.getElementById('phone').value = place.international_phone_number
             document.getElementById('website').value = place.website
             document.getElementById('place_id').value = place.place_id
+
+            console.log(place.name)
+            console.log(place.international_phone_number)
+            console.log(place.website)
+            console.log(place.place_id)
             
         }
     }
