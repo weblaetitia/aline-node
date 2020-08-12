@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var request = require('sync-request');
 
+if(!process.env.DB_INFO){
+  require('dotenv').config()
+}
+
+var placeApi = process.env.GOOGLE_API_KEY
+
 /* variable des models pour le formulaire */
 var networkModel = require('../models/networkModel')
 var placeModel = require('../models/placeModel')
@@ -13,7 +19,7 @@ router.get('/feedChoice', function(req, res, next) {
 
 /* GET form for restaurant page. */
 router.get('/formRestaurant', function(req, res, next) {
-  res.render('form/formRestaurant');
+  res.render('form/formRestaurant', {placeApi: placeApi});
   });
 
 /* GET form for shop page. */

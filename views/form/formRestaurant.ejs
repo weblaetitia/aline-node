@@ -6,103 +6,172 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="/stylesheets/style.css">
         
-
-        <title>Nourrir Aline - Restaturant</title>
+        <title>Nourrir Aline - Ajouter un restaturant</title>
     </head>
 
     <body>
-
-        <div class="container-fluid">
-
-            <!-- Header Navbar-->
-
+        <div class="container">
             <div class="row">
-                
-                <form action="/form/update-formRestaurant" method="POST" >
-                    <div class="form-group">
-                      <label for="exampleFormControlInput1">Nom du restaurant</label>
-                      <input type="text" class="form-control" name="placeName" placeholder="ex: Café Ginger">
-                      <input type="submit" class="form-control" name="valide">
-                    </div>
-                </form>
-                
-                    <button type="button" class="btn btn-outline-success">Sélectionner une photo</button>
-                <form>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Adresse</label>
-                        <input type="text" class="form-control" name="placeAdress" placeholder="ex: 123 rue Réaumur">
-                    </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <h1>Ajouter un restaurant</h1>
+                    <form action="" method="POST" >
 
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Code postal</label>
-                        <input type="text" class="form-control" name="placeZipCode" placeholder="ex: 75002">
-                    </div>
+                        <!-- find name avec autocomplete -->
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nom du restaurant</label>
+                            <input type="text" id="placeName" class="form-control" name="placeName" placeholder="ex: Café Ginger">
+                        </div>
+                        <div id="details"></div>
+                        
+                        <img src="https://res.cloudinary.com/alineconsigne/image/upload/v1597221942/exemple_map_doqipr.png" class="img-fluid" alt="Responsive image">
+                        
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input id="description" name="description" type="text" class="form-control" placeholder="ex: Restaurant végétalien">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Ville</label>
-                        <input type="text" class="form-control" name="placeCity" placeholder="ex: Paris">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Téléphone</label>
-                        <input type="text" class="form-control" name="placePhone" placeholder="ex: +331 45 65 45 65">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Email</label>
-                        <input type="text" class="form-control" name="placeEmail" placeholder="ex: exemple@email.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Site Internet</label>
-                        <input type="text" class="form-control" name="placeWebSite" placeholder="ex: http///exemple.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Nom du propriétaire</label>
-                        <input type="text" class="form-control" name="placeOwnerName" placeholder="ex: John Doe">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Réseau de consigne</label>
-                        <input type="text" class="form-control" name="placeNetwork" placeholder="ex: Reconcil">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Type d'établissement</label>
-                        <input type="text" class="form-control" name="placeType" placeholder="????">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Description</label>
-                        <input type="text" class="form-control" name="placeDescription" placeholder="ex: Restaurant en vente à emporter uniquement">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Services de consignes proposés</label>
-                        <input type="text" class="form-control" name="placeServices" placeholder="ex : Boîtes,repas en verre, couverts...">
-                        <button type="button" class="btn btn-outline-success">-</button>
-                        <button type="button" class="btn btn-outline-success">+</button>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Produits</label>
-                        <input type="text" class="form-control" name="placeProducts" placeholder="ex : ????">
-                    </div>
-
+                        <div class="form-group">
+                            <label for="adresse">Adresse</label>
+                            <input id= "adresse" name="adresse" type="text" class="form-control" placeholder="ex: 123 rue Réaumur">
+                        </div>
     
-                    <a href="/form/formThanks"><button class="btn btn-success">Envoyer</button></a>
-                </form>
+                        <div class="form-group">
+                            <label for="zipcode">Code postal</label>
+                            <input id="zipcode" name="zipcode"type="text" class="form-control"  placeholder="ex: 75002">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="city">Ville</label>
+                            <input id="city" name="city" type="text" class="form-control"  placeholder="ex: Paris">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input id="phone" name="phone" type="text" class="form-control" placeholder="ex: +331 45 65 45 65">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="website">Site Internet</label>
+                            <input name="website" name="website" type="text" class="form-control" placeholder="ex: https://exemple.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="services">Service de consigne proposé</label>
+                            <input name="service1" name="service1" type="text" class="form-control" placeholder="ex: Boîtes repas en verre">
+                        </div>
+                        
+                        <div class="form-check">
+                            <p>Produits disponibles</p>
+                            <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
+                            <div>
+                                <div>
+                                    <input id="produit1" value="produit1" class="form-check-input" type="checkbox"  >
+                                    <label class="form-check-label" for="produit1">Boîte XL (8€)</label>
+                                </div>
+                                <div>
+                                    <input id="produit2" value="produit2" class="form-check-input" type="checkbox"  >
+                                    <label class="form-check-label" for="produit2">Boîte M (6€)</label>
+                                </div>
+                                <div>
+                                    <input id="produit3" value="produit3" class="form-check-input" type="checkbox"  >
+                                    <label class="form-check-label" for="produit3">Couverts (5€)</label>
+                                </div>
+                            </div>
+                        </div>
 
-  
-            </div>    
-                
-        </div>
+                        <!-- hidden input with networkname -->
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="network" value="AAAAAAAAAAAAAAA">
+                        </div>
+                        <!-- hidden input with type -->
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="network" value="AAAAAAAAAAAAAAA">
+                        </div>
+    
         
+                        <a href="/form/formThanks"><button class="btn btn-success">Envoyer</button></a>
+                    </form>
+                </div>
+            </div>    
+        </div>
+
+    <!-- Get api key     -->
+    <!-- <script>
+        var placeApi = `<%= placeApi %>`
+        console.log(placeApi)
+        
+    </script> -->
+    <!-- <%
+        var placeUrl = `https://maps.googleapis.com/maps/api/js?key=${placeApi}&libraries=places&callback=initAutocomplete`
+        console.log(placeUrl)
+    %> -->
+
+
+<!-- Custom JS code to bind to Autocomplete API -->
+<script>
+    function initAutoComplete() {
+        let autocomplete
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('placeName'),
+            {
+                types: ['establisment'],
+                componentRestriction: {'country': ['FR']},
+                fields: ['place_id', 'geometry', 'name']
+            }
+            )
+            autocomplete.addListener('place_changed', onPlaceChanged)
+        }
+        function onPlaceChanged() {
+            var place = autocomplete.getPlace()
+
+            if (!place.geometry) {
+                // user didnt select prediction
+                document.getElementById('placeName').placeholder = 'enter a place'
+            } else {
+                // display details about places
+                console.log(place)
+                document.getElementById('details').innerHTML = place.name
+            }
+        }
+        </script>
+        <!-- Include Google Maps JS API -->
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE9M-y5UbxB_Pbgx-ZBd-aeVnJkIOjFPE&libraries=places" async defer></script>
+
+    <!-- <script>
+        function initializeAutocomplete(id) {
+            var element = document.getElementById(placeName);
+            if (element) {
+                var autocomplete = new google.maps.places.Autocomplete(element, { types: ['geocode'] });
+                google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+            }
+            }
+
+            function onPlaceChanged() {
+            var place = this.getPlace();
+
+            console.log(place);  // Uncomment this line to view the full object returned by Google API.
+
+            for (var i in place.address_components) {
+                var component = place.address_components[i];
+                for (var j in component.types) {  // Some types are ["country", "political"]
+                var type_element = document.getElementById(component.types[j]);
+                if (type_element) {
+                    type_element.value = component.long_name;
+                }
+                }
+            }
+            }
+
+            google.maps.event.addDomListener(window, 'load', function() {
+            initializeAutocomplete('user_input_autocomplete_address');
+            }); -->
+    </script>   
        
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -19,7 +19,6 @@ var PlaceSchema = mongoose.Schema({
     city: String,
     latitude: String,
     longitude: String,
-    email: String,
     webSite: String,
     type: String,
     imageUrl: String,
