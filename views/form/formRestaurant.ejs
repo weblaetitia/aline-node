@@ -96,48 +96,38 @@
             </div>    
         </div>
 
-    <!-- Get api key     -->
-    <!-- <script>
-        var placeApi = `<%= placeApi %>`
-        console.log(placeApi)
-        
-    </script> -->
-    <!-- <%
-        var placeUrl = `https://maps.googleapis.com/maps/api/js?key=${placeApi}&libraries=places&callback=initAutocomplete`
-        console.log(placeUrl)
-    %> -->
-
 
 <!-- Custom JS code to bind to Autocomplete API -->
 <script>
-    function initAutoComplete() {
-        let autocomplete
+    let autocomplete
+    function initAutocomplete() {
         autocomplete = new google.maps.places.Autocomplete(
             document.getElementById('placeName'),
             {
-                types: ['establisment'],
-                componentRestriction: {'country': ['FR']},
+                types: ['establishment'],
+                componentRestrictions: {'country': 'FR'},
                 fields: ['place_id', 'geometry', 'name']
             }
             )
             autocomplete.addListener('place_changed', onPlaceChanged)
         }
-        function onPlaceChanged() {
-            var place = autocomplete.getPlace()
 
-            if (!place.geometry) {
-                // user didnt select prediction
-                document.getElementById('placeName').placeholder = 'enter a place'
-            } else {
-                // display details about places
-                console.log(place)
-                document.getElementById('details').innerHTML = place.name
-            }
+    function onPlaceChanged() {
+        var place = autocomplete.getPlace()
+        if (!place.geometry) {
+            // user didnt select prediction
+            document.getElementById('placeName').placeholder = 'enter a place'
+        } else {
+            // display details about places
+            console.log(place)
+            document.getElementById('details').innerHTML = place.name
         }
+    }
         </script>
         <!-- Include Google Maps JS API -->
         <script type="text/javascript"
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE9M-y5UbxB_Pbgx-ZBd-aeVnJkIOjFPE&libraries=places" async defer></script>
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE9M-y5UbxB_Pbgx-ZBd-aeVnJkIOjFPE&libraries=places&callback=initAutocomplete" async defer>
+        </script>
 
     <!-- <script>
         function initializeAutocomplete(id) {
