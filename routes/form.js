@@ -66,10 +66,10 @@ router.post('/add-restaurant', async function(req, res, next){
     google_place_id: req.body.place_id,
     network: req.body.network,
     type: req.body.type,
-    products: req.body.products
+    products: req.body.products,
+    latitude: req.body.place_lat,
+    longitude: req.body.place_lng,
     // zipCode: Number,
-    // latitude: String,
-    // longitude: String,
     // imageUrl: String,
     // description: String,
   } )
