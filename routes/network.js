@@ -45,7 +45,7 @@ if ((req.body.emailFromFront == 'undefined') || (req.body.passwordFromFront == '
   console.log(myrequest)  
   if (myrequest.length != 0) {
     var hash = SHA256(req.body.passwordFromFront + myrequest[0].salt).toString(encBase64)
-    if (hash == myrequest[0].password) {
+    if (hash == myrequest[0].passwordFromFront) {
       res.json({
         succes: true,
         alert: 'all good', 
@@ -61,7 +61,7 @@ if ((req.body.emailFromFront == 'undefined') || (req.body.passwordFromFront == '
   } else {
     res.json({
       succes: false,
-      alert: 'User not exists'
+      alert: 'Network not exists'
     })
   }
 }
@@ -84,7 +84,7 @@ router.post('/sign-up', async function(req,res,next){
     })
   } else {
     // encrypt password
-    var userSalt = uid2(32)
+    var networkSalt = uid2(32)
     // add user
      var newNetwork = await new NetworkModel({
       firstName: req.body.firstnameFromFront,
@@ -98,9 +98,9 @@ router.post('/sign-up', async function(req,res,next){
       webSite: req.body.websiteFromFront,
       refoundType: req.body.refoundtypeFromFront,
       zoneAction: req.body.zoneactionFromFront,
-      password: SHA256(req.body.passwordFromFront + userSalt).toString(encBase64),
+      password: SHA256(req.body.passwordFromFront + networkSalt).toString(encBase64),
       token: uid2(32),
-      salt: userSalt,
+      salt: networkSalt,
       imageUrl : req.body.imageFromFront
     })
   
