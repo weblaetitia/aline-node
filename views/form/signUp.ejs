@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/style.css">
 
-    <title>Nourrir Aline - Connexion</title>
+    <title>Nourrir Aline - Inscription</title>
   </head>
   <body>
     <div class="container-fluid">
@@ -16,94 +15,154 @@
       <a class="logout" href="/">Deconnexion</a>
       </nav> 
 
-      <div class="signUp">
-
         <div class="row">
-
-          <div class="col-12 text-center get_started">
-            <h2>Nourrir Aline!</h2>
-          </div>
-
+          
           <!-- SIGN UP AREA -->
-          <div class="col-12 col-sm-6 text-center">
-            <div class="formArea">
+          <div class="col-12 col-md-6 offset-md-3">
+            <h2>Nourrir Aline!</h2>
 
-              <h4 class="titleForm">Sign Up</h4>
+              <h4>Sign Up</h4>
 
               <form action="/network/sign-up" method="POST">
                   <div class="form-group">
                     <label for="exampleInputFirstname">Votre prénom</label>
-                    <input name="firstnameFromFront" type="text" class="form-control" placeholder="Prénom">
+                    <input name="firstnameFromFront" type="text" class="form-control" placeholder="ex : Alain" require />
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group require /
                     <label for="exampleInputLastname">Votre nom</label>
-                    <input name="lastnameFromFront" type="text" class="form-control" placeholder="Nom">
+                    <input name="lastnameFromFront" type="text" class="form-control" placeholder="ex : Wang" require />
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputBusinessname">Nom de l'entreprise</label>
-                    <input name="businessnameFromFront" type="text" class="form-control" placeholder="Nom du réseau">
+                    <input name="businessnameFromFront" type="text" class="form-control" placeholder="ex : looper" require />
                   </div>
 
-                  <button type="button" class="btn btn-outline-success">Ajouter votre logo</button>
+                  <div class="form-group">
+                    <label for="exampleInputPhone">Téléphone</label>
+                    <input name="phoneFromFront" type="text" class="form-control" placeholder="ex : +33145424941" require />
+                  </div>
+
+                  <!-- logo   -->
+                  <div class="form-group">
+                    <div id='myImage'><img src="./images/placeholder-image.jpg" height="100" alt="Votre logo"></div>
+                    <label for="">Logo de l'entreprise</label><br />
+                    <a id="upload_widget" class="btn btn-outline-secondary">Séléctionner une photo</a>
+                    <input id="imgurl" name="imageFromFront" type="hidden" class="form-control" value="" />
+                  </div>                  
 
                   <div class="form-group">
                     <label for="exampleInputAdress">Adresse</label>
-                    <input name="adressFromFront" type="text" class="form-control" placeholder="121 rue Réaumur">
+                    <input name="adressFromFront" type="text" class="form-control" placeholder="ex : 121 rue Réaumur" require />
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputZipcode">Code postal</label>
-                    <input name="zipcodeFromFront" type="text" class="form-control" placeholder="75002">
+                    <input name="zipcodeFromFront" type="text" class="form-control" placeholder="ex : 75002" require />
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputZipcode">Ville</label>
-                    <input name="zipcodeFromFront" type="text" class="form-control" placeholder="Paris">
+                    <label for="exampleInputCity">Ville</label>
+                    <input name="cityFromFront" type="text" class="form-control" placeholder="ex : Paris" require />
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputWebsite">Site internet</label>
-                    <input name="websiteFromFront" type="text" class="form-control" placeholder="http//exemple.com">
+                    <input name="websiteFromFront" type="text" class="form-control" placeholder="ex : http://exemple.com" />
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputWebsite">Type de consigne</label>
-                    <input name="refoundtypeFromFront" type="text" class="form-control" placeholder="bouteilles">
+                    <input name="refoundtypeFromFront" type="text" class="form-control" placeholder="ex : bouteilles" require />
                     <button type="button" class="btn btn-outline-success">-</button>
                     <button type="button" class="btn btn-outline-success">+</button>
                   </div>
 
                   <div class="form-group">
+                    <label for="exampleInputZoneaction">Zone d'action</label>
+                    <input name="zoneactionFromFront" type="text" class="form-control"  placeholder="ex : Bordeaux" require />
+                  </div>
+
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Votre e-mail</label>
-                    <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                    <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp" placeholder="ex : exemple@email.com" require />
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Choisissez un mot de passe</label>
-                    <input name="passwordFromFront" type="password" class="form-control"  placeholder="Enter password">
+                    <input name="passwordFromFront" type="password" class="form-control"  placeholder="votre mot de passe" require />
                   </div>
 
                   <div class="form-group">
                     <label for="exampleInputPassword1">Confirmez votre mot de passe</label>
-                    <input name="passwordFromFront" type="password" class="form-control"  placeholder="Enter password">
+                    <input name="passwordConfirmedFromFront" type="password" class="form-control"  placeholder="confirmez votre mot de passe" require />
                   </div>
 
-                  <button type="submit" class="btn btn-success">S'inscrire</button>
+                
+                  <button type="submit" class="btn btn-outline-success">S'inscrire</button>
+                    
                   
                </form>
              
-            </div>
+            
           </div>    
 
         </div>
       
-      </div>
     </div>
 
+    <!-- Cloudinary widget -->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
+    <script type="text/javascript">  
+      var myWidget = cloudinary.createUploadWidget({
+        cloudName: 'alineconsigne', 
+        uploadPreset: 'ml_default',
+        multiple: false, // multiples autorisés
+        maxFiles: 1, // nombe max de photo
+        }, (error, result) => { 
+          if (!error && result && result.event === "success") { 
+            console.log('Done! Here is the image info: ', result.info); 
+            var secureUrl = result.info.secure_url
+            console.log(secureUrl)
+            var myImage = document.getElementById("myImage")
+            myImage.innerHTML = `<img src="${result.info.thumbnail_url}" alt="${result.info.public_id}">`
+            document.getElementById("imgurl").value = result.info.secure_url
+            // ----- this is how result.info looks like ------
+            // access_mode: "public"
+            // asset_id: "ba97cd4dec2a75cd0228871cafe6f791"
+            // batchId: "uw-batch2"
+            // bytes: 68197
+            // created_at: "2020-08-11T14:54:38Z"
+            // etag: "7aab44a855cdc03a5b839d146b64c3b8"
+            // existing: false
+            // format: "png"
+            // height: 426
+            // id: "uw-file3"
+            // original_filename: "Nom_Photo_"
+            // path: "v1597157678/Nom_Photo__zenlkt.png"
+            // placeholder: false
+            // public_id: "Nom_Photo__zenlkt"
+            // resource_type: "image"
+            // secure_url: "https://res.cloudinary.com/alineconsigne/image/upload/v1597157678/Nom_Photo_zenlkt.png"
+            // signature: "52828f9ac7d3ab714856fd6e3d9143c9fc51c36e"
+            // tags: []
+            // thumbnail_url: "https://res.cloudinary.com/alineconsigne/image/upload/c_limit,h_60,w_90/v1597157678/Nom_Photo__zenlkt.png"
+            // type: "upload"
+            // url: "http://res.cloudinary.com/alineconsigne/image/upload/v1597157678/Nom_Photo_zenlkt.png"
+            // version: 1597157678
+            // version_id: "1b5b9fa91ac89d4dd60793b1f3345d6d"
+            // width: 1244
+          }
+        }
+      )
+      document.getElementById("upload_widget").addEventListener("click", function(){
+          myWidget.open();
+        }, false);
+    </script>
 
 
+    <!-- bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>

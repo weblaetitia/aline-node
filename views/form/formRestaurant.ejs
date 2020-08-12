@@ -20,79 +20,80 @@
 
             <div class="row">
                 
-                <form>
+                <form action="/form/update-formRestaurant" method="POST" >
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Nom du restaurant</label>
-                      <input type="text" class="form-control" id="placeName" placeholder="ex: Café Ginger" 
-                        onChange="findPlaces($('#placeName').val());">
+                      <input type="text" class="form-control" name="placeName" placeholder="ex: Café Ginger">
+                      <input type="submit" class="form-control" name="valide">
                     </div>
-
+                </form>
+                
                     <button type="button" class="btn btn-outline-success">Sélectionner une photo</button>
-
+                <form>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Adresse</label>
-                        <input type="text" class="form-control" id="placeAdress" placeholder="ex: 123 rue Réaumur" 
-                          onChange="findPlaces($('#placeAdress').val());">
+                        <input type="text" class="form-control" name="placeAdress" placeholder="ex: 123 rue Réaumur">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Code postal</label>
-                        <input type="text" class="form-control" id="placeZipCode" placeholder="ex: 75002">
+                        <input type="text" class="form-control" name="placeZipCode" placeholder="ex: 75002">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Ville</label>
-                        <input type="text" class="form-control" id="placeCity" placeholder="ex: Paris">
+                        <input type="text" class="form-control" name="placeCity" placeholder="ex: Paris">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Téléphone</label>
-                        <input type="text" class="form-control" id="placePhone" placeholder="ex: +331 45 65 45 65">
+                        <input type="text" class="form-control" name="placePhone" placeholder="ex: +331 45 65 45 65">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email</label>
-                        <input type="text" class="form-control" id="placeEmail" placeholder="ex: exemple@email.com">
+                        <input type="text" class="form-control" name="placeEmail" placeholder="ex: exemple@email.com">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Site Internet</label>
-                        <input type="text" class="form-control" id="placeWebSite" placeholder="ex: http///exemple.com">
+                        <input type="text" class="form-control" name="placeWebSite" placeholder="ex: http///exemple.com">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nom du propriétaire</label>
-                        <input type="text" class="form-control" id="placeOwnerName" placeholder="ex: John Doe">
+                        <input type="text" class="form-control" name="placeOwnerName" placeholder="ex: John Doe">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Réseau de consigne</label>
-                        <input type="text" class="form-control" id="placeNetwork" placeholder="ex: Reconcil">
+                        <input type="text" class="form-control" name="placeNetwork" placeholder="ex: Reconcil">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Type d'établissement</label>
-                        <input type="text" class="form-control" id="placeType" placeholder="????">
+                        <input type="text" class="form-control" name="placeType" placeholder="????">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Description</label>
-                        <input type="text" class="form-control" id="placeDescription" placeholder="ex: Restaurant en vente à emporter uniquement">
+                        <input type="text" class="form-control" name="placeDescription" placeholder="ex: Restaurant en vente à emporter uniquement">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Services de consignes proposés</label>
-                        <input type="text" class="form-control" id="placeServices" placeholder="ex : Boîtes,repas en verre, couverts...">
+                        <input type="text" class="form-control" name="placeServices" placeholder="ex : Boîtes,repas en verre, couverts...">
                         <button type="button" class="btn btn-outline-success">-</button>
                         <button type="button" class="btn btn-outline-success">+</button>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Produits</label>
-                        <input type="text" class="form-control" id="placeProducts" placeholder="ex : ????">
+                        <input type="text" class="form-control" name="placeProducts" placeholder="ex : ????">
                     </div>
 
-                    <button type="submit" class="btn btn-success">Envoyer</button>
+    
+                    <a href="/form/formThanks"><button class="btn btn-success">Envoyer</button></a>
                 </form>
 
   
