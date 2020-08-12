@@ -27,6 +27,8 @@ var NetworkSchema = mongoose.Schema({
     imageUrl: String,
     zoneAction: Array,
     password: String,
+    token: String,
+    salt: String,
     products: [ProductSchema]
    });
 

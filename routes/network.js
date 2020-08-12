@@ -98,7 +98,7 @@ router.post('/sign-up', async function(req,res,next){
       webSite: req.body.websiteFromFront,
       refoundType: req.body.refoundtypeFromFront,
       zoneAction: req.body.zoneactionFromFront,
-      password: SHA256(req.body.password + userSalt).toString(encBase64),
+      password: SHA256(req.body.passwordFromFront + userSalt).toString(encBase64),
       token: uid2(32),
       salt: userSalt,
       imageUrl : req.body.imageFromFront
