@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-var ProductSchema = mongoose.Schema({
+var ProductShema = mongoose.Schema({
     name: String,
     brand: String,
     type: String,
@@ -17,6 +17,8 @@ var PlaceSchema = mongoose.Schema({
     adress : String,
     zipCode: Number,
     city: String,
+    latitude: String,
+    longitude: String,
     email: String,
     webSite: String,
     type: String,
@@ -24,7 +26,7 @@ var PlaceSchema = mongoose.Schema({
     description: String,
     network: String,
     services: Array,
-    products: [ProductSchema]
+    products: [ProductShema]
    });
 
 const PlaceModel = mongoose.model('places', PlaceSchema);
