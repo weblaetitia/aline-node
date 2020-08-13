@@ -9,7 +9,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var backofficeRouter = require('./routes/backoffice');
 var formRouter = require('./routes/form');
-var networkRouter = require('./routes/network')
+var networkRouter = require('./routes/network');
+var mapRouter = require('./routes/map');
 
 var mongoose = require('./models/connection')
 
@@ -40,6 +41,7 @@ app.use('/users', usersRouter);
 app.use('/backoffice', backofficeRouter);
 app.use('/form', formRouter);
 app.use('/network', networkRouter);
+app.use('/map', mapRouter);
 
 
 // catch 404 and forward to error handler
