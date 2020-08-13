@@ -32,7 +32,7 @@ router.get('/check-token', async function(req, res, next) {
 router.post('/sign-in', async function(req,res,next){
 
 // Check if all inputs are field
-if ((req.body.emailFromFront == 'undefined') || (req.body.passwordFromFront == 'undefined')) {
+if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length == 0)) {
   res.json({
     succes: false,
     alert: 'All fields must be provided'
@@ -42,10 +42,10 @@ if ((req.body.emailFromFront == 'undefined') || (req.body.passwordFromFront == '
   var myrequest = await NetworkModel.find({
     email: req.body.emailFromFront
    }) 
-  console.log(myrequest)  
+  console.log(myrequest) 
   if (myrequest.length != 0) {
     var hash = SHA256(req.body.passwordFromFront + myrequest[0].salt).toString(encBase64)
-    if (hash == myrequest[0].passwordFromFront) {
+    if (hash == myrequest[0].password) {
       res.json({
         succes: true,
         alert: 'all good', 
