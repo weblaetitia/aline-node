@@ -30,39 +30,28 @@ router.get('/check-token', async function(req, res, next) {
 
 /* POST sign-in */
 router.post('/sign-in', async function(req,res,next){
-
 // Check if all inputs are field
 if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length == 0)) {
-  res.json({
-    succes: false,
-    alert: 'All fields must be provided'
-  })
+  res.render('form/signIn', {status: 'loginfailed'})
+  console.log('veuillez remplir tous les champs')
 } else {
   // all fields are provided now check if user exist
   var myrequest = await NetworkModel.find({
     email: req.body.emailFromFront
    }) 
-  console.log(myrequest) 
-  if (myrequest.length != 0) {
+   if (myrequest.length != 0) {
     var hash = SHA256(req.body.passwordFromFront + myrequest[0].salt).toString(encBase64)
     if (hash == myrequest[0].password) {
-      res.json({
-        succes: true,
-        alert: 'all good', 
-        token: myrequest[0].token
-      })
+      req.session.token = myrequest[0].token
+      res.render('form/feedChoice')
     } else {
-      res.json({
-        succes: false,
-        alert: 'wrong password'
-      })
+      res.render('form/signIn', {status: 'loginfailed'})
+      console.log('wrong email or password')
     }
 
   } else {
-    res.json({
-      succes: false,
-      alert: 'Network not exists'
-    })
+    res.render('form/signIn', {status: 'loginfailed'})
+    console.log('wrong email or password')
   }
 }
 })
