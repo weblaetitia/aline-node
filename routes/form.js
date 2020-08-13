@@ -52,9 +52,8 @@ router.post('/update-formShop', async function(req, res, next){
 
 /* POST add-restaurant */
 router.post('/add-restaurant', async function(req, res, next){
-  console.log(req.body.products)
-  console.log(req.body.services)
-  console.log('--------------------')
+  console.log(req.body.products) // tableau des id de produits
+  console.log(req.body.services) // tableaux
 
   var newRestaurant = await PlaceModel( {
     name: req.body.name,
@@ -66,9 +65,9 @@ router.post('/add-restaurant', async function(req, res, next){
     google_place_id: req.body.place_id,
     network: req.body.network,
     type: req.body.type,
-    products: req.body.products,
     latitude: req.body.place_lat,
     longitude: req.body.place_lng,
+    // products: {sous document},
     // zipCode: Number,
     // imageUrl: String,
     // description: String,
