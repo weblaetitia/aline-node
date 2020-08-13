@@ -72,9 +72,9 @@ router.post('/add-place', async function(req, res, next){
   console.log(retaurantSaved)
 
   if (retaurantSaved) {
-    res.render('form/feedChoice', {formSucces: true }, {token: req.session.token})
+    res.render('form/feedChoice', {formSucces: true, token: req.session.token})
   } else {
-    res.render('form/feedChoice', {formSucces: false }, {token: req.session.token})
+    res.render('form/feedChoice', {formSucces: false, token: req.session.token})
   }
 })
 
@@ -94,9 +94,9 @@ router.post('/add-product', async function(req, res, next){
   })
   var networkSaved = await network.save()
   if (networkSaved) {
-    res.render('form/feedChoice', {formSucces: true }, {token: req.session.token})
+    res.render('form/feedChoice', {formSucces: true, token: req.session.token})
   } else {
-    res.render('form/feedChoice', {formSucces: false }, {token: req.session.token})
+    res.render('form/feedChoice', {formSucces: false, token: req.session.token})
   }
 })
 
