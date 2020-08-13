@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,96 +13,189 @@
     </head>
 
     <body>
-
-        <div class="container-fluid">
-
-            <!-- Header Navbar-->
-
+        <div class="container">
             <div class="row">
-                
-                <form action="/form/update-formShop" method="POST" >
+                <div class="col-12 col-md-6 offset-md-3">
+                    <h1>Ajouter un magasin</h1>
+                    
+                    <!-- find name avec autocomplete -->
                     <div class="form-group">
-                      <label for="exampleFormControlInput1">Nom du magasin</label>
-                      <input type="text" class="form-control" name="placeName" placeholder="ex: Biocoop">
-                      <input type="submit" class="form-control" name="valide">
-                    </div>
-                </form>
-
-                    <button type="button" class="btn btn-outline-success">Sélectionner une photo</button>
-
-                <form>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Adresse</label>
-                        <input type="text" class="form-control" name="placeAdress" placeholder="ex: 123 rue Réaumur">
+                        <label for="autocomplete">Rechercher</label>
+                        <input type="text" id="autocomplete" class="form-control" name="autocomplete" placeholder="Tapper ici votre recherche">
                     </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Code postal</label>
-                        <input type="text" class="form-control" name="placeZipCode" placeholder="ex: 75002">
-                    </div>
+                    <div id="details"></div>
+                    
+                    <!-- map -->
+                    <div id="map" style="height: 300px;"></div>
+                    <div id="infowindow-content">
+                        <img src="" width="16" height="16" id="place-icon">
+                        <span id="place-name"  class="title"></span><br>
+                        <span id="place-address"></span>
+                      </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Ville</label>
-                        <input type="text" class="form-control" name="placeCity" placeholder="ex: Paris">
-                    </div>
+                    <!-- debut du form -->
+                    <form action="/form/add-restaurant" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nom du magasin</label>
+                            <input type="text" id="name" class="form-control" name="name" placeholder="ex: La Récolte">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Téléphone</label>
-                        <input type="text" class="form-control" name="placePhone" placeholder="ex: +331 45 65 45 65">
-                    </div>
+                        <div class="form-group">
+                            <label for="address">Addresse</label>
+                            <input id= "address" name="address" type="text" class="form-control" placeholder="ex: 43 rue Beaubourg">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="city">Ville</label>
+                            <input id="city" name="city" type="text" class="form-control"  placeholder="ex: Paris">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input id="phone" name="phone" type="text" class="form-control" placeholder="ex: +331 45 65 45 65">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="website">Site Internet</label>
+                            <input id="website" name="website" type="text" class="form-control" placeholder="ex: https://exemple.com">
+                        </div>
+                        
+                        <!-- services -->
+                        <div class="form-group">
+                            <label for="">Service de consigne proposé</label>
+                            <input id="service1" name="services" type="text" class="form-control" placeholder="ex: Boîtes repas en verre">
+                            <input id="service2" name="services" type="text" class="form-control" placeholder="ex: Couverts en métal">
+                        </div>
+                        
+                        <!-- produits -->
+                        <div class="form-check">
+                            <p>Produits disponibles</p>
+                            <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
+                            
+                                <div class="form-group form-check">
+                                    <input name="products" type="checkbox" value="aaaaa" class="form-check-input">
+                                    <label class="form-check-label">Boîte XXL (8€)</label>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input name="products" type="checkbox" value="bbbbbb" class="form-check-input">
+                                    <label class="form-check-label">Boîte M (6€)</label>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input name="products" type="checkbox" value="cccccc" class="form-check-input">
+                                    <label class="form-check-label">Couverts (5€)</label>
+                                </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Email</label>
-                        <input type="text" class="form-control" name="placeEmail" placeholder="ex: exemple@email.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Site Internet</label>
-                        <input type="text" class="form-control" name="placeWebSite" placeholder="ex: http///exemple.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Nom du propriétaire</label>
-                        <input type="text" class="form-control" name="placeOwnerName" placeholder="ex: John Doe">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Réseau de consigne</label>
-                        <input type="text" class="form-control" name="placeNetwork" placeholder="ex: Reconcil">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Type d'établissement</label>
-                        <input type="text" class="form-control" name="placeType" placeholder="????">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Description</label>
-                        <input type="text" class="form-control" name="placeDescription" placeholder="ex: Restaurant en vente à emporter uniquement">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Services de consignes proposés</label>
-                        <input type="text" class="form-control" name="placeServices" placeholder="ex : Boîtes,repas en verre, couverts...">
-                        <button type="submit" class="btn btn-outline-success"  id="button-subon">-</button>
-                        <button type="submit" class="btn btn-outline-success"  id="button-addon">+</button>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Produits</label>
-                        <input type="text" class="form-control" name="placeProducts" placeholder="ex : ????">
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Envoyer</button>
-                </form>
-
-  
+                        <!-- hidden input with googlePlace ID -->
+                        <div class="form-group">
+                            <input id="place_id" type="hidden" class="form-control" name="place_id" value="">
+                        </div>
+                        <!-- hidden input with googlePlace LATITUDE -->
+                        <div class="form-group">
+                            <input id="place_lat" type="hidden" class="form-control" name="place_lat" value="">
+                        </div>
+                        <!-- hidden input with googlePlace LONGITUDE -->
+                        <div class="form-group">
+                            <input id="place_lng" type="hidden" class="form-control" name="place_lng" value="">
+                        </div>
+                        <!-- hidden input with networkname -->
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="network" value="looper">
+                        </div>
+                        <!-- hidden input with type -->
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="type" value="shop">
+                        </div>
+    
+                        <button type="submit" class="btn btn-success">Envoyer</button>
+                    </form>
+                </div>
             </div>    
-                
         </div>
-        
-      
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <!-- Custom JS code to bind to Autocomplete API -->
+    <script>
+    // 
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 47.082590, lng: 2.399697},
+            zoom: 5
+            })
+        var input = document.getElementById('autocomplete')
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+        autocomplete.setComponentRestrictions({'country': 'FR'})
+        autocomplete.setFields(
+            ['place_id', 'geometry', 'name',  'opening_hours', 'photos', 'types', 'url', 'website', 'address_components', 'international_phone_number', 'icon']);
+        autocomplete.setTypes(['establishment'])    
+        autocomplete.setOptions(true)
+
+      var infowindow = new google.maps.InfoWindow();
+      var infowindowContent = document.getElementById('infowindow-content');
+      infowindow.setContent(infowindowContent);
+      var marker = new google.maps.Marker({
+        map: map,
+        anchorPoint: new google.maps.Point(0, -29)
+      });
+
+      autocomplete.addListener('place_changed', function() {
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          // user didnt select prediction
+          return;
+        }
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);  // Why 17? Because it looks good.
+        }
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+        var address = '';
+        if (place.address_components) {
+          address = [
+            (place.address_components[0] && place.address_components[0].short_name || ''),
+            (place.address_components[1] && place.address_components[1].short_name || ''),
+            (place.address_components[2] && place.address_components[2].short_name || '')
+          ].join(' ');
+        }
+
+        document.getElementById('name').value = place.name
+        document.getElementById('address').value = address
+        document.getElementById('city').value = place.address_components[2].long_name
+        document.getElementById('phone').value = place.international_phone_number
+        document.getElementById('website').value = place.website
+        document.getElementById('place_id').value = place.place_id
+        var placeLat = place.geometry.location.lat()
+        document.getElementById('place_lat').value = placeLat
+        var placeLng = place.geometry.location.lng()
+        document.getElementById('place_lng').value = placeLng
+        console.log(placeLat, placeLng)
+        infowindowContent.children['place-icon'].src = place.icon;
+        infowindowContent.children['place-name'].textContent = place.name;
+        infowindowContent.children['place-address'].textContent = address;
+        infowindow.open(map, marker);
+      })
+    }
+  </script>
+    <!-- Include Google Maps JS API -->
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE9M-y5UbxB_Pbgx-ZBd-aeVnJkIOjFPE&libraries=places&callback=initMap" defer>
+    </script>
+
+    
+       
+    <!-- BOOTSTRAP -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     </body>
 </html>

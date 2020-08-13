@@ -5,10 +5,8 @@ var ProductSchema = mongoose.Schema({
     name: String,
     brand: String,
     type: String,
-    network: String,
     refoundPrice: Number,
-    impact: String,
-    code: Number,
+    barCode: String,
     imageUrl: String
 });
 
