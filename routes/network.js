@@ -44,7 +44,7 @@ if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length 
     if (hash == myrequest[0].password) {
       // succes
       req.session.token = myrequest[0].token
-      res.render('form/feedChoice')
+      res.render('form/feedChoice', {token: req.session.token})
     } else {
       // unsuccess
       res.render('form/signIn', {status: 'login-failed'})
@@ -96,7 +96,7 @@ router.post('/sign-up', async function(req,res,next){
       // sucess 
       // store token
       req.session.token = networkSaved.token
-      res.render('form/feedChoice')
+      res.render('form/feedChoice', {token: req.session.token})
       } else {
         res.render('form/signUp', {status: 'signup-failed'})
         console.log('ooops something went wrong')
