@@ -36,7 +36,7 @@
                       </div>
 
                     <!-- debut du form -->
-                    <form action="/form/add-restaurant" method="POST">
+                    <form action="/form/add-place" method="POST">
                         <div class="form-group">
                             <label for="name">Nom du magasin</label>
                             <input type="text" id="name" class="form-control" name="name" placeholder="ex: La Récolte">
@@ -100,9 +100,9 @@
                         <div class="form-group">
                             <input id="place_lng" type="hidden" class="form-control" name="place_lng" value="">
                         </div>
-                        <!-- hidden input with networkname -->
+                        <!-- hidden input with network token -->
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="network" value="looper">
+                            <input id="networktoken" type="hidden" class="form-control" name="networktoken" value="<%= token %>">
                         </div>
                         <!-- hidden input with type -->
                         <div class="form-group">

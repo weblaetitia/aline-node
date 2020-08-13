@@ -51,10 +51,12 @@
                         <label for="barcode">Numéro de code barre du produit</label>
                         <input id="barcode" name="barcode" type="number" class="form-control"placeholder="47587909U8983">
                     </div>
-                   <!-- hidden input with networkName -->
+
+                   <!-- hidden input with network token -->
                     <div class="form-group">
-                        <input id="networkName" type="hidden" class="form-control" name="networkName" value="looper">
+                        <input id="networktoken" type="hidden" class="form-control" name="networktoken" value="<%= token %>">
                     </div>
+
                     <button type="submit" class="btn btn-success">Envoyer</button>
                 </form>
                 </div>

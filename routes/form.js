@@ -10,6 +10,7 @@ if(!process.env.DB_INFO){
 /* variable des models pour le formulaire */
 const PlaceModel = require('../models/placeModel');
 const NetworkModel = require('../models/networkModel');
+const { findOne } = require('../models/placeModel');
 
 
 /* GET feed choices page. */
@@ -35,9 +36,19 @@ router.get('/formProduct', function(req, res, next) {
 
 
 /* POST add-restaurant */
-router.post('/add-restaurant', async function(req, res, next){
-  console.log(req.body.products) // tableau des id de produits
+router.post('/add-place', async function(req, res, next){
+  console.log(req.body.products) // tableau des id de produits // à traiter
   console.log(req.body.services) // tableaux
+
+  // get network from token
+  var network = await NetworkModel.findOne({
+    token: req.body.networktoken
+  })
+
+  var networkName = network.businessName
+
+  console.log(networkName)
+
 
   var newRestaurant = await PlaceModel( {
     name: req.body.name,
@@ -47,7 +58,7 @@ router.post('/add-restaurant', async function(req, res, next){
     webSite: req.body.website,
     services: req.body.services,
     google_place_id: req.body.place_id,
-    network: req.body.network,
+    network: networkName,
     type: req.body.type,
     latitude: req.body.place_lat,
     longitude: req.body.place_lng,
@@ -71,7 +82,7 @@ router.post('/add-restaurant', async function(req, res, next){
 /* POST add-product */
 router.post('/add-product', async function(req, res, next){
   var network = await NetworkModel.findOne({
-    businessName: req.body.networkName // penser à changer en name/id
+    businessName: req.body.networktoken // recupere le reseau par son token
   })
   network.products.push({
     name: req.body.name,
