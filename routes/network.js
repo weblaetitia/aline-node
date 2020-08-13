@@ -42,14 +42,17 @@ if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length 
    if (myrequest.length != 0) {
     var hash = SHA256(req.body.passwordFromFront + myrequest[0].salt).toString(encBase64)
     if (hash == myrequest[0].password) {
+      // succes
       req.session.token = myrequest[0].token
       res.render('form/feedChoice')
     } else {
-      res.render('form/signIn', {status: 'loginfailed'})
+      // unsuccess
+      res.render('form/signIn', {status: 'login-failed'})
       console.log('wrong email or password')
     }
 
   } else {
+    // unsuccess
     res.render('form/signIn', {status: 'loginfailed'})
     console.log('wrong email or password')
   }
@@ -59,18 +62,14 @@ if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length 
 
 /* POST sign-up */
 router.post('/sign-up', async function(req,res,next){
-
 // check if network alredy exist
   var networkExist = await NetworkModel.findOne({
     email: req.body.emailFromFront 
   })
-  
   if (networkExist != null) {
-
-    res.json({
-      succes: false,
-      alert: 'Network with this email already exists'
-    })
+    res.render('form/signUp', {status: 'signup-failed'})
+    console.log('Network with this email already exists')
+    
   } else {
     // encrypt password
     var networkSalt = uid2(32)
@@ -92,32 +91,18 @@ router.post('/sign-up', async function(req,res,next){
       salt: networkSalt,
       imageUrl : req.body.imageFromFront
     })
-  
     var networkSaved = await newNetwork.save();
-    console.log(networkSaved)
-    // send a succes and token
-      res.json({
-        succes: true,
-        alert: 'New network saved',
-        token: networkSaved.token 
-      })
+    if (networkSaved) {
+      // sucess 
+      // store token
+      req.session.token = networkSaved.token
+      res.render('form/feedChoice')
+      } else {
+        res.render('form/signUp', {status: 'signup-failed'})
+        console.log('ooops something went wrong')
+      }
     }
   })
 
-//     res.render('form/feedChoice')
-//   } else {
-//     console.log('existe déjà')
-//     res.render('form/signUp')
-//   } 
-// })
-
-
-// /* Logout */
-// router.get('/logout', function(req,res,next){
-
-//   req.session.network = null;
-
-//   res.redirect('/')
-// })
 
 module.exports = router;
