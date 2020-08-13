@@ -12,6 +12,7 @@ var placeApi = process.env.GOOGLE_API_KEY
 var networkModel = require('../models/networkModel')
 var placeModel = require('../models/placeModel');
 const PlaceModel = require('../models/placeModel');
+const NetworkModel = require('../models/networkModel');
 
 /* GET feed choices page. */
 router.get('/feedChoice', function(req, res, next) {
@@ -28,27 +29,36 @@ router.get('/formShop', function(req, res, next) {
   res.render('form/formShop');
   });
 
+/* GET form for product page. */
+router.get('/formProduct', function(req, res, next) {
+  res.render('form/formProduct');
+  });
+
+/* GET thanks page. */
+router.get('/formThanks', function(req, res, next) {
+  res.render('form/formThanks');
+  });
 
 /* GET API for restaurant form. */
-router.post('/update-formRestaurant', async function(req, res, next){
-  console.log('placeName', req.body.placeName)
-  var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +`&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
-  var dataAPI = JSON.parse(data.getBody())
-  console.log('dataGoogle', dataAPI)
+// router.post('/update-formRestaurant', async function(req, res, next){
+//   console.log('placeName', req.body.placeName)
+//   var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +`&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
+//   var dataAPI = JSON.parse(data.getBody())
+//   console.log('dataGoogle', dataAPI)
 
-  res.render('form/formRestaurant')
-})
+//   res.render('form/formRestaurant')
+// })
 
 
 /* GET API for shop form. */
-router.post('/update-formShop', async function(req, res, next){
-  console.log('placeName', req.body.placeName)
-  var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +`&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
-  var dataAPI = JSON.parse(data.getBody())
-  console.log('dataGoogle', dataAPI)
+// router.post('/update-formShop', async function(req, res, next){
+//   console.log('placeName', req.body.placeName)
+//   var data = request("GET", 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+ req.body.placeName +`&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
+//   var dataAPI = JSON.parse(data.getBody())
+//   console.log('dataGoogle', dataAPI)
 
-  res.render('form/formShop')
-})
+//   res.render('form/formShop')
+// })
 
 /* POST add-restaurant */
 router.post('/add-restaurant', async function(req, res, next){
@@ -81,19 +91,32 @@ router.post('/add-restaurant', async function(req, res, next){
   } else {
     res.render('form/feedChoice', {formSucces: false })
   }
-
-  
 })
 
-/* GET form for product page. */
-router.get('/formProduct', function(req, res, next) {
-  res.render('form/formProduct');
-  });
 
-/* GET thanks page. */
-router.get('/formThanks', function(req, res, next) {
-  res.render('form/formThanks');
-  });
+/* POST add-product */
+router.post('/add-product', async function(req, res, next){
+  var network = await NetworkModel.findOne({
+    businessName: req.body.networkName // penser à changer en name/id
+  })
+  network.products.push({
+    name: req.body.name,
+    brand: req.body.brand,
+    type: req.body.type,
+    refoundPrice: req.body.price,
+    barCode: req.body.code,
+    imageUrl: req.body.imgUrl,
+  })
+  var networkSaved = await network.save()
+  if (networkSaved) {
+    res.render('form/feedChoice', {formSucces: true })
+  } else {
+    res.render('form/feedChoice', {formSucces: false })
+  }
+})
+
+
+
 
 
 
