@@ -82,8 +82,13 @@ router.post('/add-place', async function(req, res, next){
 /* POST add-product */
 router.post('/add-product', async function(req, res, next){
   var network = await NetworkModel.findOne({
-    businessName: req.body.networktoken // recupere le reseau par son token
+    token: req.body.networktoken // recupere le reseau par son token
   })
+  var keyword = [];
+
+  keyword.push(req.body.name, req.body.brand);
+ 
+  console.log(network)
   network.products.push({
     name: req.body.name,
     brand: req.body.brand,
@@ -91,7 +96,9 @@ router.post('/add-product', async function(req, res, next){
     refoundPrice: req.body.price,
     barCode: req.body.code,
     imageUrl: req.body.imgUrl,
+    keyword: keyword
   })
+
   var networkSaved = await network.save()
   if (networkSaved) {
     res.render('form/feedChoice', {formSucces: true }, {token: req.session.token})
@@ -99,10 +106,6 @@ router.post('/add-product', async function(req, res, next){
     res.render('form/feedChoice', {formSucces: false }, {token: req.session.token})
   }
 })
-
-
-
-
 
 
 module.exports = router;
