@@ -6,7 +6,8 @@ var ProductShema = mongoose.Schema({
     type: String,
     refoundPrice: Number,
     barCode: String,
-    imageUrl: String
+    imageUrl: String,
+    keyword: Array
 });
 
 var PlaceSchema = mongoose.Schema({
