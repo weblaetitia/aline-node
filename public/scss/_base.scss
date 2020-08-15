@@ -1,14 +1,31 @@
 // add your custom styles here
 // to learn more about SASS, visit sass-lang.com
 
+$fontgroup: 'Capriola', 'Source Sans Pro', "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
 // body 
 body {
   color: $darkblue;
 }
 // add custom font for heading
 .title {
-  font-family: 'Capriola', 'Source Sans Pro', "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: $fontgroup;
   letter-spacing: -0.7;
+}
+
+// btn
+.btn {
+  border-radius: 1.5rem;
+  font-family: $fontgroup;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+.form-control {
+  border-radius: 1.5rem;
+  &:focus {
+    border-color: $mint-light;
+    box-shadow: 0 0 0 0.2rem rgba(213, 239, 232, 0.5);
+  }
 }
 
 .cover-container {
