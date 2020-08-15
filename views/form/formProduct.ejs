@@ -5,32 +5,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
         <!-- my custom Bootstrap -->
-        <link href="css/style.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
 
-        <title>Nourrir Aline - Produit</title>
-    </head>
+    <title>Nourrir Aline - Ajouter un produit</title>
+  </head>
+  <body>
+    
+    <div class="cover-container d-flex flex-column">
+      <!-- Header Navbar-->
+      <header class="mb-auto">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+          <a class="navbar-brand" href="#">
+            <img src="/images/logo-aline.svg" width="76" height="36" class="d-inline-block align-top" alt="" loading="lazy">
+            <span class="navbar-text title text-info ml-2">L'appli consigne</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <a href="" class="btn btn-info">Déconnexion</a>
+            </form>
+          </div>
+        </nav>
+      </header>
 
-    <body>
-        <div class="container my-4">
+
+        <div class="container my-4 py-4" style="background-color: #fff;">
             <div class="row">
-                <div class="col-12 col-md-6 offset-md-3">
-                    <h2>Ajouter un produit</h2>
-                    <h4>Token : <%= token %></h4>
+                <div class="col-12">
+                    <h1 class="title text-primary h2 text-center">Ajouter un produit<br> <span class="h6">Token : <%= token %></span></h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-5">
 
                     <form method="POST" action="/form/add-product">
                     <!-- image   -->
                     <div class="form-group">
-                            <div id='myImage'><img src="/images/placeholder-image.jpg" height="100" alt="Photo du produit"></div>
-                            <label for="">Photo du produit</label><br />
-                            <a id="upload_widget" class="btn btn-outline-secondary">Séléctionner une photo</a>
-                            <input id="imgurl" name="imgUrl" type="hidden" class="form-control" value="" />
-                    </div>    
-                  
-                  
-                    <div class="form-group">
                       <label for="name">Nom du produit</label>
                       <input id="name" name="name" type="text" class="form-control"  placeholder="ex: Black IPA">
                     </div>
+                    
+                    <div class="form-group">
+                            <div id='myImage'><img src="/images/placeholder-image.jpg" height="100" alt="Photo du produit"></div>
+                            <label for="">Photo du produit</label><br />
+                            <a id="upload_widget" class="btn btn-sm btn-outline-primary">Séléctionner une photo</a>
+                            <input id="imgurl" name="imgUrl" type="hidden" class="form-control" value="" />
+                    </div>    
+                  
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-7">
 
                     <div class="form-group">
                         <label for="brand">Marque du produit</label>
@@ -57,12 +89,25 @@
                         <input id="networktoken" type="hidden" class="form-control" name="networktoken" value="<%= token %>">
                     </div>
 
-                    <button type="submit" class="btn btn-success">Envoyer</button>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
                 </div>
                 
             </div>    
         </div>
+
+
+
+            <footer class="mt-auto py-4">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                    <p class="text-center"><a href="#" class="text-info">Contacter aline : aline.consigne@gmail.com</a></p>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+
+
     <!-- Cloudinary widget -->
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
     <script type="text/javascript">  
@@ -87,9 +132,13 @@
         }, false);
     </script>
 
-   <!-- BOOTSTRAP -->
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-   </body>
+
+    
+    
+    
+    <!-- BOOTSTRAP -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
 </html>

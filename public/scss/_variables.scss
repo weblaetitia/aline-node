@@ -12,18 +12,21 @@ $darkblue: #033C47;
 $dark: #374141;
 $tomato: #ec333b;
 $gold: #e8ba00;
+$green:   #28a745 !default;
+
 
 // ajouter + modifier des couleurs
 $theme-colors: (
   "primary": $mint,     // vert
-  "success": $gold,     // gold
-  "warning": $warning,  
+  "success": $green,     
+  "warning": $gold,  // gold
   "danger": $tomato,    // rouge
   "light": $light,
   "dark": $darkblue,      
   "info": $darkblue,
   "secondary": $dark,  
 );
+
 
 
 // Links

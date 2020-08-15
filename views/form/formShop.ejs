@@ -5,22 +5,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
         <!-- my custom Bootstrap -->
-        <link href="css/style.css" rel="stylesheet">        
+        <link href="/css/style.css" rel="stylesheet">
 
-        <title>Nourrir Aline - Magasin</title>
-    </head>
-
-    <body>
-        <div class="container">
+    <title>Nourrir Aline - Ajouter un produit</title>
+  </head>
+  <body>
+    
+    <div class="cover-container d-flex flex-column">
+      <!-- Header Navbar-->
+      <header class="mb-auto">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+          <a class="navbar-brand" href="#">
+            <img src="/images/logo-aline.svg" width="76" height="36" class="d-inline-block align-top" alt="" loading="lazy">
+            <span class="navbar-text title text-info ml-2">L'appli consigne</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <a href="" class="btn btn-info">Déconnexion</a>
+            </form>
+          </div>
+        </nav>
+      </header>
+      <div class="container my-4 py-4" style="background-color: #fff;">
             <div class="row">
-                <div class="col-12 col-md-6 offset-md-3">
-                    <h1>Ajouter un magasin</h1>
-                    <h4>Token : <%= token %></h4>
-                    
+                <div class="col-12">
+                    <h1 class="title text-primary h2 text-center">Ajouter un magasin<br> <span class="h6">Token : <%= token %></span></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-5">
                     <!-- find name avec autocomplete -->
                     <div class="form-group">
                         <label for="autocomplete">Rechercher</label>
-                        <input type="text" id="autocomplete" class="form-control" name="autocomplete" placeholder="Tapper ici votre recherche">
+                        <input type="text" id="autocomplete" class="form-control form-control-lg" name="autocomplete" placeholder="Tapper ici votre recherche">
                     </div>
 
                     <div id="details"></div>
@@ -31,8 +56,9 @@
                         <img src="" width="16" height="16" id="place-icon">
                         <span id="place-name"  class="title"></span><br>
                         <span id="place-address"></span>
-                      </div>
-
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7">
                     <!-- debut du form -->
                     <form action="/form/add-place" method="POST">
                         <div class="form-group">
@@ -49,6 +75,17 @@
                             <label for="city">Ville</label>
                             <input id="city" name="city" type="text" class="form-control"  placeholder="ex: Paris">
                         </div>
+
+                        <!-- input with googlePlace LATITUDE -->
+                        <div class="form-group">
+                            <label for="place_lat">Latitude</label>
+                            <input id="place_lat" type="text" class="form-control" name="place_lat" value="" placeholder="Lat.">
+                        </div>
+                        <!-- input with googlePlace LONGITUDE -->
+                        <div class="form-group">
+                            <label for="place_lng">Longitude</label>
+                            <input id="place_lng" type="text" class="form-control" name="place_lng" value="" placeholder="Long.">
+                        </div>
     
                         <div class="form-group">
                             <label for="phone">Téléphone</label>
@@ -63,12 +100,11 @@
                         <!-- services -->
                         <div class="form-group">
                             <label for="">Service de consigne proposé</label>
-                            <input id="service1" name="services" type="text" class="form-control" placeholder="ex: Boîtes repas en verre">
-                            <input id="service2" name="services" type="text" class="form-control" placeholder="ex: Couverts en métal">
+                            <input id="service1" name="services" type="text" class="form-control" placeholder="ex: Produits consignés et contenants vides">
                         </div>
                         
                         <!-- produits -->
-                        <div class="form-check">
+                        <div class="form-check pl-0">
                             <p>Produits disponibles</p>
                             <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
                             
@@ -90,16 +126,6 @@
                         <div class="form-group">
                             <input id="place_id" type="hidden" class="form-control" name="place_id" value="">
                         </div>
-                        <!-- input with googlePlace LATITUDE -->
-                        <div class="form-group">
-                            <label for="place_lat">Latitude</label>
-                            <input id="place_lat" type="text" class="form-control" name="place_lat" value="" placeholder="Lat.">
-                        </div>
-                        <!-- input with googlePlace LONGITUDE -->
-                        <div class="form-group">
-                            <label for="place_lng">Longitude</label>
-                            <input id="place_lng" type="text" class="form-control" name="place_lng" value="" placeholder="Long.">
-                        </div>
                         <!-- hidden input with network token -->
                         <div class="form-group">
                             <input id="networktoken" type="hidden" class="form-control" name="networktoken" value="<%= token %>">
@@ -109,13 +135,21 @@
                             <input type="hidden" class="form-control" name="type" value="shop">
                         </div>
     
-                        <button type="submit" class="btn btn-success">Envoyer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer le magasin</button>
                     </form>
                 </div>
+            </div>
             </div>    
         </div>
 
-
+        <footer class="mt-auto py-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                <p class="text-center"><a href="#" class="text-info">Contacter aline : aline.consigne@gmail.com</a></p>
+                </li>
+            </ul>
+        </footer>
+    </div>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script>
     // 
@@ -194,9 +228,9 @@
 
     
        
-    <!-- BOOTSTRAP -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    </body>
+       <!-- BOOTSTRAP -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+   </body>
 </html>
