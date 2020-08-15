@@ -1,24 +1,23 @@
 // add your custom styles here
 // to learn more about SASS, visit sass-lang.com
 
+// body 
+body {
+  color: $darkblue;
+}
+// add custom font for heading
+.title {
+  font-family: 'Capriola', 'Source Sans Pro', "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  letter-spacing: -0.7;
+}
+
 .cover-container {
   min-height: 100vh;
-  background-color: aqua;
+  background-image: url(../images/backgroung-mint.svg);
+  background-position: center;
+  background-size: cover;
 }
 
-main > .container {
-  padding: 60px 15px 0;
-}
-
-.footer {
-  background-color: #f5f5f5;
-}
-
-.footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-code {
-  font-size: 80%;
+.myfooter {
+  height: 5em;
 }

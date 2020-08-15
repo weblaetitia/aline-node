@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024px" height="885px" viewBox="0 0 1024 885" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>patate</title>
+    <defs>
+        <polygon id="path-1" points="0.888083424 1.99160813 1056.94702 1.99160813 1056.94702 876.216398 0.888083424 876.216398"></polygon>
+    </defs>
+    <g id="Website" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Signin" transform="translate(0.000000, -119.000000)">
+            <g id="background" transform="translate(-64.000000, 98.000000)">
+                <g id="patate" transform="translate(560.000000, 475.256637) rotate(4.000000) translate(-560.000000, -475.256637) translate(30.939227, 37.113317)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M1034.73501,188.505557 C1118.64996,328.448092 961.1549,698.123895 623.938586,823.50433 C450.000882,888.176712 248.748655,978.181247 37.3462245,510.550565 C-16.566774,391.292929 -60.3115554,-14.516688 288.939655,2.51188371 C567.490147,16.0929722 987.560854,109.835638 1034.73501,188.505557" id="Fill-1" fill="#D5EFE8" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

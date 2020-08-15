@@ -10,48 +10,73 @@
     <title>Nourrir Aline - Connexion</title>
   </head>
   <body>
-    <div class="container-fluid">
-        <!-- Header Navbar-->
-        <nav class=" header navbar">
-          Aline #pourquellerevienne
-        <a class="logout" href="/">Deconnexion</a>
-        </nav> 
-
-        <div class="row">
-
-            <!-- SIGN IN AREA -->
-            <div class="col-12 col-md-6 offset-md-3 text-center">
-              <h2>Nourrir Aline!</h2>
-              
-                <div class="formArea">
-
-                  <h4 class="titleForm">Sign In</h4>
-
-                  <form action="/network/sign-in" method="POST">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Votre e-mail</label>
-                      <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp" placeholder="exemple@email.com">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Votre mot de passe</label>
-                      <input name="passwordFromFront" type="password" class="form-control" placeholder="Enter password">
-                    </div>
-                    <button type="submit" class="btn btn-success">Connexion</button>
-                  </form>
-                    
-                    <h2>Vous êtes nouveau ici?</h2>
-                    <a href="/network/sign-up" class="btn btn-outline-success">S'inscrire</a>
-                 
-                </div>
-
-            </div>
-
-            
-
-        </div>  
+    
+    <div class="cover-container d-flex flex-column">
+      <!-- Header Navbar-->
+      <header class="mb-auto">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+          <a class="navbar-brand" href="#">
+            <img src="/images/logo-aline.svg" width="76" height="36" class="d-inline-block align-top" alt="" loading="lazy">
+            <span class="navbar-text title text-info ml-2">L'appli consigne</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">S'enregistrer <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <a href="" class="btn btn-info">Connexion</a>
+            </form>
+          </div>
+        </nav>
+      </header>
       
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+            <div class="card">
+              <div class="card-body">
+
+                <h1 class="title text-primary h1">Se connecter</h1>
+
+                <form action="/network/sign-in" method="POST">
+                  <div class="form-group">
+                    <label for="emailFromFront">Votre e-mail</label>
+                    <input id="emailFromFront" name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="passwordFromFront">Votre mot de passe</label>
+                    <input id="passwordFromFront" name="passwordFromFront" type="password" class="form-control" placeholder="Enter password">
+                  </div>
+                  <p class="text-center"><button type="submit" class="btn btn-primary">Connexion</button></p>
+                </form>
+                  
+                  <p class="text-center text-center mt-4 mb-2">Vous êtes nouveau ici?</p>
+                  <p class="text-center"><a href="/network/sign-up" class="btn btn-outline-primary text-center">S'inscrire</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="mt-auto py-4">
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <p class="text-center"><a href="#" class="text-info">Contacter aline : aline.consigne@gmail.com</a></p>
+          </li>
+        </ul>
+      </footer>
     </div>
    
+    
     
   <!-- BOOTSTRAP -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
