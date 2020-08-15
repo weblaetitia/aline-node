@@ -76,7 +76,7 @@ router.post('/add-place', async function(req, res, next){
   } else {
     res.render('form/feedChoice', {formSucces: false }, {token: req.session.token})
   }
-})
+});
 
 
 /* POST add-product */
@@ -85,6 +85,8 @@ router.post('/add-product', async function(req, res, next){
     token: req.body.networktoken // recupere le reseau par son token
   })
   var keyword = [];
+  var searchWord = req.body.name
+  
 
   keyword.push(req.body.name, req.body.brand);
  
@@ -94,7 +96,7 @@ router.post('/add-product', async function(req, res, next){
     brand: req.body.brand,
     type: req.body.type,
     refoundPrice: req.body.price,
-    barCode: req.body.code,
+    barCode: req.body.barcode,
     imageUrl: req.body.imgUrl,
     keyword: keyword
   })
@@ -105,7 +107,7 @@ router.post('/add-product', async function(req, res, next){
   } else {
     res.render('form/feedChoice', {formSucces: false }, {token: req.session.token})
   }
-})
+});
 
 
 module.exports = router;
