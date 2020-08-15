@@ -10,11 +10,29 @@ const PlaceModel = require('../models/placeModel');
 
 router.post('/getPlaces', async function(req,res,next){
 
-    var myrequest = await PlaceModel.find({
-        network: req.body.networkFromFront
-       })
+    if(req.body.name.length>0) {
+        var myRequest = await PlaceModel.find({
+            name: req.body.name,
+           })
+    } else if(req.body.network.length>0 && req.body.type.length>0){
+        var myRequest = await PlaceModel.find({
+            network: req.body.network,
+            type: req.body.type
+        })
+    } else if(req.body.network.length>0) {
+        var myRequest = await PlaceModel.find({
+            network: req.body.network
+        })
+    } else if(req.body.type.length>0) {
+        var myRequest = await PlaceModel.find({
+            type: req.body.type
+        })
+    } else {
+        var myRequest = []
+    }
 
-    res.json(myrequest)
+
+    res.json(myRequest)
 })
 
 module.exports = router;
