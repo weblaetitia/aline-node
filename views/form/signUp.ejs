@@ -158,6 +158,7 @@
         uploadPreset: 'ml_default',
         multiple: false, // multiples autorisés
         maxFiles: 1, // nombe max de photo
+        folder: 'networks-logos', // folder
         }, (error, result) => { 
           if (!error && result && result.event === "success") { 
             console.log('Done! Here is the image info: ', result.info); 
