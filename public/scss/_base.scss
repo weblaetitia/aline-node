@@ -1,6 +1,11 @@
 // add your custom styles here
 // to learn more about SASS, visit sass-lang.com
 
+.cover-container {
+  min-height: 100vh;
+  background-color: aqua;
+}
+
 main > .container {
   padding: 60px 15px 0;
 }
