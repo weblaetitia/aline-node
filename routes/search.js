@@ -73,6 +73,7 @@ router.post('/search-barcode', async function(req,res,next){
         imageUrl: prod.imageUrl,
         barCode: prod.barCode,
         network: prod.ownerDocument().businessName,
+        networkImgUrl: prod.ownerDocument().imageUrl,
         }
       }
     })
