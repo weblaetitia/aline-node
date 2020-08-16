@@ -59,22 +59,25 @@ router.post('/search-product', async function(req,res,next){
 
 /* Post search-barcode */ 
 router.post('/search-barcode', async function(req,res,next){
-
-  var myrequest = await NetworkModel.find()
-    
-  for(let i=0; i<myrequest.length; i++){
-    for(let j=0; j<myrequest[i].products.length; j++){
-
-        var searchCodeProduct = myrequest[i].products[j].barCode
-        if(searchCodeProduct.includes(searchElements)){
-          // console.log(myrequest[i].products[j])
-          res.json(myrequest[i].products[j]);
+  console.log(req.body.data)
+  var infos
+  var networks = await NetworkModel.find()
+  networks.forEach((network) => {
+    network.products.forEach((prod) => {
+      if (prod.barCode == req.body.data) {
+        console.log('trouvé')
+        infos = {
+        name: prod.name,
+        brand: prod.brand,
+        refoundPrice: prod.refoundPrice,
+        imageUrl: prod.imageUrl,
+        barCode: prod.barCode,
+        network: prod.ownerDocument().businessName,
         }
-
-    }
-  };
-
-  res.json(false)
+      }
+    })
+  })
+  res.json(infos)
 })
 
 
