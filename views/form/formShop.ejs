@@ -105,22 +105,22 @@
                         
                         <!-- produits -->
                         <div class="form-check pl-0">
-                            <p>Produits disponibles</p>
-                            <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
-                            
-                                <div class="form-group form-check">
-                                    <input name="products" type="checkbox" value="aaaaa" class="form-check-input">
-                                    <label class="form-check-label">Boîte XXL (8€)</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input name="products" type="checkbox" value="bbbbbb" class="form-check-input">
-                                    <label class="form-check-label">Boîte M (6€)</label>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input name="products" type="checkbox" value="cccccc" class="form-check-input">
-                                    <label class="form-check-label">Couverts (5€)</label>
-                                </div>
-                        </div>
+                          <label for="products">Séléctionner les produits disponibles dans cet établissement</label>
+                      <% if (products.length == 0) { %>
+                        <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
+                      <% } else {
+                          products.forEach(element => {
+                            %>
+                            <div class="checkbox">
+                              <input name="products" type="checkbox" value="<%= element._id %>">
+                              <img src="<%= element.imageUrl %>" class="mx-2" width="50" alt="<%= element.name %>">
+                              <label><%= element.brand %> - <%= element.name %> (consigne : <%= element.refoundPrice %>&nbsp;€)</label>
+                            </div>
+                            <%
+                          }); 
+                        }
+                        %>
+                      </div>
 
                         <!-- hidden input with googlePlace ID -->
                         <div class="form-group">

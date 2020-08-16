@@ -19,13 +19,23 @@ router.get('/feedChoice', function(req, res, next) {
   });
 
 /* GET form for restaurant page. */
-router.get('/formRestaurant', function(req, res, next) {
-  res.render('form/formRestaurant', {token: req.session.token});
+router.get('/formRestaurant', async function(req, res, next) {
+   // get products and send them to the front
+   var network = await NetworkModel.findOne({
+    token: req.session.token
+  })
+  var products = network.products
+  res.render('form/formRestaurant', {token: req.session.token, products});
   });
 
 /* GET form for shop page. */
-router.get('/formShop', function(req, res, next) {
-  res.render('form/formShop', {token: req.session.token});
+router.get('/formShop', async function(req, res, next) {
+  // get products and send them to the front
+  var network = await NetworkModel.findOne({
+    token: req.session.token
+  })
+  var products = network.products
+  res.render('form/formShop', {token: req.session.token, products});
   });
 
 /* GET form for product page. */
@@ -35,22 +45,30 @@ router.get('/formProduct', function(req, res, next) {
 
 
 
-/* POST add-restaurant */
+/* POST add-place (restaurant and shop) */
 router.post('/add-place', async function(req, res, next){
-  console.log(req.body.products) // tableau des id de produits // à traiter
-  console.log(req.body.services) // tableaux
 
   // get network from token
   var network = await NetworkModel.findOne({
     token: req.body.networktoken
   })
-
   var networkName = network.businessName
 
-  console.log(networkName)
+  // get productList from this network
+  var networkProducts = network.products // []
+  
+  // get placeProducts infos
+  var placeProducts = []
+  networkProducts.forEach(networkProd => {
+    req.body.products.forEach(reqProd => {
+      if (reqProd == networkProd._id) {
+        placeProducts.push(networkProd)
+      }
+    })
+  })
 
-
-  var newRestaurant = await PlaceModel( {
+  // enregistrer la place en bdd
+  var newPlace = await PlaceModel( {
     name: req.body.name,
     adress: req.body.address,
     city: req.body.city,
@@ -62,21 +80,22 @@ router.post('/add-place', async function(req, res, next){
     type: req.body.type,
     latitude: req.body.place_lat,
     longitude: req.body.place_lng,
-    // products: {sous document},
+    products: placeProducts,
     // zipCode: Number,
     // imageUrl: String,
     // description: String,
   } )
-  var retaurantSaved = await newRestaurant.save()
+  var placeSaved = await newPlace.save()
 
-  console.log(retaurantSaved)
+  console.log(placeSaved)
 
-  if (retaurantSaved) {
+  if (placeSaved) {
+    // faire un redirect au lieu de render ?
     res.render('form/feedChoice', {formSucces: true, token: req.session.token})
   } else {
     res.render('form/feedChoice', {formSucces: false, token: req.session.token})
   }
-});
+})
 
 
 /* POST add-product */

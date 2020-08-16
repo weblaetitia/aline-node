@@ -50,15 +50,15 @@
                         <input type="text" id="autocomplete" class="form-control form-control-lg" name="autocomplete" placeholder="Tapper ici votre recherche">
                     </div>
 
-                    <div id="details"></div>
+                    <!-- <div id="details"></div> -->
                     
                     <!-- map -->
                     <div id="map" style="height: 300px;"></div>
                     <div id="infowindow-content">
-                        <img src="" width="16" height="16" id="place-icon">
-                        <span id="place-name"  class="title"></span><br>
-                        <span id="place-address"></span>
-                      </div>
+                      <img src="" width="16" height="16" id="place-icon">
+                      <span id="place-name" class="title"></span><br>
+                      <span id="place-address"></span>
+                    </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-7">
 
@@ -108,22 +108,23 @@
                         
                         <!-- produits -->
                         <div class="form-check pl-0">
-                            <label for="products">Produits disponibles</label>
-                            <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
-                            <div>
-                                <div class="checkbox">
-                                    <label><input name="products" type="checkbox" value="aaaaa">Boîte XXL (8€)</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input name="products" type="checkbox" value="bbbbbb">Boîte M (6€)</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input name="products" type="checkbox" value="cccccc">Couverts (5€)</label>
-                                </div>
-                                
-                            </div>
+                            <label for="products">Séléctionner les produits disponibles dans cet établissement</label>
+                        <% if (products.length == 0) { %>
+                          <div class="alert alert-warning">Vous n'avez pas encore enregistré de produits</div>
+                        <% } else {
+                            products.forEach(element => {
+                              %>
+                              <div class="checkbox">
+                                <input name="products" type="checkbox" value="<%= element._id %>">
+                                <img src="<%= element.imageUrl %>" class="mx-2" width="50" alt="<%= element.name %>">
+                                <label><%= element.brand %> - <%= element.name %> (consigne : <%= element.refoundPrice %>&nbsp;€)</label>
+                              </div>
+                              <%
+                            }); 
+                          }
+                          %>
                         </div>
-
+                        
 
                         <!-- hidden input with googlePlace ID -->
                         <div class="form-group">
