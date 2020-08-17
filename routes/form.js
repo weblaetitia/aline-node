@@ -67,6 +67,9 @@ router.post('/add-place', async function(req, res, next){
     })
   })
 
+  console.log(req.body.placeImg)
+  console.log(req.body.openingHours)
+
   // enregistrer la place en bdd
   var newPlace = await PlaceModel( {
     name: req.body.name,
@@ -81,13 +84,14 @@ router.post('/add-place', async function(req, res, next){
     latitude: req.body.place_lat,
     longitude: req.body.place_lng,
     products: placeProducts,
+    placeImg: req.body.placeImg,
+    openingHours : req.body.openingHours,
     // zipCode: Number,
     // imageUrl: String,
     // description: String,
   } )
   var placeSaved = await newPlace.save()
 
-  console.log(placeSaved)
 
   if (placeSaved) {
     // faire un redirect au lieu de render ?

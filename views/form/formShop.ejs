@@ -160,6 +160,14 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="type" value="shop">
                         </div>
+                        <!-- hidden input with image -->
+                        <div class="form-group">
+                            <input id="place-img" type="hidden" class="form-control" name="placeImg" value="">
+                        </div>
+                        <!-- hidden input with opening_hours -->
+                        <div class="form-group">
+                            <input id="opening_hours" type="hidden" class="form-control" name="openingHours" value="">
+                        </div>
     
                         <button type="submit" class="btn btn-primary">Enregistrer le magasin</button>
                     </form>
@@ -178,7 +186,6 @@
     </div>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script>
-    // 
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -190,7 +197,7 @@
         autocomplete.bindTo('bounds', map);
         autocomplete.setComponentRestrictions({'country': 'FR'})
         autocomplete.setFields(
-            ['place_id', 'geometry', 'name',  'opening_hours', 'photos', 'types', 'url', 'website', 'address_components', 'international_phone_number', 'icon']);
+            ['place_id', 'geometry', 'name',  'opening_hours', 'photos', 'types', 'url', 'website', 'address_components', 'formatted_phone_number', 'icon', 'photos', 'address_component']);
         autocomplete.setTypes(['establishment'])    
         autocomplete.setOptions(true)
 
@@ -232,7 +239,7 @@
         document.getElementById('name').value = place.name
         document.getElementById('address').value = address
         document.getElementById('city').value = place.address_components[2].long_name
-        document.getElementById('phone').value = place.international_phone_number
+        document.getElementById('phone').value = place.formatted_phone_number
         document.getElementById('website').value = place.website
         document.getElementById('place_id').value = place.place_id
         var placeLat = place.geometry.location.lat()
@@ -240,6 +247,15 @@
         var placeLng = place.geometry.location.lng()
         document.getElementById('place_lng').value = placeLng
         console.log(placeLat, placeLng)
+        
+        var myphoto = place.photos[0].getUrl()
+        document.getElementById('place-img').value = myphoto
+        
+        var opening = place.opening_hours.weekday_text
+        document.getElementById('opening_hours').value = opening
+        console.log(opening)
+
+
         infowindowContent.children['place-icon'].src = place.icon;
         infowindowContent.children['place-name'].textContent = place.name;
         infowindowContent.children['place-address'].textContent = address;
