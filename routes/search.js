@@ -8,6 +8,7 @@ if(!process.env.DB_INFO){
   }
 
 var NetworkModel = require('../models/networkModel')
+const PlaceModel = require('../models/placeModel');
 
 
 
@@ -30,10 +31,8 @@ router.post('/search', async function(req,res,next){
 });
 
 
-
-
-/* Post search-product */
-router.post('/search-product', async function(req,res,next){
+/* Get search-product */
+router.get('/search-product', async function(req,res,next){
 
     var myrequest = await NetworkModel.find()
     
@@ -57,14 +56,19 @@ router.post('/search-product', async function(req,res,next){
 
 
 
-/* Post search-barcode */ 
-router.post('/search-barcode', async function(req,res,next){
-  console.log(req.body.data)
+
+/* Get search-barcode */ 
+router.get('/search-barcode', async function(req,res,next){
+  if(req.query.data){
+    searchElements = req.query.data
+  }
+
+  console.log(req.query.data)
   var infos
   var networks = await NetworkModel.find()
   networks.forEach((network) => {
     network.products.forEach((prod) => {
-      if (prod.barCode == req.body.data) {
+      if (prod.barCode == searchElements) {
         console.log('trouvé')
         infos = {
         name: prod.name,
@@ -78,6 +82,7 @@ router.post('/search-barcode', async function(req,res,next){
       }
     })
   })
+  console.log(searchElements)
   res.json(infos)
 })
 
