@@ -58,13 +58,13 @@ router.post('/search-product', async function(req,res,next){
 
 
 /* Post search-barcode */ 
-router.post('/search-barcode', async function(req,res,next){
-  console.log(req.body.data)
+router.get('/search-barcode', async function(req,res,next){
+  console.log(req.query.data)
   var infos
   var networks = await NetworkModel.find()
   networks.forEach((network) => {
     network.products.forEach((prod) => {
-      if (prod.barCode == req.body.data) {
+      if (prod.barCode == req.query.data) {
         console.log('trouvé')
         infos = {
         name: prod.name,
