@@ -65,8 +65,8 @@ router.post('/search-barcode', async function(req,res,next){
   for(let i=0; i<myrequest.length; i++){
     for(let j=0; j<myrequest[i].products.length; j++){
 
-        var searchCodeProduct = myrequest[i].products[j].barCode
-        if(searchCodeProduct.includes(searchElements)){
+        var searchBarCode = myrequest[i].products[j].barCode
+        if(searchBarCode.includes(searchElements)){
           // console.log(myrequest[i].products[j])
           res.json(myrequest[i].products[j]);
         }
