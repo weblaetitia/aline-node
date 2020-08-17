@@ -60,7 +60,7 @@ router.post('/search-product', async function(req,res,next){
 /* Post search-barcode */ 
 router.get('/search-barcode', async function(req,res,next){
   console.log(req.query.data)
-  var infos
+  var infos = false
   var networks = await NetworkModel.find()
   networks.forEach((network) => {
     network.products.forEach((prod) => {
