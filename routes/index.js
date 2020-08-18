@@ -90,4 +90,111 @@ router.get('/add-places-keywords', async function(req, res, next) {
   
 })
 
+
+// ajouter services pour chaque places
+router.get('/add-places-services', async function(req, res, next) {
+ 
+  // if shop
+  var shops = await PlaceModel.find({
+    type: 'shop'
+  })
+  shops.forEach((shop) => {
+    if (shop.services == '' || shop.services == undefined || shop.services == ',') {
+      shop.services = 'Produits alimentaires avec contenants consignés'
+      shop.save()
+      // console.log(shop)
+    }
+  })
+  
+  // if restaurant
+  var restaurants = await PlaceModel.find({
+    type: 'restaurant'
+  })
+  restaurants.forEach((restaurant) => {
+    if (restaurant.services == '' || restaurant.services == undefined || restaurant.services == ',') {
+      restaurant.services = 'Boîtes repas et couverts consignés'
+      restaurant.save()
+      // console.log(restaurant)
+    }
+  })
+})
+
+// ajouter services pour chaque places
+router.get('/add-places-photos', async function(req, res, next) {
+
+  var randomNum = (Math.floor(Math.random()*18))
+
+ 
+  // if shop
+  // var shops = await PlaceModel.find({
+  //   type: 'shop'
+  // })
+ 
+  // var images = ['https://res.cloudinary.com/alineconsigne/image/upload/v1597748308/shops/shops-19_rl2d78.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748308/shops/shops-18_fw14pv.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748307/shops/shops-13_lb3pcb.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748307/shops/shops-14_ofnn16.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748307/shops/shops-16_eqitzo.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748307/shops/shops-15_n7pahl.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748307/shops/shops-17_bprdwg.jpg', 
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748307/shops/shops-9_ie3ybb.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-11_xytrdb.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-8_kdlhu5.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-12_mkfxab.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-6_ejroll.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-7_abeawg.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-2_kedl4c.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-1_g2cc4q.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-3_jhbzd0.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-5_tpkbfw.jpg',
+  //               'https://res.cloudinary.com/alineconsigne/image/upload/v1597748306/shops/shops-4_iv5r59.jpg'
+  //             ]
+
+  // shops.forEach((shop) => {
+  //   if(shop.placeImg == undefined || shop.placeImg == '' || !shop.placeImg) {
+  //     shop.placeImg = images[randomNum]
+  //     console.log(shop.placeImg)
+  //     shop.save()
+  //   }
+  // })
+
+
+  // if restaurant
+  var restaurants = await PlaceModel.find({
+    type: 'restaurant'
+  })
+
+  var images = ['https://res.cloudinary.com/alineconsigne/image/upload/v1597751869/restaurants/restaurants-5_wlmzof.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751869/restaurants/restaurants-1_h77tyy.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751869/restaurants/restaurants-3_vv93i7.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751869/restaurants/restaurants-2_bk7pnq.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751869/restaurants/restaurants-4_bxlmti.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751870/restaurants/restaurants-14_omez5t.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751870/restaurants/restaurants-11_t3cz0f.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751870/restaurants/restaurants-12_nf6ong.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751870/restaurants/restaurants-9_k4brvg.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751870/restaurants/restaurants-7_nu1gkk.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751870/restaurants/restaurants-6_uar3hw.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751871/restaurants/restaurants-22_c6fkde.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751871/restaurants/restaurants-16_kcbt3d.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751871/restaurants/restaurants-17_tfxqit.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751871/restaurants/restaurants-13_fiwvp1.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751871/restaurants/restaurants-19_btgkje.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751871/restaurants/restaurants-18_cxxkys.jpg',
+                'https://res.cloudinary.com/alineconsigne/image/upload/v1597751871/restaurants/restaurants-15_k7oqt4.jpg']
+
+restaurants.forEach((resto) => {
+  if(resto.placeImg == undefined || resto.placeImg == '' || !resto.placeImg) {
+    resto.placeImg = images[randomNum]
+    // console.log(resto.placeImg)
+    resto.save()
+  }
+})
+  
+})
+
+
+
+
+
 module.exports = router;
