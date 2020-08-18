@@ -122,7 +122,7 @@ router.get('/add-places-services', async function(req, res, next) {
 // ajouter services pour chaque places
 router.get('/add-places-photos', async function(req, res, next) {
 
-  var randomNum = (Math.floor(Math.random()*18))
+  
 
  
   // if shop
@@ -151,11 +151,10 @@ router.get('/add-places-photos', async function(req, res, next) {
   //             ]
 
   // shops.forEach((shop) => {
-  //   if(shop.placeImg == undefined || shop.placeImg == '' || !shop.placeImg) {
+  //   var randomNum = (Math.floor(Math.random()*18))
   //     shop.placeImg = images[randomNum]
   //     console.log(shop.placeImg)
   //     shop.save()
-  //   }
   // })
 
 
@@ -185,6 +184,7 @@ router.get('/add-places-photos', async function(req, res, next) {
 
 restaurants.forEach((resto) => {
   if(resto.placeImg == undefined || resto.placeImg == '' || !resto.placeImg) {
+    var randomNum = (Math.floor(Math.random()*18))
     resto.placeImg = images[randomNum]
     // console.log(resto.placeImg)
     resto.save()
