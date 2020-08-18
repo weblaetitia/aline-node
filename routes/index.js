@@ -4,6 +4,7 @@ var request = require('sync-request');
 
 
 var NetworkModel = require('../models/networkModel')
+var PlaceModel = require('../models/placeModel')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -57,5 +58,36 @@ router.get('/add-keywords', async function(req, res, next) {
   })
 })
 
+
+// ajouter une liste de keywords pour chaque places
+router.get('/add-places-keywords', async function(req, res, next) {
+  var exclude = ['la', 'le', 'les', 'de', 'des', 'du', 'à', 'aux', 'à', '-']
+  var places = await PlaceModel.find()
+  
+  places.forEach((place) => {
+    // create keywords array
+    var keywords = [];
+    var nameSplit = place.name.toLowerCase().split(' ')
+    var city = place.city.toLowerCase()
+    var type = place.type.toLowerCase()
+    var keywords = nameSplit.concat(city, type)
+    if (type == 'shop') {
+      keywords.push('magasin', 'boutique', 'supermarché')
+    }
+
+    if (type == 'restaurant') {
+      keywords.push('café', 'traiteur')
+    }
+    keywords = [...new Set(keywords)]
+
+    exclude.forEach((fil) => {
+      keywords = keywords.filter(word => word != fil)
+    })
+    // console.log(keywords)
+    place.keywords = keywords
+    place.save()
+  })
+  
+})
 
 module.exports = router;
