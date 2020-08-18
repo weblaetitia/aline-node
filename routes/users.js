@@ -155,8 +155,12 @@ router.get('/mobile/add-fav', async function (req, res, next) {
     token: req.query.token
   })
   user.favorites.push(place)
-  user.save()
-  
+  var userSaved = user.save()
+  if (userSaved) {
+    res.json({succes: true})
+  } else {
+    res.json({succes: false})
+  }
 })
 
 
