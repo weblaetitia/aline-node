@@ -27,7 +27,7 @@ router.post('/search', async function(req,res,next){
 
 /* Get search-all */
 router.get('/search-all', async function(req,res,next){
-    console.log(searchElements, "a")
+    // console.log(searchElements, "a")
      if(req.query.data){
       searchElements = req.query.data
     }
@@ -39,7 +39,7 @@ router.get('/search-all', async function(req,res,next){
      
       for(let j=0; j<myrequest[i].products.length; j++){
           var searchProduct = myrequest[i].products[j].keywords
-          console.log(searchProduct, "b")
+          // console.log(searchProduct, "b")
           if(searchProduct.includes(searchElements)){
               result.push(myrequest[i].products[j])
           }  
@@ -48,15 +48,16 @@ router.get('/search-all', async function(req,res,next){
 
  
     var myrequest = await PlaceModel.find()
-    
+    // console.log(myrequest)
     for(let i=0; i<myrequest.length; i++){
-      console.log(myrequest[i], 'hello')
-          var searchPlace = myrequest[i].keywords
-          console.log('search place', searchPlace)
+
+      // console.log(myrequest[i], 'hello', i)
+          let searchPlace = myrequest[i]
+          console.log('search place', searchPlace.keywords)
          
-          if(searchPlace.includes(searchElements)){
-              result.push(myrequest[i])
-          }    
+          //  if(searchPlace.includes(searchElements)){
+          //     result.push(myrequest[i])
+          // }   
     };
     console.log(result)
 
