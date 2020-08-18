@@ -5,6 +5,7 @@ var encBase64 = require('crypto-js/enc-base64')
 var uid2 = require('uid2')
 
 var UserModel = require('../models/userModel');
+var PlaceModel = require('../models/placeModel');
 
 
 /* GET users listing. */
@@ -139,5 +140,24 @@ router.post('/mobile/sign-up', async function(req, res, next) {
     })
   }
 })
+
+
+/* GET add favorite */
+router.get('/mobile/add-fav', async function (req, res, next) {
+  // console.log(req.query.token) // ok
+  // console.log(req.query.placeid) // ok
+  place = await PlaceModel.findOne({
+    _id: req.query.placeid
+  })
+
+  
+  user = await UserModel.findOne({
+    token: req.query.token
+  })
+  user.favorites.push(place)
+  user.save()
+  
+})
+
 
 module.exports = router;
