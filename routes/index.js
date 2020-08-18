@@ -193,6 +193,20 @@ restaurants.forEach((resto) => {
   
 })
 
+// add opening hours
+
+
+
+router.get('/add-hours', async function(req, res, next) {
+  var places = await PlaceModel.find() 
+  places.forEach((place) => {
+    if (place.openingHours == undefined || place.openingHours == '' || !place.openingHours) {
+      place.openingHours = 'lundi: 12:00 – 14:30, 17:30 – 22:00,mardi: 12:00 – 14:30, 17:30 – 22:00,mercredi: 12:00 – 14:30, 17:30 – 22:00,jeudi: 12:00 – 14:30, 17:30 – 22:00,vendredi: 12:00 – 14:30, 17:30 – 22:00,samedi: 12:00 – 14:30, 17:30 – 22:00,dimanche: 12:00 – 14:30, 17:30 – 22:00'
+      place.save()
+    }
+  })
+})
+
 
 
 
