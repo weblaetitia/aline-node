@@ -14,25 +14,23 @@ const PlaceModel = require('../models/placeModel');
 
 /* Post search */
 router.post('/search', async function(req,res,next){
-
-  var search = req.body.dataProducts;
-
-  if(search.length == 13){
-    if(typeof parseInt(search) == "number"){
+  var search=req.body.dataProducts;
+  if(search.length == 13 && typeof parseInt(search) == "number"){
       searchElements = parseInt(search);
       res.redirect('/search/search-barcode');
     }else{
-      res.redirect('/search/search-product')
+      searchElements = search;
+      res.redirect('/search/search-all')
     }
-  }else{
-    res.json(false)
-  }
-
 });
 
 
-/* Get search-product */
-router.get('/search-product', async function(req,res,next){
+/* Get search-all */
+router.get('/search-all', async function(req,res,next){
+    console.log(searchElements, "a")
+     if(req.query.data){
+      searchElements = req.query.data
+    }
 
     var myrequest = await NetworkModel.find()
     
@@ -40,14 +38,25 @@ router.get('/search-product', async function(req,res,next){
     for(let i=0; i<myrequest.length; i++){
      
       for(let j=0; j<myrequest[i].products.length; j++){
-          var searchProduct = myrequest[i].products[j].keyword
-          console.log(searchProduct)
-          if(searchProduct.includes(req.body.dataProducts)){
+          var searchProduct = myrequest[i].products[j].keywords
+          console.log(searchProduct, "b")
+          if(searchProduct.includes(searchElements)){
               result.push(myrequest[i].products[j])
-
-          }
-          
+          }  
       }
+    };
+
+ 
+    var myrequest = await PlaceModel.find()
+    
+    for(let i=0; i<myrequest.length; i++){
+      console.log(myrequest[i], 'hello')
+          var searchPlace = myrequest[i].keywords
+          console.log('search place', searchPlace)
+         
+          if(searchPlace.includes(searchElements)){
+              result.push(myrequest[i])
+          }    
     };
     console.log(result)
 
@@ -56,14 +65,12 @@ router.get('/search-product', async function(req,res,next){
 
 
 
-
 /* Get search-barcode */ 
 router.get('/search-barcode', async function(req,res,next){
   if(req.query.data){
-    searchElements = req.query.data
+    searchElements = parseInt(req.query.data)
   }
 
-  console.log(req.query.data)
   var infos = false
   var networks = await NetworkModel.find()
   networks.forEach((network) => {
@@ -82,7 +89,7 @@ router.get('/search-barcode', async function(req,res,next){
       }
     })
   })
-  console.log(searchElements)
+ 
   res.json(infos)
 })
 
