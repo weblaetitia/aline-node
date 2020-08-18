@@ -108,11 +108,13 @@ router.post('/add-product', async function(req, res, next){
     token: req.body.networktoken // recupere le reseau par son token
   })
   var keywords = [];
+  var nameSplit = req.body.name.toLowerCase().split(' ')
+  var brandSplit = req.body.brand.toLowerCase().split(' ')
+  var keywords = nameSplit.concat(brandSplit)
   
-  keywords.push(req.body.name, req.body.brand);
- 
-  console.log(network)
-  network.products.push({
+  keywords = [...new Set(keywords)]
+
+   network.products.push({
     name: req.body.name,
     brand: req.body.brand,
     type: req.body.type,
