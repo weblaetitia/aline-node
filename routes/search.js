@@ -32,36 +32,36 @@ router.get('/search-all', async function(req,res,next){
       searchElements = req.query.data
     }
 
-    var myrequest = await NetworkModel.find()
+    searchElements = searchElements.split(' ')
+    var productsArray = [];
+    var placesArray = [];
+
+    var networks = await NetworkModel.find()
+
+    networks.forEach((network) => {
+      network.products.forEach((product) => {
+        product.keywords.forEach((keyword) =>{
+          if (searchElements.includes(keyword)) {
+            console.log('ok produit trouvé :')
+            productsArray.push(product)
+          }
+        })
+      })
+    })
+
     
-    var result = []
-    for(let i=0; i<myrequest.length; i++){
-     
-      for(let j=0; j<myrequest[i].products.length; j++){
-          var searchProduct = myrequest[i].products[j].keywords
-          // console.log(searchProduct, "b")
-          if(searchProduct.includes(searchElements)){
-              result.push(myrequest[i].products[j])
-          }  
-      }
-    };
+    var places = await PlaceModel.find()
+    places.forEach((place) => {
+      place.keywords.forEach((keyword) => {
+        console.log(searchElements)
+        console.log(keyword)
+        if (searchElements.includes(keyword)) {
+          placesArray.push(place)
+        }
+      })
+    })
 
- 
-    var myrequest = await PlaceModel.find()
-    // console.log(myrequest)
-    for(let i=0; i<myrequest.length; i++){
-
-      // console.log(myrequest[i], 'hello', i)
-          let searchPlace = myrequest[i]
-          console.log('search place', searchPlace.keywords)
-         
-          //  if(searchPlace.includes(searchElements)){
-          //     result.push(myrequest[i])
-          // }   
-    };
-    console.log(result)
-
-    res.json(result)
+    res.json({productsArray, placesArray})
 });
 
 

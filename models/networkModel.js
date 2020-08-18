@@ -28,6 +28,7 @@ var NetworkSchema = mongoose.Schema({
     password: String,
     token: String,
     salt: String,
+    keywords : Array,
     products: [ProductSchema]
    });
 
