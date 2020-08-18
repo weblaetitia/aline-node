@@ -107,21 +107,21 @@ router.post('/add-product', async function(req, res, next){
   var network = await NetworkModel.findOne({
     token: req.body.networktoken // recupere le reseau par son token
   })
-  var keyword = [];
-  var searchWord = req.body.name
+  var keywords = [];
+  var nameSplit = req.body.name.toLowerCase().split(' ')
+  var brandSplit = req.body.brand.toLowerCase().split(' ')
+  var keywords = nameSplit.concat(brandSplit)
   
+  keywords = [...new Set(keywords)]
 
-  keyword.push(req.body.name, req.body.brand);
- 
-  console.log(network)
-  network.products.push({
+   network.products.push({
     name: req.body.name,
     brand: req.body.brand,
     type: req.body.type,
     refoundPrice: req.body.price,
     barCode: req.body.barcode,
     imageUrl: req.body.imgUrl,
-    keyword: keyword
+    keywords: keywords
   })
 
   var networkSaved = await network.save()

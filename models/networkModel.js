@@ -8,7 +8,7 @@ var ProductSchema = mongoose.Schema({
     refoundPrice: Number,
     barCode: String,
     imageUrl: String,
-    keyword: Array
+    keywords: Array
 });
 
 var NetworkSchema = mongoose.Schema({
