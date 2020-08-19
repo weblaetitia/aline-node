@@ -155,6 +155,29 @@ router.get('/mobile/get-user-fav/', async function (req, res, next) {
   }
 })
 
+/* CHECK user's fav */
+router.get('/mobile/check-fav/', async function (req, res, next) {
+  var user = await UserModel.findOne({
+    token: req.query.token
+  })
+
+  user.favorites.forEach(fav => {
+    if(fav._id == req.query.placeid) {
+      res.json(true)
+    } 
+  })
+
+
+
+  // user.favorites.forEach(fav => {
+  //   if (fav._id == req.query.placeid) {
+  //     res.json(true)
+  //   } else {
+  //     res.json(false)
+  //   }
+  // })
+})
+
 /* GET add favorite */
 router.get('/mobile/add-fav', async function (req, res, next) {
   place = await PlaceModel.findOne({
@@ -167,9 +190,9 @@ router.get('/mobile/add-fav', async function (req, res, next) {
   user.favorites.push(place)
   var userSaved = user.save()
   if (userSaved) {
-    res.json({succes: true})
+    res.json(user.favorites)
   } else {
-    res.json({succes: false})
+    res.json(false)
   }
 })
 
@@ -182,11 +205,10 @@ router.get('/mobile/delete-fav', async function (req, res, next) {
   var newFavs = user.favorites.filter(fav => (fav._id != req.query.placeid))
   user.favorites = newFavs
   var userSaved = user.save()
-
   if (userSaved) {
-    res.json({succes: true})
+    res.json(user.favorites)
   } else {
-    res.json({succes: false})
+    res.json(false)
   }
 
 })
