@@ -27,7 +27,7 @@ var PlaceSchema = mongoose.Schema({
     google_place_id: String,
     placeImg: String,
     openingHours : String,
-    keywords: Array,
+    keywords : Array,
     products: [ProductSchema]
    });
 
