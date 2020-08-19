@@ -141,15 +141,25 @@ router.post('/mobile/sign-up', async function(req, res, next) {
   }
 })
 
+/* GET user's fav */
+router.get('/mobile/get-user-fav/', async function (req, res, next) {
+  user = await UserModel.findOne({
+    token: req.query.token
+  })
+  userFavs = user.favorites
+  
+  if (userFavs.length >0) {
+    res.json(userFavs)
+  } else {
+    req.json(false)
+  }
+})
 
 /* GET add favorite */
 router.get('/mobile/add-fav', async function (req, res, next) {
-  // console.log(req.query.token) // ok
-  // console.log(req.query.placeid) // ok
   place = await PlaceModel.findOne({
     _id: req.query.placeid
   })
-
   
   user = await UserModel.findOne({
     token: req.query.token
@@ -161,6 +171,24 @@ router.get('/mobile/add-fav', async function (req, res, next) {
   } else {
     res.json({succes: false})
   }
+})
+
+
+/* GET delet favorite */
+router.get('/mobile/delete-fav', async function (req, res, next) {
+  user = await UserModel.findOne({
+    token: req.query.token
+  })
+  var newFavs = user.favorites.filter(fav => (fav._id != req.query.placeid))
+  user.favorites = newFavs
+  var userSaved = user.save()
+
+  if (userSaved) {
+    res.json({succes: true})
+  } else {
+    res.json({succes: false})
+  }
+
 })
 
 
