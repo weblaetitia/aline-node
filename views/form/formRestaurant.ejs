@@ -7,7 +7,7 @@
         <!-- my custom Bootstrap -->
         <link href="/css/style.css" rel="stylesheet">
 
-    <title>Nourrir Aline - Ajouter un produit</title>
+    <title>Nourrir Aline - Ajouter restaurant</title>
   </head>
   <body>
     
@@ -65,7 +65,7 @@
       <div class="container my-4 py-4" style="background-color: #fff;">
         <div class="row">
             <div class="col-12">
-                <h1 class="title text-primary h2 text-center">Ajouter un restaurant<br> <span class="h6">Token : <%= token %></span></h1>
+                <h1 class="title text-primary h2 text-center">Ajouter un restaurant<br></h1>
             </div>
         </div>
             <div class="row">
@@ -128,8 +128,11 @@
                         
                         <!-- services -->
                         <div class="form-group">
-                            <label for="services">Service de consigne proposé</label>
-                            <input id="services" name="services" type="text" class="form-control" placeholder="ex: Boîtes repas en verre et couverts lavables">
+                          <label for="refoundtypeFromFront">Service de consigne proposé</label>
+                          <select class="form-control" id="refoundtypeFromFront" name="refoundtypeFromFront">
+                            <option>Produits conditionnés consignés</option>
+                            <option>Contenants vides</option>
+                          </select>
                         </div>
                         
                         <!-- produits -->
