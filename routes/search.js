@@ -25,6 +25,20 @@ router.post('/search', async function(req,res,next){
     }
 });
 
+/* get network-img */
+router.get('/get-network-img/', async function(req,res,next){
+  
+  var network = await NetworkModel.findOne({
+    businessName: req.query.network
+  })
+  console.log(network)
+  console.log(network.imageUrl)
+  if(network) {
+    res.json({networkImg: network.imageUrl})
+  }
+  
+});
+
 
 /* Get search-all */
 router.get('/search-all', async function(req,res,next){
