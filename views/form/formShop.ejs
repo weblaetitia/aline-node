@@ -7,7 +7,7 @@
         <!-- my custom Bootstrap -->
         <link href="/css/style.css" rel="stylesheet">
 
-    <title>Nourrir Aline - Ajouter un produit</title>
+    <title>Nourrir Aline - Ajouter un magasin</title>
   </head>
   <body>
     
@@ -48,7 +48,7 @@
                 <a class="nav-link" href="/form/formRestaurant">Ajouter un restaurant</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/form/formShop">Ajouter un magasin <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/form/formShop">Ajouter un magasin</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
@@ -63,7 +63,7 @@
       <div class="container my-4 py-4" style="background-color: #fff;">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="title text-primary h2 text-center">Ajouter un magasin<br> <span class="h6">Token : <%= token %></span></h1>
+                    <h1 class="title text-primary h2 text-center">Ajouter un magasin<br></h1>
                 </div>
             </div>
             <div class="row">
@@ -125,8 +125,11 @@
                         
                         <!-- services -->
                         <div class="form-group">
-                            <label for="">Service de consigne proposé</label>
-                            <input id="service1" name="services" type="text" class="form-control" placeholder="ex: Produits consignés et contenants vides">
+                          <label for="refoundtypeFromFront">Service de consigne proposé</label>
+                          <select class="form-control" id="refoundtypeFromFront" name="refoundtypeFromFront">
+                            <option>Produits conditionnés consignés</option>
+                            <option>Contenants vides</option>
+                          </select>
                         </div>
                         
                         <!-- produits -->
