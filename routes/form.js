@@ -60,11 +60,18 @@ router.post('/add-place', async function(req, res, next){
   // get placeProducts infos
   var placeProducts = []
   networkProducts.forEach(networkProd => {
-    req.body.products.forEach(reqProd => {
-      if (reqProd == networkProd._id) {
+    
+    if (Array.isArray(req.body.products)) {
+      req.body.products.forEach(reqProd => {
+        if (reqProd == networkProd._id) {
+          placeProducts.push(networkProd)
+        }
+      })
+    } else {
+      if (req.body.products == networkProd._id) {
         placeProducts.push(networkProd)
       }
-    })
+    }
   })
 
   console.log(req.body.placeImg)
