@@ -44,7 +44,18 @@ router.get('/search-all', async function(req,res,next){
         product.keywords.forEach((keyword) =>{
           if (searchElements.includes(keyword)) {
             console.log('ok produit trouvé :')
-            productsArray.push(product)
+            console.log(network.businessName)
+            var newProduct = {
+            _id: product._id,
+            name: product.name,
+            brand: product.brand,
+            type:product.type,
+            refoundPrice: product.refoundPrice,
+            barCode: product.barCode,
+            imageUrl: product.imageUrl,
+            network: network.businessName,
+            }
+            productsArray.push(newProduct)
           }
         })
       })
@@ -54,8 +65,6 @@ router.get('/search-all', async function(req,res,next){
     var places = await PlaceModel.find()
     places.forEach((place) => {
       place.keywords.forEach((keyword) => {
-        console.log(searchElements)
-        console.log(keyword)
         if (searchElements.includes(keyword)) {
           placesArray.push(place)
         }
