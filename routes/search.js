@@ -54,6 +54,7 @@ router.get('/search-all', async function(req,res,next){
             barCode: product.barCode,
             imageUrl: product.imageUrl,
             network: network.businessName,
+            networkImgUrl: network.imageUrl,
             }
             productsArray.push(newProduct)
           }
