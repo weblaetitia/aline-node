@@ -33,7 +33,6 @@ router.post('/getPlaces', async function(req,res,next){
         var myRequest = []
     }
 
-
     res.json(myRequest)
 })
 

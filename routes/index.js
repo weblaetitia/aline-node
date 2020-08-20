@@ -184,10 +184,10 @@ router.get('/add-places-photos', async function(req, res, next) {
 
 restaurants.forEach((resto) => {
   if(resto.placeImg == undefined || resto.placeImg == '' || !resto.placeImg) {
-    var randomNum = (Math.floor(Math.random()*18))
+    var randomNum = (Math.floor(Math.random()*17))
     resto.placeImg = images[randomNum]
     // console.log(resto.placeImg)
-    resto.save()
+    resto.updateOne()
   }
 })
   
