@@ -10,6 +10,8 @@ const PlaceModel = require('../models/placeModel');
 
 router.post('/getPlaces', async function(req,res,next){
 
+    console.log('BACKEND getPlaces', req.body)
+
     if(req.body.name.length>0) {
         var myRequest = await PlaceModel.find({
             name: req.body.name,

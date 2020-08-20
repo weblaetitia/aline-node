@@ -14,12 +14,13 @@ const PlaceModel = require('../models/placeModel');
 
 /* Post search */
 router.post('/search', async function(req,res,next){
+  console.log('REQ.BODY =====', req.body)
   var search=req.body.dataProducts;
   if(search.length == 13 && typeof parseInt(search) == "number"){
       searchElements = parseInt(search);
       res.redirect('/search/search-barcode');
     }else{
-      searchElements = search;
+      searchElements = search.toLowerCase();
       res.redirect('/search/search-all')
     }
 });
