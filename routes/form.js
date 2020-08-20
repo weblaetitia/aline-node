@@ -56,6 +56,8 @@ router.post('/add-place', async function(req, res, next){
 
   // get productList from this network
   var networkProducts = network.products // []
+  console.log('PRODUCTS ====', req.body.products.length)
+
   
   // get placeProducts infos
   var placeProducts = []
