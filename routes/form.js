@@ -104,9 +104,9 @@ router.post('/add-place', async function(req, res, next){
 
   if (placeSaved) {
     // faire un redirect au lieu de render ?
-    res.render('form/feedChoice', {formSucces: true, token: req.session.token})
+    res.render('form/feedChoice', {formSucces: true, message: 'Établissement bien enregistré', token: req.session.token})
   } else {
-    res.render('form/feedChoice', {formSucces: false, token: req.session.token})
+    res.render('form/feedChoice', {formSucces: false, message: 'erreur : dans l\'enregistrement', token: req.session.token})
   }
 })
 
@@ -135,9 +135,9 @@ router.post('/add-product', async function(req, res, next){
 
   var networkSaved = await network.save()
   if (networkSaved) {
-    res.render('form/feedChoice', {formSucces: true, token: req.session.token})
+    res.render('form/feedChoice', {formSucces: true, message: 'Produit bien enregistré', token: req.session.token})
   } else {
-    res.render('form/feedChoice', {formSucces: false, token: req.session.token})
+    res.render('form/feedChoice', {formSucces: false, message: 'erreur : dans l\'enregistrement', token: req.session.token})
   }
 });
 
