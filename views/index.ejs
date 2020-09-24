@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
           <a class="navbar-brand" href="/">
             <img src="/images/logo-aline.svg" width="76" height="36" class="d-inline-block align-top" alt="" loading="lazy">
-            <span class="navbar-text title text-info ml-2">L'appli consigne</span>
+            <span class="navbar-text title text-info ml-2">Pour qu'elle revienne</span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -45,19 +45,32 @@
           <!-- part 1 -->
           <div class="col-12 col-lg-8 mb-2 mb-md-0 p-4">
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-5" style="max-width: 300px; margin: 0 auto">
                 <img src="/images/2-iphones-and-shadow.png" class="img-fluid" alt="Responsive image">
               </div>
-              <div class="col-12 col-md-8">
-                <h1 class="title h2 text-center mb-4">Passez à&nbsp;l'action&nbsp;!</h1>
-                <p class="text-center intro-text">Téléchargez <strong class="font-weight-bold">l’application Aline</strong> et réduisez votre impact environnemental en pratiquant la consigne autour de vous.</p>
-                <p class="text-primary text-center intro-text-two">Aline est en cours de développement, inscrivez-vous pour être informé de la date de sortie de l’application.</p>
+              <div class="col-12 col-md-7">
+
+                <h1 class="title h2 text-center text-md-left mb-4">Passez à&nbsp;l'action&nbsp;!</h1>
+
+                <p class="text-center text-md-left intro-text"><strong class="font-weight-bold">L’application Aline</strong> localise autour de vous les points de vente et points de collecte des produits consignés.</p>
+
+                <p class="text-center text-md-left intro-text"><strong class="font-weight-bold">Réduisez votre impact environnemental</strong> en limitant vos déchets et faites des économies grâce aux produits consignés !</p>
+
+                <p class="text-center"><button class="btn btn-primary w-100" data-toggle="modal" data-target="#homemodal">Voir une démo</button></p>
+
+                <p class="text-primary text-center text-md-left intro-text-two">Aline est en cours de développement, inscrivez-vous pour être informé de la date de sortie de l’application.</p>
+
                 <form action="/network/get-info" method="POST">
-                  <div class="form-group">
-                    <input id="emailFromFront" name="emailFromFront" type="email" class="form-control text-center light-input" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                  <div class="form-row">
+                    <div class="col-12 col-md-8">
+                      <input id="emailFromFront" name="emailFromFront" type="email" class="form-control text-center text-md-left light-input mb-2" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                    </div>
+                    <div class="col">
+                      <p class="text-center"><button type="submit" class="btn btn-primary w-100">Envoyer</button></p>
+                    </div>
                   </div>
-                  <p class="text-center"><button type="submit" class="btn btn-primary w-100">Envoyer</button></p>
                 </form>
+
               </div>
             </div>
           </div>
