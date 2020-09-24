@@ -13,6 +13,54 @@ body {
   letter-spacing: -0.7;
 }
 
+// custom homepage
+.intro-text {
+  font-size: 1.2rem;
+  line-height: 1.75rem;
+}
+.intro-text-two {
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.4rem;
+}
+.light-input {
+  color: #879299;
+}
+.home-part-two {
+  background-color: white;
+  border: #ced4da 1px solid;
+  .btn {
+    width: 50%;
+  }
+}
+@include media-breakpoint-up(lg){
+  .home-part-two {
+    .btn {
+      width: 100%;
+    }
+  }
+}
+@include media-breakpoint-down(sm) {
+  .home-part-two {
+    background-color: $darkblue;
+    .btn {
+      width: 100%;
+    }
+    .btn-outline-primary {
+      color: white;
+      border-color: white;
+      &:hover {
+        // color: $darkblue;
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+  }
+  
+    p {
+      color: white;
+    }
+  }
+}
+
 // btn
 .btn {
   border-radius: 1.5rem;

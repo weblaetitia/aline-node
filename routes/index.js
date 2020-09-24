@@ -8,6 +8,11 @@ var PlaceModel = require('../models/placeModel')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  res.render('index');
+});
+
+/* GET sign in page. */
+router.get('/sign-in', function(req, res, next) {
   res.render('form/signIn');
 });
 
