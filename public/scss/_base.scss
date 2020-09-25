@@ -50,6 +50,7 @@ body {
 @include media-breakpoint-down(sm) {
   .home-part-two {
     background-color: $darkblue;
+    border: none;
     .btn {
       width: 100%;
     }
@@ -102,12 +103,32 @@ body {
   }
 }
 
+// main container
 .cover-container {
   min-height: 100vh;
-  background-image: url(../images/backgroung-mint.svg);
-  background-position: center;
-  background-size: cover;
 }
+
+// responsive background
+.cover-container {
+  background-image: url(../images/backgroung-mint.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media screen and (orientation: landscape) {
+  .cover-container {
+    background-position: 0 -20px;
+    background-size: cover;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .cover-container {
+    background-position: 0;
+    background-size: contain;
+  }
+}
+
 
 .myfooter {
   height: 5em;

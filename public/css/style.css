@@ -8901,6 +8901,7 @@ body {
 @media (max-width: 767.98px) {
   .home-part-two {
     background-color: #033C47;
+    border: none;
   }
   .home-part-two .btn {
     width: 100%;
@@ -8953,11 +8954,26 @@ body {
 
 .cover-container {
   min-height: 100vh;
-  background-image: url(../images/backgroung-mint.svg);
-  background-position: center;
-  background-size: cover;
 }
 
+.cover-container {
+  background-image: url(../images/backgroung-mint.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media screen and (orientation: landscape) {
+  .cover-container {
+    background-position: 0 -20px;
+    background-size: cover;
+  }
+}
+@media screen and (orientation: portrait) {
+  .cover-container {
+    background-position: 0;
+    background-size: contain;
+  }
+}
 .myfooter {
   height: 5em;
 }
