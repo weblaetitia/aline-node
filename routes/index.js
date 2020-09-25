@@ -17,7 +17,7 @@ router.get('/sign-in', function(req, res, next) {
 });
 
 /* GET signUp page. */
-router.get('/network/sign-up', function(req, res, next) {
+router.get('/sign-up', function(req, res, next) {
   res.render('form/signUp');
 });
 

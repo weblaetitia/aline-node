@@ -8863,6 +8863,13 @@ body {
   letter-spacing: -0.7;
 }
 
+.slogan {
+  text-transform: uppercase;
+  font-size: 80%;
+  color: #27AC88;
+  padding-left: 1em;
+}
+
 .intro-text {
   font-size: 1.2rem;
   line-height: 1.75rem;

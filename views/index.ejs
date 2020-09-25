@@ -13,30 +13,7 @@
     
     <div class="cover-container d-flex flex-column">
       <!-- Header Navbar-->
-      <header class="mb-auto">
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-          <a class="navbar-brand" href="/">
-            <img src="/images/logo-aline.svg" width="76" height="36" class="d-inline-block align-top" alt="" loading="lazy">
-            <span class="navbar-text title text-info ml-2">Pour qu'elle revienne</span>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/network/sign-up">S'enregistrer</a>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <a href="" class="btn btn-info">Connexion <span class="sr-only">(current)</span></a>
-            </form>
-          </div>
-        </nav>
-      </header>
+      <%- include('header') %>
       
       <!-- main -->
       <div class="container-fluid container-md">
@@ -80,7 +57,7 @@
           <div class="col-12 col-lg-3 offset-lg-1 home-part-two p-4 d-flex flex-column align-items-center justify-content-center">
             <p class="title text-center h4">Vous êtes professionel de la consigne ?</p>
             <p class="text-center intro-text">Inscrivez votre réseaux et vos produits sur Aline dès aujourd’hui.</p>
-            <p class="text-center w-100"><a href="#" class="btn btn-outline-primary form-control">S'inscrire</a></p>
+            <p class="text-center w-100"><a href="/sign-in" class="btn btn-outline-primary form-control">S'inscrire</a></p>
           </div>
           <!-- end part 2 -->
 
@@ -89,13 +66,7 @@
       <!-- end main -->
 
       <!-- footer -->
-      <footer class="mt-auto py-4">
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <p class="text-center"><a href="#" class="text-info">Contacter aline : aline.consigne@gmail.com</a></p>
-          </li>
-        </ul>
-      </footer>
+      <%- include('footer') %>
       <!-- end footer -->
     </div>
    

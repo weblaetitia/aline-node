@@ -13,6 +13,13 @@ body {
   letter-spacing: -0.7;
 }
 
+.slogan {
+  text-transform: uppercase;
+  font-size: 80%;
+  color: $mint;
+  padding-left: 1em;
+}
+
 // custom homepage
 .intro-text {
   font-size: 1.2rem;
