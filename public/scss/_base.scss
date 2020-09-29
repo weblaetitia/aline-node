@@ -36,6 +36,7 @@ body {
 .home-part-two {
   background-color: white;
   border: #ced4da 1px solid;
+  border-radius: 8px;
   .btn {
     width: 50%;
   }
@@ -132,4 +133,8 @@ body {
 
 .myfooter {
   height: 5em;
+}
+
+::selection {
+  background-color: $mint-light;
 }

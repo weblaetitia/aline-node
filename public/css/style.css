@@ -8888,6 +8888,7 @@ body {
 .home-part-two {
   background-color: white;
   border: #ced4da 1px solid;
+  border-radius: 8px;
 }
 .home-part-two .btn {
   width: 50%;
@@ -8976,6 +8977,10 @@ body {
 }
 .myfooter {
   height: 5em;
+}
+
+::selection {
+  background-color: #D5EFE8;
 }
 
 /*# sourceMappingURL=style.css.map */
