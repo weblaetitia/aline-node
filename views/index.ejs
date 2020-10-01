@@ -38,16 +38,30 @@
 
                 <p class="text-primary text-center text-md-left intro-text-two">Aline est en cours de développement, inscrivez-vous pour être informé de la date de sortie de l’application.</p>
 
-                <form action="/network/get-info" method="POST">
-                  <div class="form-row">
-                    <div class="col-12 col-md-8">
-                      <input id="emailFromFront" name="emailFromFront" type="email" class="form-control text-center text-md-left light-input mb-2" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                <% if (locals.subscription == undefined || subscription == 'empty' || subscription == 'exist') { %>
+                  <form action="/subscription" method="POST">
+                    <div class="form-row">
+                      <div class="col-12 col-md-8">
+                        <input id="emailFromFront" name="emailFromFront" type="email" class="form-control text-center text-md-left light-input mb-2" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                      </div>
+                      <div class="col">
+                        <p class="text-center"><button type="submit" class="btn btn-primary w-100">Envoyer</button></p>
+                      </div>
+                      <% if (locals.subscription == 'exist') { %>
+                      <div class="col-12">
+                        <p class="small text-danger mt-n2">Votre adresse email a déjà été enregistrée</p>
+                      </div>
+                      <% } else if (locals.subscription == 'empty') { %>
+                      <div class="col-12">
+                        <p class="small text-danger mt-n2">Veuillez entrer une adresse email valide</p>
+                      </div>
+                      <% } %>
                     </div>
-                    <div class="col">
-                      <p class="text-center"><button type="submit" class="btn btn-primary w-100">Envoyer</button></p>
-                    </div>
-                  </div>
-                </form>
+                  </form>
+                  <% } else if (locals.subscription == 'ok') { %>
+                    <p class="font-weight-bold">Bien reçu merci ! Nous vous tiendrons informé.</p>
+                  <% } %>
+
 
               </div>
             </div>
