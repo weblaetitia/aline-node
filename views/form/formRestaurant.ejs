@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
         <!-- my custom Bootstrap -->
         <link href="/css/style.css" rel="stylesheet">
 
@@ -13,53 +14,7 @@
     
     <div class="cover-container d-flex flex-column">
       <!-- Header Navbar-->
-      <header class="mb-auto">
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-          <a class="navbar-brand" href="/">
-            <img
-              src="/images/logo-aline.svg"
-              width="76"
-              height="36"
-              class="d-inline-block align-top"
-              alt=""
-              loading="lazy"
-            />
-            <span class="navbar-text title text-info ml-2"
-              >L'appli consigne</span
-            >
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/form/formProduct">Ajouter un produit</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/form/formRestaurant">Ajouter un restaurant <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/form/formShop">Ajouter un magasin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <a href="/" class="btn btn-info">Déconnexion</a>
-            </form>
-          </div>
-        </nav>
-      </header>
+      <%- include('../headerForm') %>
 
       
       <div class="container my-4 py-4" style="background-color: #fff;">
@@ -181,13 +136,7 @@
                 </div>
             </div> 
         </div>
-        <footer class="mt-auto py-4">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                <p class="text-center"><a href="#" class="text-info">Contacter aline : aline.consigne@gmail.com</a></p>
-                </li>
-            </ul>
-        </footer>
+        <%- include('../footer')%>
     </div>
 
     <!-- Custom JS code to bind to Autocomplete API -->
