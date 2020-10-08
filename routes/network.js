@@ -104,10 +104,28 @@ router.post('/sign-up', async function(req,res,next){
     }
   })
 
-  /* Sign-out (clear session token) */
-  router.get('/log-out', function (req, res, next) {
-    req.session.token = ''
+/* Sign-out (clear session token) */
+router.get('/log-out', function (req, res, next) {
+  req.session.token = ''
+  res.redirect('../')
+})
+
+/* Sign-out (clear session token) */
+router.get('/products', async function (req, res, next) {
+  if (req.session.token == '') {
     res.redirect('../')
-  })
+  } else {
+    // afficher les produits
+    var network = await NetworkModel.findOne({
+      token: req.session.token
+    })
+    if (network) {
+      var networkName = network.businessName
+      var networkProducts = network.products // []
+      console.log('PRODUCTS ====', networkProducts)
+      res.render('network/products', {networkProducts, networkName})
+    }
+  }
+})
 
 module.exports = router;
