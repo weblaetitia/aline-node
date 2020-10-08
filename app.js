@@ -7,7 +7,6 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var backofficeRouter = require('./routes/backoffice');
 var formRouter = require('./routes/form');
 var networkRouter = require('./routes/network');
 var mapRouter = require('./routes/map');
@@ -39,7 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/backoffice', backofficeRouter);
 app.use('/form', formRouter);
 app.use('/network', networkRouter);
 app.use('/map', mapRouter);

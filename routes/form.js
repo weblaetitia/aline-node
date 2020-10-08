@@ -15,33 +15,51 @@ const { findOne } = require('../models/placeModel');
 
 /* GET feed choices page. */
 router.get('/feedChoice', function(req, res, next) {
-  res.render('form/feedChoice', {token: req.session.token});
-  });
+  if (req.session.token != '') {
+    console.log('session token est vide')
+    res.redirect('../')
+  } else {
+    res.render('form/feedChoice', {token: req.session.token})
+  }
+});
 
 /* GET form for restaurant page. */
 router.get('/formRestaurant', async function(req, res, next) {
-   // get products and send them to the front
-   var network = await NetworkModel.findOne({
-    token: req.session.token
-  })
-  var products = network.products
-  res.render('form/formRestaurant', {token: req.session.token, products});
+   if (req.session.token == '') {
+    res.redirect('../')
+   } else {
+     // get products and send them to the front
+    var network = await NetworkModel.findOne({
+      token: req.session.token
+    })
+    var products = network.products
+    res.render('form/formRestaurant', {token: req.session.token, products});
+    }
   });
+
 
 /* GET form for shop page. */
 router.get('/formShop', async function(req, res, next) {
-  // get products and send them to the front
-  var network = await NetworkModel.findOne({
-    token: req.session.token
-  })
-  var products = network.products
-  res.render('form/formShop', {token: req.session.token, products});
-  });
+  if (req.session.token == '') {
+    res.redirect('../')
+  } else {
+    // get products and send them to the front
+    var network = await NetworkModel.findOne({
+      token: req.session.token
+    })
+    var products = network.products
+    res.render('form/formShop', {token: req.session.token, products});
+  } 
+})
 
 /* GET form for product page. */
 router.get('/formProduct', function(req, res, next) {
-  res.render('form/formProduct', {token: req.session.token});
-  });
+  if (res.session.token == '') {
+    res.redirect('../')
+  } else {
+    res.render('form/formProduct', {token: req.session.token});
+  }
+});
 
 
 

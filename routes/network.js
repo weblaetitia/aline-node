@@ -104,5 +104,10 @@ router.post('/sign-up', async function(req,res,next){
     }
   })
 
+  /* Sign-out (clear session token) */
+  router.get('/log-out', function (req, res, next) {
+    req.session.token = ''
+    res.redirect('../')
+  })
 
 module.exports = router;
