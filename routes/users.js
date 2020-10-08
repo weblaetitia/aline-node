@@ -28,7 +28,6 @@ router.post('/mobile/adduser', async function(req, res, next) {
       alert: 'User with this email already exists'
     })
   } else {
-    console.log('dans la route')
     // encrypt password
     var userSalt = uid2(32)
     // connexion à la db
@@ -41,7 +40,6 @@ router.post('/mobile/adduser', async function(req, res, next) {
       salt: userSalt,
     })
     var userSaved = await newUser.save()
-    console.log(userSaved)
     res.json({
       succes: true,
       alert: 'New user saved'
@@ -53,13 +51,17 @@ router.post('/mobile/adduser', async function(req, res, next) {
 
 /* GET token */
 router.get('/mobile/check-token', async function(req, res, next) {
-  console.log(req.query.token)
   var myrequest = await UserModel.findOne({
     token: req.query.token
     }) 
-  console.log(myrequest)
   if (myrequest) {
-    res.json({succes: true})
+    res.json({
+      succes: true, 
+      firstName: myrequest.firstName,
+      lastName: myrequest.lastName,
+      email: myrequest.email,
+      token: myrequest.token,
+    })
   } else {
     res.json({succes: false})
   }
@@ -79,14 +81,16 @@ router.post('/mobile/sign-in/', async function(req, res, next) {
     var myrequest = await UserModel.find({
       email: req.body.email
       })    
-    console.log(myrequest)  
     if (myrequest.length != 0) {
       var hash = SHA256(req.body.password + myrequest[0].salt).toString(encBase64)
       if (hash == myrequest[0].password) {
         res.json({
           succes: true,
           alert: 'all good', 
-          token: myrequest[0].token
+          token: myrequest[0].token,
+          firstName: myrequest[0].firstName,
+          lastName: myrequest[0].lastName, 
+          email: myrequest[0].email, 
         })
       } else {
         res.json({
@@ -131,12 +135,14 @@ router.post('/mobile/sign-up', async function(req, res, next) {
       salt: userSalt,
     })
     var userSaved = await newUser.save()
-    console.log(userSaved)
     // send a succes and token
     res.json({
       succes: true,
       alert: 'New user saved',
-      token: userSaved.token 
+      token: userSaved.token, 
+      firstName: userSaved.firstName,
+      lastName: userSaved.lastName,
+      email: userSaved.email,
     })
   }
 })
@@ -151,7 +157,7 @@ router.get('/mobile/get-user-fav/', async function (req, res, next) {
   if (userFavs.length >0) {
     res.json(userFavs)
   } else {
-    req.json(false)
+    res.json(false)
   }
 })
 
