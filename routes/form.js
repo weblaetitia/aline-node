@@ -15,7 +15,7 @@ const { findOne } = require('../models/placeModel');
 
 /* GET feed choices page. */
 router.get('/feedChoice', function(req, res, next) {
-  if (req.session.token != '') {
+  if (req.session.token == '') {
     console.log('session token est vide')
     res.redirect('../')
   } else {
