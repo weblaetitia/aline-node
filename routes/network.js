@@ -130,7 +130,7 @@ router.get('/log-out', function (req, res, next) {
   res.redirect('../')
 })
 
-/* Sign-out (clear session token) */
+/* Get product's page */
 router.get('/products', async function (req, res, next) {
   if (req.session.token == '') {
     res.redirect('../')
@@ -143,7 +143,7 @@ router.get('/products', async function (req, res, next) {
       var networkName = network.businessName
       var networkProducts = network.products // []
       var networkToken = network.token
-      res.render('network/products', {networkProducts, networkName, networkToken})
+      res.render('network/products', {networkProducts, networkName, networkToken, businessName: req.session.businessName})
     }
   }
 })

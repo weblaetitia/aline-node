@@ -2,7 +2,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
       <a class="navbar-brand" href="/">
         <img src="/images/logo-aline.svg" width="76" height="36" class="d-inline-block align-top" alt="" loading="lazy">
-        <span class="navbar-text title text-info ml-2 d-none d-lg-inline-block">L'application consigne <span class="slogan">Pour qu'elle revienne !</span></span>
       </a>
       <button
         class="navbar-toggler"
@@ -16,7 +15,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/form/feedChoice">Accueil</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/form/formProduct">Ajouter un produit</a>
           </li>
@@ -28,7 +30,17 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <a href="/network/log-out" class="btn btn-info">Déconnexion</a>
+          <div class="dropdown">
+            <a class="dropdown-toggle h5 text-decoration-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%=businessName%>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/network/products">Mes produits</a>
+              <a class="dropdown-item" href="/network/restaurants">Mes restaurants</a>
+              <a class="dropdown-item" href="/network/shops">Mes magasins</a>
+              <a class="dropdown-item" href="/network/log-out"><i class="fas fa-sign-out-alt mr-2 text-dark"></i>Déconnexion</a>
+            </div>
+          </div>
         </form>
       </div>
     </nav>

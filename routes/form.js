@@ -19,7 +19,7 @@ router.get('/feedChoice', function(req, res, next) {
     console.log('session token est vide')
     res.redirect('../')
   } else {
-    res.render('form/feedChoice', {token: req.session.token})
+    res.render('form/feedChoice', {token: req.session.token, businessName: req.session.businessName})
   }
 });
 
@@ -33,7 +33,7 @@ router.get('/formRestaurant', async function(req, res, next) {
       token: req.session.token
     })
     var products = network.products
-    res.render('form/formRestaurant', {token: req.session.token, products});
+    res.render('form/formRestaurant', {token: req.session.token, products, businessName: req.session.businessName});
     }
   });
 
@@ -48,7 +48,7 @@ router.get('/formShop', async function(req, res, next) {
       token: req.session.token
     })
     var products = network.products
-    res.render('form/formShop', {token: req.session.token, products});
+    res.render('form/formShop', {token: req.session.token, products, businessName: req.session.businessName});
   } 
 })
 
@@ -57,7 +57,7 @@ router.get('/formProduct', function(req, res, next) {
   if (req.session.token == '') {
     res.redirect('../')
   } else {
-    res.render('form/formProduct', {token: req.session.token});
+    res.render('form/formProduct', {token: req.session.token, businessName: req.session.businessName});
   }
 });
 
