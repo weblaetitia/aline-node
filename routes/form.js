@@ -54,7 +54,7 @@ router.get('/formShop', async function(req, res, next) {
 
 /* GET form for product page. */
 router.get('/formProduct', function(req, res, next) {
-  if (res.session.token == '') {
+  if (req.session.token == '') {
     res.redirect('../')
   } else {
     res.render('form/formProduct', {token: req.session.token});
