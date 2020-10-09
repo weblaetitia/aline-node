@@ -7,6 +7,9 @@
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
     <!-- my custom Bootstrap -->
     <link href="/css/style.css" rel="stylesheet" />
+    <!-- font awesome CDN -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
 
     <title>Nourrir Aline - Mes produits</title>
   </head>
@@ -23,34 +26,40 @@
             </h1>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="alert alert-warning" role="alert">
-              <%= networkName %>
-            </div>
-          </div>
-        </div>
+        
         <div class="row">
 
           <!-- loop card -->
-            <% networkProducts.forEach( (card) => { %>
+            <% networkProducts.forEach( (product) => { %>
               <div class="col-12 col-md-6 col-lg-4 mb-3">
-                <div class="card">
-                  <% if (card.imageUrl) { %><img src="<%= card.imageUrl %>" class="card-img-top" alt="<%= card.name %>"><% } %>
+                <div class="card pt-3">
+                  <% if (product.imageUrl) { %><img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.name %>"><% } %>
                   <div class="card-body">
-                    <% if (card.name) { %><h5 class="card-title"><%= card.name %></h5><% } %>
-                    <% if (card.brand) { %><h6 class="card-subtitle mb-2 text-muted"><%= card.brand %></h6><% } %>
-                    <% if (card.type) { %><p class="card-text">Type de consigne : <%= card.type %></p><% } %>
-                    <% if (card.refoundPrice) { %><p class="card-text">Prix de la consigne : <%= card.refoundPrice %>&nbsp;€</p><% } %>
-                    <% if (card.barCode) { %><p class="card-text">Code barre : <%= card.barCode %></p><% } %>
-                    <button class="btn btn-primary">Editer</button>
-                    <button class="btn btn-danger">Supprimer</button>
+                    <% if (product.name) { %><h5 class="card-title"><%= product.name %></h5><% } %>
+                    <% if (product.brand) { %><h6 class="card-subtitle mb-2 text-muted"><%= product.brand %></h6><% } %>
+                    <% if (product.type) { %><p class="card-text">Type de consigne : <%= product.type %></p><% } %>
+                    <% if (product.refoundPrice) { %><p class="card-text">Prix de la consigne : <%= product.refoundPrice %>&nbsp;€</p><% } %>
+                    <% if (product.barCode) { %><p class="card-text">Code barre : <%= product.barCode %></p><% } %>
+                    <div class="d-flex flex-column">
+                      <button class="btn btn-primary mb-2 w-75 mx-auto" data-id="<%=product._id%>"><i class="far fa-edit mr-2"></i>Editer</button>
+                      <button class="btn btn-danger w-75 mx-auto" name="delete-btn" data-id="<%=product._id%>"><i class="far fa-trash-alt mr-2"></i>Supprimer</button>
+                      <a href="/network/delete-product?token=<%=networkToken%>&productId=<%=product._id%>" class="btn btn-outline-danger w-75 mx-auto" name="confirm-delete-btn" data-id="<%=product._id%>"><i class="far fa-check-square mr-2"></i></i>Valider la suppression ?</a>
+                    </div>
                   </div>
                 </div>
               </div>
             <% })%>  
           <!-- end loop card -->
-
+              <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card bg-light mb-3" style="min-height: 200px;">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Un nouveau produit ?</h5>
+                    <p class="card-text text-center"><a href="/form/formProduct" class=""><i class="far fa-plus-square mr-2"></i>Cliquez ici pour ajouter un nouveau produit</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>    
         </div>
       </div>
       <%- include('../footer')%>
@@ -60,5 +69,20 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <script>
+    $('[name="confirm-delete-btn"]').css("display", "none")
+    const $deleteBtn = $( "[name='delete-btn']" )
+
+    $deleteBtn.click(function( event ) {
+      const id = $(this).data('id')
+      console.log(id)
+      $(`[data-id="${id}"][name="delete-btn"]`).css("display", "none")
+      $(`[data-id="${id}"][name="confirm-delete-btn"]`).css("display", "block")
+    })
+
+
+  </script>
+
 </body>
 </html>

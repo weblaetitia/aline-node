@@ -104,6 +104,24 @@ router.post('/sign-up', async function(req,res,next){
     }
   })
 
+/* Delete product */
+router.get('/delete-product', async function(req, res, next) {
+  console.log(req.query.token)
+  console.log(req.query.productId)
+  var network = await NetworkModel.findOne({
+    token: req.query.token
+  })
+  network.products.forEach(product => {
+    if (product._id == req.query.productId) {
+      product.remove()
+    }
+  })
+  network.save()
+  res.redirect('/network/products')
+ })
+
+
+
 /* Sign-out (clear session token) */
 router.get('/log-out', function (req, res, next) {
   req.session.token = ''
@@ -122,8 +140,8 @@ router.get('/products', async function (req, res, next) {
     if (network) {
       var networkName = network.businessName
       var networkProducts = network.products // []
-      console.log('PRODUCTS ====', networkProducts)
-      res.render('network/products', {networkProducts, networkName})
+      var networkToken = network.token
+      res.render('network/products', {networkProducts, networkName, networkToken})
     }
   }
 })
