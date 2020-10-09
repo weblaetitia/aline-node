@@ -74,8 +74,6 @@ router.post('/add-place', async function(req, res, next){
 
   // get productList from this network
   var networkProducts = network.products // []
-  console.log('PRODUCTS ====', req.body.products.length)
-
   
   // get placeProducts infos
   var placeProducts = []
@@ -93,10 +91,6 @@ router.post('/add-place', async function(req, res, next){
       }
     }
   })
-
-  console.log(req.body.placeImg)
-  console.log(req.body.openingHours)
-
   // enregistrer la place en bdd
   var newPlace = await PlaceModel( {
     name: req.body.name,
@@ -122,9 +116,9 @@ router.post('/add-place', async function(req, res, next){
 
   if (placeSaved) {
     // faire un redirect au lieu de render ?
-    res.render('form/feedChoice', {formSucces: true, message: 'Établissement bien enregistré', token: req.session.token})
+    res.render('form/feedChoice', {formSucces: true, message: 'Établissement bien enregistré', token: req.session.token, businessName: req.session.businessName})
   } else {
-    res.render('form/feedChoice', {formSucces: false, message: 'erreur : dans l\'enregistrement', token: req.session.token})
+    res.render('form/feedChoice', {formSucces: false, message: 'erreur : dans l\'enregistrement', token: req.session.token, businessName: req.session.businessName})
   }
 })
 
@@ -153,9 +147,9 @@ router.post('/add-product', async function(req, res, next){
 
   var networkSaved = await network.save()
   if (networkSaved) {
-    res.render('form/feedChoice', {formSucces: true, message: 'Produit bien enregistré', token: req.session.token})
+    res.render('form/feedChoice', {formSucces: true, message: 'Produit bien enregistré', token: req.session.token, businessName: req.session.businessName})
   } else {
-    res.render('form/feedChoice', {formSucces: false, message: 'erreur : dans l\'enregistrement', token: req.session.token})
+    res.render('form/feedChoice', {formSucces: false, message: 'erreur : dans l\'enregistrement', token: req.session.token, businessName: req.session.businessName})
   }
 });
 

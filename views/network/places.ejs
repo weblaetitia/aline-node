@@ -32,7 +32,7 @@
           <!-- loop card -->
             <% placesList.forEach( (place) => { %>
               <div class="col-12 col-md-6 col-lg-4 mb-3">
-                <div class="card pt-3">
+                <div class="card">
                   <% if (place.placeImg && place.name) { %><img src="<%= place.placeImg %>" class="card-img-top card-img-top-cover" alt="<%= place.name %>"><% } %>
                   <div class="card-body">
                     <% if (place.name) { %><h5 class="card-title"><%= place.name %></h5><% } %>
