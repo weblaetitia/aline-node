@@ -5,6 +5,7 @@ var encBase64 = require('crypto-js/enc-base64')
 var uid2 = require('uid2')
 
 var NetworkModel = require('../models/networkModel')
+var PlaceModel = require('../models/placeModel')
 
 
 /* GET users listing. */
@@ -106,30 +107,6 @@ router.post('/sign-up', async function(req,res,next){
     }
   })
 
-/* Delete product */
-router.get('/delete-product', async function(req, res, next) {
-  console.log(req.query.token)
-  console.log(req.query.productId)
-  var network = await NetworkModel.findOne({
-    token: req.query.token
-  })
-  network.products.forEach(product => {
-    if (product._id == req.query.productId) {
-      product.remove()
-    }
-  })
-  network.save()
-  res.redirect('/network/products')
- })
-
-
-
-/* Sign-out (clear session token) */
-router.get('/log-out', function (req, res, next) {
-  req.session.token = ''
-  res.redirect('../')
-})
-
 /* Get product's page */
 router.get('/products', async function (req, res, next) {
   if (req.session.token == '') {
@@ -147,5 +124,53 @@ router.get('/products', async function (req, res, next) {
     }
   }
 })
+
+/* Delete product */
+router.get('/delete-product', async function(req, res, next) {
+  console.log(req.query.token)
+  console.log(req.query.productId)
+  var network = await NetworkModel.findOne({
+    token: req.query.token
+  })
+  network.products.forEach(product => {
+    if (product._id == req.query.productId) {
+      product.remove()
+    }
+  })
+  network.save()
+  res.redirect('/network/products')
+ })
+ 
+/* Get place's page */
+router.get('/places', async function (req, res, next) {
+  if (req.session.token == '') {
+    res.redirect('../')
+  } else {
+    // afficher les restaurants
+    let placesList = await PlaceModel.aggregate([
+      { $match: {"network": req.session.businessName} }
+    ])
+
+    // console.log(restaurantsList)     // [array]
+    res.render('network/places', {placesList, businessName: req.session.businessName, token: req.session.token})
+  }
+})
+
+/* Delete restaurant */
+router.get('/delete-place', async function (req, res, next) {
+  // console.log(req.query.placeId)
+  await PlaceModel.deleteOne({ 
+    _id: req.query.placeId 
+  })
+  res.redirect('/network/places')
+})
+
+
+/* Sign-out (clear session token) */
+router.get('/log-out', function (req, res, next) {
+  req.session.token = ''
+  res.redirect('../')
+})
+
 
 module.exports = router;

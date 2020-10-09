@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+    <!-- my custom Bootstrap -->
+    <link href="/css/style.css" rel="stylesheet" />
+    <!-- font awesome CDN -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+    <title>Nourrir Aline - Mes produits</title>
+  </head>
+  <body>
+    <div class="cover-container d-flex flex-column">
+      <!-- Header Navbar-->
+      <%- include('../headerForm') %>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="title text-primary h2 text-center">
+              Mes lieux de vente et collecte
+            </h1>
+          </div>
+        </div>
+        
+        <div class="row">
+
+          <!-- loop card -->
+            <% placesList.forEach( (place) => { %>
+              <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card pt-3">
+                  <% if (place.placeImg && place.name) { %><img src="<%= place.placeImg %>" class="card-img-top card-img-top-cover" alt="<%= place.name %>"><% } %>
+                  <div class="card-body">
+                    <% if (place.name) { %><h5 class="card-title"><%= place.name %></h5><% } %>
+                    <% if (place.adress && place.city) { %><h6 class="card-subtitle mb-2 text-muted"><%= place.adress %>, <%= place.city %></h6><% } %>
+                    <div class="d-flex flex-column">
+                      <button class="btn btn-primary mb-2 w-75 mx-auto" data-id="<%=place._id%>"><i class="far fa-edit mr-2"></i>Editer</button>
+                      <button class="btn btn-danger w-75 mx-auto" name="delete-btn" data-id="<%=place._id%>"><i class="far fa-trash-alt mr-2"></i>Supprimer</button>
+                      <a href="/network/delete-place?&placeId=<%=place._id%>" class="btn btn-outline-danger w-75 mx-auto" name="confirm-delete-btn" data-id="<%=place._id%>"><i class="far fa-check-square mr-2"></i></i>Valider la suppression ?</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% })%>  
+          <!-- end loop card -->
+              <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card bg-light mb-3" style="min-height: 200px;">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Un nouveau lieu ?</h5>
+                    <p class="card-text text-center"><a href="/form/formRestaurant" class=""><i class="far fa-plus-square mr-2"></i>Cliquez ici pour ajouter un nouveau restaurant</a></p>
+                    <p class="card-text text-center"><a href="/form/formShop" class=""><i class="far fa-plus-square mr-2"></i>Cliquez ici pour ajouter un nouveau magasin</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>    
+          <%- include('../footer')%>
+    </div><!-- end cover-container -->
+
+
+<!-- BOOTSTRAP -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <script>
+    $('[name="confirm-delete-btn"]').css("display", "none")
+    const $deleteBtn = $( "[name='delete-btn']" )
+
+    $deleteBtn.click(function( event ) {
+      const id = $(this).data('id')
+      console.log(id)
+      $(`[data-id="${id}"][name="delete-btn"]`).css("display", "none")
+      $(`[data-id="${id}"][name="confirm-delete-btn"]`).css("display", "block")
+    })
+
+
+  </script>
+
+</body>
+</html>
