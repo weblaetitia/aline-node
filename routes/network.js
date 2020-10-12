@@ -151,7 +151,6 @@ router.get('/places', async function (req, res, next) {
       { $match: {"network": req.session.businessName} }
     ])
 
-    // console.log(restaurantsList)     // [array]
     res.render('network/places', {placesList, businessName: req.session.businessName, token: req.session.token})
   }
 })
@@ -185,6 +184,21 @@ router.get('/edit-product/:productid', async function(req, res, next) {
     }
     
     res.render('network/editProduct', {token: req.session.token, businessName: req.session.businessName, editableProduct: editableProduct})
+  }
+})
+
+/* Get edit-place page*/
+router.get('/edit-place/:placeid', async function(req, res, next) {
+  if (req.session.token == ''){
+    res.redirect('../')
+  } else {
+    // find place with placeid
+    console.log(req.params.placeid)
+    const editablePlace = await PlaceModel.findOne({
+      _id: req.params.placeid
+    })
+    console.log(editablePlace)   
+    res.render('network/editPlace', {token: req.session.token, businessName: req.session.businessName, editablePlace})
   }
 })
 
