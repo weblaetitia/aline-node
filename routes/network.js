@@ -165,6 +165,42 @@ router.get('/delete-place', async function (req, res, next) {
   res.redirect('/network/places')
 })
 
+/* Get edit-product page*/
+router.get('/edit-product/:productid', async function(req, res, next) {
+  if (req.session.token == ''){
+    res.redirect('../')
+  } else {
+    // find product with id and network token
+    const network = await NetworkModel.findOne({
+      token: req.session.token
+    })
+    let editableProduct = {}
+    if (network) {
+      network.products.forEach(product => {
+        if (product._id == req.params.productid) {
+          console.log('produit trouvé: ')
+         editableProduct = product
+        }
+      })
+    }
+    
+    res.render('network/editProduct', {token: req.session.token, businessName: req.session.businessName, editableProduct: editableProduct})
+  }
+})
+
+/* POST edit product in DB */
+router.post('/editproduct', async function (req, res, next) {
+  // console.log('name ', req.body.name)
+  // console.log('brand ', req.body.brand)
+  // console.log('type ', req.body.type)
+  // console.log('id ', req.body.productid)
+  // console.log('refound ', req.body.refoundprice)
+  // console.log('url ', req.body.imgurl)
+  // console.log('barcode ', req.body.barcode)
+
+  // redirection à changer
+  res.redirect(`/form/feedChoice`)
+})
 
 /* Sign-out (clear session token) */
 router.get('/log-out', function (req, res, next) {

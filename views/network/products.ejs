@@ -41,7 +41,7 @@
                     <% if (product.refoundPrice) { %><p class="card-text">Prix de la consigne : <%= product.refoundPrice %>&nbsp;€</p><% } %>
                     <% if (product.barCode) { %><p class="card-text">Code barre : <%= product.barCode %></p><% } %>
                     <div class="d-flex flex-column">
-                      <button class="btn btn-primary mb-2 w-75 mx-auto" data-id="<%=product._id%>"><i class="far fa-edit mr-2"></i>Editer</button>
+                      <a href="/network/edit-product/<%=product._id%>" class="btn btn-primary mb-2 w-75 mx-auto"><i class="far fa-edit mr-2"></i>Editer</a>
                       <button class="btn btn-danger w-75 mx-auto" name="delete-btn" data-id="<%=product._id%>"><i class="far fa-trash-alt mr-2"></i>Supprimer</button>
                       <a href="/network/delete-product?token=<%=networkToken%>&productId=<%=product._id%>" class="btn btn-outline-danger w-75 mx-auto" name="confirm-delete-btn" data-id="<%=product._id%>"><i class="far fa-check-square mr-2"></i></i>Valider la suppression ?</a>
                     </div>

@@ -8993,4 +8993,23 @@ body {
   background-color: #D5EFE8;
 }
 
+.edit-form input {
+  display: block;
+  width: 100%;
+  height: calc(1em + 0.75rem + 2px);
+  padding: 0rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #033C47;
+  background-clip: padding-box;
+  border: none;
+  border-bottom: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.edit-form input:focus {
+  outline: none;
+  border-bottom: 1px solid #033C47;
+}
+
 /*# sourceMappingURL=style.css.map */
