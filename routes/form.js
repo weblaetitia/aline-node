@@ -5,7 +5,7 @@ var request = require('sync-request');
 if(!process.env.DB_INFO){
   require('dotenv').config()
 }
-
+const googleApiKey = process.env.GOOGLE_API_KEY
 
 /* variable des models pour le formulaire */
 const PlaceModel = require('../models/placeModel');
@@ -33,7 +33,7 @@ router.get('/formRestaurant', async function(req, res, next) {
       token: req.session.token
     })
     var products = network.products
-    res.render('form/formRestaurant', {token: req.session.token, products, businessName: req.session.businessName});
+    res.render('form/formRestaurant', {token: req.session.token, products, businessName: req.session.businessName, googleApiKey});
     }
   });
 
@@ -48,7 +48,7 @@ router.get('/formShop', async function(req, res, next) {
       token: req.session.token
     })
     var products = network.products
-    res.render('form/formShop', {token: req.session.token, products, businessName: req.session.businessName});
+    res.render('form/formShop', {token: req.session.token, products, businessName: req.session.businessName, googleApiKey});
   } 
 })
 
