@@ -38,7 +38,7 @@
                     <% if (place.name) { %><h5 class="card-title"><%= place.name %></h5><% } %>
                     <% if (place.adress && place.city) { %><h6 class="card-subtitle mb-2 text-muted"><%= place.adress %>, <%= place.city %></h6><% } %>
                     <div class="d-flex flex-column">
-                      <button class="btn btn-primary mb-2 w-75 mx-auto" data-id="<%=place._id%>"><i class="far fa-edit mr-2"></i>Editer</button>
+                      <a href="/network/edit-place/<%=place._id%>" class="btn btn-primary mb-2 w-75 mx-auto" data-id="<%=place._id%>"><i class="far fa-edit mr-2"></i>Editer</a>
                       <button class="btn btn-danger w-75 mx-auto" name="delete-btn" data-id="<%=place._id%>"><i class="far fa-trash-alt mr-2"></i>Supprimer</button>
                       <a href="/network/delete-place?&placeId=<%=place._id%>" class="btn btn-outline-danger w-75 mx-auto" name="confirm-delete-btn" data-id="<%=place._id%>"><i class="far fa-check-square mr-2"></i></i>Valider la suppression ?</a>
                     </div>

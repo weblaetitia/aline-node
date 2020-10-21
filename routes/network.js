@@ -193,12 +193,15 @@ router.get('/edit-place/:placeid', async function(req, res, next) {
     res.redirect('../')
   } else {
     // find place with placeid
-    console.log(req.params.placeid)
     const editablePlace = await PlaceModel.findOne({
       _id: req.params.placeid
     })
-    console.log(editablePlace)   
-    res.render('network/editPlace', {token: req.session.token, businessName: req.session.businessName, editablePlace})
+    // find all products for this network
+    const network = await NetworkModel.findOne({
+      token: req.session.token
+    })
+
+    res.render('network/editPlace', {token: req.session.token, businessName: req.session.businessName, editablePlace: editablePlace, products: network.products})
   }
 })
 

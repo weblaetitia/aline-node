@@ -9012,4 +9012,11 @@ body {
   border-bottom: 1px solid #033C47;
 }
 
+.big-label {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #033C47;
+}
+
 /*# sourceMappingURL=style.css.map */
