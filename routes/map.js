@@ -8,6 +8,14 @@ if(!process.env.DB_INFO){
   
 const PlaceModel = require('../models/placeModel');
 
+router.get('/get-all-places', async function(req, res, next) {
+    console.log('All request')
+    var myRequest = await PlaceModel.find({})
+    if (myRequest) {
+        res.json(myRequest)
+    }
+})
+
 router.post('/getPlaces', async function(req,res,next){
 
     console.log('BACKEND getPlaces', req.body)
