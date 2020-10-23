@@ -194,7 +194,7 @@ router.get('/mobile/add-fav', async function (req, res, next) {
     token: req.query.token
   })
   user.favorites.push(place)
-  var userSaved = user.save()
+  var userSaved = await user.save()
   if (userSaved) {
     res.json(user.favorites)
   } else {
@@ -210,7 +210,7 @@ router.get('/mobile/delete-fav', async function (req, res, next) {
   })
   var newFavs = user.favorites.filter(fav => (fav._id != req.query.placeid))
   user.favorites = newFavs
-  var userSaved = user.save()
+  var userSaved = await user.save()
   if (userSaved) {
     res.json(user.favorites)
   } else {
