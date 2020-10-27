@@ -8,6 +8,7 @@ if(!process.env.DB_INFO){
   
 const PlaceModel = require('../models/placeModel');
 
+
 router.get('/get-all-places', async function(req, res, next) {
     console.log('All request')
     var myRequest = await PlaceModel.find({})
@@ -43,5 +44,18 @@ router.post('/getPlaces', async function(req,res,next){
 
     res.json(myRequest)
 })
+
+/* GET places List for one network */
+router.get('/get-places-list', async function (req, res, next) {
+    placesList = await PlaceModel.find({
+        network: req.query.network
+    })
+    if (placesList) {
+      res.json(placesList)
+    } else {
+      res.json(false)
+    }
+  
+  })
 
 module.exports = router;
