@@ -102,7 +102,7 @@
     
                         <div class="form-group">
                             <label for="opening">Horaires d'ouverture</label>
-                            <div id="openingHours"><input id="opening" name="opening[]" type="text" class="form-control" value="" placeholder="Ouvert du lundi au samedi"></div>
+                            <div id="openingHours"><input id="opening" name="openingHours" type="text" class="form-control" value="" placeholder="Ouvert du lundi au samedi"></div>
                         </div>
                         
                         <!-- services -->
@@ -261,13 +261,13 @@
         }
         
         var opening = place.opening_hours.weekday_text
-        document.getElementById('openingHours').innerHTML = `<input id="opening" name="opening" type="text" class="form-control" value="${opening[0].capitalize()}"><br />
-                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[1].capitalize()}"><br />
-                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[2].capitalize()}"><br />
-                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[3].capitalize()}"><br />
-                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[4].capitalize()}"><br />
-                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[5].capitalize()}"><br />
-                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[6].capitalize()}">`
+        document.getElementById('openingHours').innerHTML = `<input name="openingHours" type="text" class="form-control" value="${opening[0].capitalize()}"><br />
+                                                          <input name="openingHours" type="text" class="form-control" value="${opening[1].capitalize()}"><br />
+                                                          <input name="openingHours" type="text" class="form-control" value="${opening[2].capitalize()}"><br />
+                                                          <input name="openingHours" type="text" class="form-control" value="${opening[3].capitalize()}"><br />
+                                                          <input name="openingHours" type="text" class="form-control" value="${opening[4].capitalize()}"><br />
+                                                          <input name="openingHours" type="text" class="form-control" value="${opening[5].capitalize()}"><br />
+                                                          <input name="openingHours" type="text" class="form-control" value="${opening[6].capitalize()}">`
 
 
         infowindowContent.children['place-icon'].src = place.icon;
