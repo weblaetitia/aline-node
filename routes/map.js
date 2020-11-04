@@ -10,7 +10,6 @@ const PlaceModel = require('../models/placeModel');
 
 
 router.get('/get-all-places', async function(req, res, next) {
-    console.log('All request')
     var myRequest = await PlaceModel.find({})
     if (myRequest) {
         res.json(myRequest)
@@ -18,8 +17,6 @@ router.get('/get-all-places', async function(req, res, next) {
 })
 
 router.post('/getPlaces', async function(req,res,next){
-
-    console.log('BACKEND getPlaces', req.body)
 
     if(req.body.name.length>0) {
         var myRequest = await PlaceModel.find({

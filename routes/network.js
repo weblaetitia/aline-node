@@ -16,11 +16,9 @@ router.get('/', function(req, res, next) {
 
 /* GET token */
 router.get('/check-token', async function(req, res, next) {
-  console.log(req.query.token)
   var myrequest = await networkModel.findOne({
     token: req.query.token
     }) 
-  console.log(myrequest)
   if (myrequest) {
     res.json({succes: true})
   } else {
@@ -127,8 +125,6 @@ router.get('/products', async function (req, res, next) {
 
 /* Delete product */
 router.get('/delete-product', async function(req, res, next) {
-  console.log(req.query.token)
-  console.log(req.query.productId)
   var network = await NetworkModel.findOne({
     token: req.query.token
   })
@@ -157,7 +153,6 @@ router.get('/places', async function (req, res, next) {
 
 /* Delete restaurant */
 router.get('/delete-place', async function (req, res, next) {
-  // console.log(req.query.placeId)
   await PlaceModel.deleteOne({ 
     _id: req.query.placeId 
   })
@@ -177,7 +172,6 @@ router.get('/edit-product/:productid', async function(req, res, next) {
     if (network) {
       network.products.forEach(product => {
         if (product._id == req.params.productid) {
-          console.log('produit trouvé: ')
          editableProduct = product
         }
       })

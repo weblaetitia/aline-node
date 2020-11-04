@@ -33,7 +33,6 @@ router.get('/sign-up', function(req, res, next) {
 router.post('/subscription', async function(req, res, next) {
   // verifier si le champ est rempli
   if (!req.body.emailFromFront) {
-    console.log('emptyyyy')
     res.render('index', { subscription: 'empty' })
   } else {
   // verifier si l'email existe
@@ -42,7 +41,6 @@ router.post('/subscription', async function(req, res, next) {
   }) 
 
   if (email) {
-    console.log(`email gggg existe déjà`)
     res.render('index', { subscription: 'exist' })
   } else {
     // enregistrer l'email en bdd

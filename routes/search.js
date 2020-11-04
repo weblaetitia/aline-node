@@ -14,7 +14,6 @@ const PlaceModel = require('../models/placeModel');
 
 /* Post search */
 router.post('/search', async function(req,res,next){
-  console.log('REQ.BODY =====', req.body)
   var search=req.body.dataProducts;
   if(search.length == 13 && typeof parseInt(search) == "number"){
       searchElements = parseInt(search);
@@ -31,8 +30,6 @@ router.get('/get-network-img/', async function(req,res,next){
   var network = await NetworkModel.findOne({
     businessName: req.query.network
   })
-  console.log(network)
-  console.log(network.imageUrl)
   if(network) {
     res.json({networkImg: network.imageUrl})
   }
@@ -42,7 +39,6 @@ router.get('/get-network-img/', async function(req,res,next){
 
 /* Get search-all */
 router.get('/search-all', async function(req,res,next){
-    // console.log(searchElements, "a")
      if(req.query.data){
       searchElements = req.query.data
     }
@@ -57,8 +53,6 @@ router.get('/search-all', async function(req,res,next){
       network.products.forEach((product) => {
         product.keywords.forEach((keyword) =>{
           if (searchElements.includes(keyword)) {
-            console.log('ok produit trouvé :')
-            console.log(network.businessName)
             var newProduct = {
             _id: product._id,
             name: product.name,
@@ -102,7 +96,6 @@ router.get('/search-barcode', async function(req,res,next){
   networks.forEach((network) => {
     network.products.forEach((prod) => {
       if (prod.barCode == searchElements) {
-        console.log('trouvé')
         infos = {
         name: prod.name,
         brand: prod.brand,
