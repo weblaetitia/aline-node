@@ -62,6 +62,22 @@
                             <label for="city">Ville</label>
                             <input id="city" name="city" type="text" class="form-control"  placeholder="ex: Paris">
                         </div>
+    
+                        <div class="form-group">
+                            <label for="zipcode">Code postale</label>
+                            <input id="zipcode" name="zipcode" type="text" class="form-control" placeholder="75002">
+                        </div>
+
+                        <div class="form-group d-flex flex-row align-items-end">
+                          <div>
+                            <label for="placeImg">Photo</label>
+                            <div id="myImage" class="border"><img id='placeImgSrc' src="https://res.cloudinary.com/alineconsigne/image/upload/v1597671122/website/placeholder-image_eoeppy.png" height="100" alt="Photo du point de vente"></div>
+                          </div>
+                          <div class="ml-2">
+                            <a id="upload_widget" class="btn btn-sm btn-outline-primary">Changer la photo</a>
+                            <input id="placeImgInput" name="placeImg" type="hidden" value="" />
+                          </div>
+                        </div>  
 
                         <!-- input with googlePlace LATITUDE -->
                         <div class="form-group">
@@ -83,11 +99,16 @@
                             <label for="website">Site Internet</label>
                             <input id="website" name="website" type="text" class="form-control" placeholder="ex: https://exemple.com">
                         </div>
+    
+                        <div class="form-group">
+                            <label for="opening">Horaires d'ouverture</label>
+                            <div id="openingHours"><input id="opening" name="opening[]" type="text" class="form-control" value="" placeholder="Ouvert du lundi au samedi"></div>
+                        </div>
                         
                         <!-- services -->
                         <div class="form-group">
-                          <label for="refoundtypeFromFront">Service de consigne proposé</label>
-                          <select class="form-control" id="refoundtypeFromFront" name="refoundtypeFromFront">
+                          <label for="services">Service de consigne proposé</label>
+                          <select class="form-control" id="services" name="services">
                             <option>Produits conditionnés consignés</option>
                             <option>Contenants vides</option>
                           </select>
@@ -125,14 +146,6 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="type" value="restaurant">
                         </div>
-                        <!-- hidden input with image -->
-                        <div class="form-group">
-                            <input id="place-img" type="hidden" class="form-control" name="placeImg" value="">
-                        </div>
-                        <!-- hidden input with opening_hours -->
-                        <div class="form-group">
-                            <input id="opening_hours" type="hidden" class="form-control" name="openingHours" value="">
-                        </div>
     
                         <button type="submit" class="btn btn-primary">Enregistrer ce restaurant</button>
                     </form>
@@ -141,6 +154,32 @@
         </div>
         <%- include('../footer')%>
     </div>
+
+
+
+
+    <!-- Cloudinary widget -->
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
+    <script type="text/javascript">  
+      var myWidget = cloudinary.createUploadWidget({
+        cloudName: 'alineconsigne', 
+        uploadPreset: 'ml_default',
+        multiple: false, // multiples autorisés
+        maxFiles: 1, // nombe max de photo
+        }, (error, result) => { 
+          if (!error && result && result.event === "success") { 
+            var secureUrl = result.info.secure_url
+            var myImage = document.getElementById("myImage")
+            myImage.innerHTML = `<img src="${result.info.thumbnail_url}" alt="${result.info.public_id}">`
+            document.getElementById("placeImgInput").value = result.info.secure_url
+          }
+        }
+      )
+      document.getElementById("upload_widget").addEventListener("click", function(){
+          myWidget.open();
+        }, false);
+    </script>
+
 
     <!-- Custom JS code to bind to Autocomplete API -->
     <script>
@@ -185,17 +224,26 @@
         marker.setVisible(true);
 
         var address = '';
+        var tempAdress = []
+        var city = ''
+        var zipcode = ''
         if (place.address_components) {
-          address = [
-            (place.address_components[0] && place.address_components[0].short_name || ''),
-            (place.address_components[1] && place.address_components[1].short_name || ''),
-            (place.address_components[2] && place.address_components[2].short_name || '')
-          ].join(' ');
+          place.address_components.forEach(add => {
+            if (add.types[0] === 'locality') {
+                city = add.long_name
+              } else if (add.types[0] === 'postal_code') {
+                zipcode = add.long_name
+              } else if ((add.types[0] === 'floor') || (add.types[0] === 'street_number') || (add.types[0] === 'route')) {
+                tempAdress.push(add.long_name)
+              }
+          })
+          address = tempAdress.join(' ')
         }
 
         document.getElementById('name').value = place.name
         document.getElementById('address').value = address
-        document.getElementById('city').value = place.address_components[2].long_name
+        document.getElementById('city').value = city
+        document.getElementById('zipcode').value = zipcode
         document.getElementById('phone').value = place.formatted_phone_number
         document.getElementById('website').value = place.website
         document.getElementById('place_id').value = place.place_id
@@ -203,14 +251,23 @@
         document.getElementById('place_lat').value = placeLat
         var placeLng = place.geometry.location.lng()
         document.getElementById('place_lng').value = placeLng
-        console.log(placeLat, placeLng)
         
         var myphoto = place.photos[0].getUrl()
-        document.getElementById('place-img').value = myphoto
+        document.getElementById('placeImgSrc').src = myphoto
+        document.getElementById('placeImgInput').value = myphoto
+
+        String.prototype.capitalize = function() {
+          return this.charAt(0).toUpperCase() + this.slice(1);
+        }
         
         var opening = place.opening_hours.weekday_text
-        document.getElementById('opening_hours').value = opening
-        console.log(opening)
+        document.getElementById('openingHours').innerHTML = `<input id="opening" name="opening" type="text" class="form-control" value="${opening[0].capitalize()}"><br />
+                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[1].capitalize()}"><br />
+                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[2].capitalize()}"><br />
+                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[3].capitalize()}"><br />
+                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[4].capitalize()}"><br />
+                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[5].capitalize()}"><br />
+                                                          <input id="opening" name="opening" type="text" class="form-control" value="${opening[6].capitalize()}">`
 
 
         infowindowContent.children['place-icon'].src = place.icon;

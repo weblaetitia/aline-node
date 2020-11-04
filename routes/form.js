@@ -107,9 +107,7 @@ router.post('/add-place', async function(req, res, next){
     products: placeProducts,
     placeImg: req.body.placeImg,
     openingHours : req.body.openingHours,
-    // zipCode: Number,
-    // imageUrl: String,
-    // description: String,
+    zipCode: req.body.zipcode,
   } )
   var placeSaved = await newPlace.save()
 
