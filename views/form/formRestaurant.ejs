@@ -21,7 +21,7 @@
 
       
       <div class="container my-4 py-4" style="background-color: #fff;">
-        <div class="row">
+        <div class="row mb-5 mt-3">
             <div class="col-12">
                 <h1 class="title text-primary h2 text-center">Ajouter un restaurant<br></h1>
             </div>
@@ -49,23 +49,23 @@
                     <!-- debut du form -->
                     <form action="/form/add-place" method="POST">
                         <div class="form-group">
-                            <label for="name">Nom du restaurant</label>
-                            <input type="text" id="name" class="form-control" name="name" placeholder="ex: Café Ginger">
+                            <label for="name">Nom du restaurant <span class="text-danger">*</span></label>
+                            <input type="text" id="name" class="form-control" name="name" placeholder="ex: Café Ginger" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="address">Adresse</label>
-                            <input id= "address" name="address" type="text" class="form-control" placeholder="ex: 123 rue Réaumur">
+                            <label for="address">Adresse <span class="text-danger">*</span></label>
+                            <input id= "address" name="address" type="text" class="form-control" placeholder="ex: 123 rue Réaumur" required>
                         </div>
     
                         <div class="form-group">
-                            <label for="city">Ville</label>
-                            <input id="city" name="city" type="text" class="form-control"  placeholder="ex: Paris">
+                            <label for="city">Ville <span class="text-danger">*</span></label>
+                            <input id="city" name="city" type="text" class="form-control"  placeholder="ex: Paris" required>
                         </div>
     
                         <div class="form-group">
-                            <label for="zipcode">Code postale</label>
-                            <input id="zipcode" name="zipcode" type="text" class="form-control" placeholder="75002">
+                            <label for="zipcode">Code postale <span class="text-danger">*</span></label>
+                            <input id="zipcode" name="zipcode" type="text" class="form-control" placeholder="75002" required>
                         </div>
 
                         <div class="form-group d-flex flex-row align-items-end">
@@ -81,13 +81,13 @@
 
                         <!-- input with googlePlace LATITUDE -->
                         <div class="form-group">
-                            <label for="place_lat">Latitude</label>
-                            <input id="place_lat" type="text" class="form-control" name="place_lat" value="" placeholder="Lat.">
+                            <label for="place_lat">Latitude <span class="text-danger">*</span></label>
+                            <input id="place_lat" type="text" class="form-control" name="place_lat" value="" placeholder="Lat." required>
                         </div>
                         <!-- input with googlePlace LONGITUDE -->
                         <div class="form-group">
-                            <label for="place_lng">Longitude</label>
-                            <input id="place_lng" type="text" class="form-control" name="place_lng" value="" placeholder="Long.">
+                            <label for="place_lng">Longitude <span class="text-danger">*</span></label>
+                            <input id="place_lng" type="text" class="form-control" name="place_lng" value="" placeholder="Long." required>
                         </div>
     
                         <div class="form-group">
@@ -108,7 +108,7 @@
                         <!-- services -->
                         <div class="form-group">
                           <label for="services">Service de consigne proposé</label>
-                          <select class="form-control" id="services" name="services">
+                          <select class="form-control custom-select" id="services" name="services" required>
                             <option>Produits conditionnés consignés</option>
                             <option>Contenants vides</option>
                           </select>

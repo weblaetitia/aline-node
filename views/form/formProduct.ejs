@@ -20,7 +20,7 @@
 
 
         <div class="container my-4 py-4" style="background-color: #fff;">
-            <div class="row">
+            <div class="row mt-3 mb-5">
                 <div class="col-12">
                     <h1 class="title text-primary h2 text-center">Ajouter un produit<br></h1>
                 </div>
@@ -32,16 +32,21 @@
                     <form method="POST" action="/form/add-product">
                     <!-- image   -->
                     <div class="form-group">
-                      <label for="name">Nom du produit</label>
-                      <input id="name" name="name" type="text" class="form-control"  placeholder="ex: Black IPA">
+                      <label for="name">Nom du produit <span class="text-danger">*</span></label>
+                      <input id="name" name="name" type="text" class="form-control"  placeholder="ex: Black IPA" required>
                     </div>
                     
-                    <div class="form-group">
-                            <div id='myImage'><img src="/images/placeholder-image.jpg" height="100" alt="Photo du produit"></div>
-                            <label for="">Photo du produit</label><br />
-                            <a id="upload_widget" class="btn btn-sm btn-outline-primary">Séléctionner une photo</a>
-                            <input id="imgurl" name="imgUrl" type="hidden" class="form-control" value="" />
-                    </div>    
+                   
+                    <div class="form-group d-flex flex-row align-items-end">
+                        <div>
+                          <label for="placeImg">Photo du produit</label>
+                          <div id="myImage" class="border"><img id='placeImgSrc' src="https://res.cloudinary.com/alineconsigne/image/upload/v1597671122/website/placeholder-image_eoeppy.png" height="100" alt="Photo du point de vente"></div>
+                        </div>
+                        <div class="ml-2">
+                          <a id="upload_widget" class="btn btn-sm btn-outline-primary">Séléctionner une photo</a>
+                          <input id="imgurl" name="imgUrl" type="hidden" class="form-control" value="" />
+                        </div>
+                      </div>  
                   
                 </div>
 
@@ -49,22 +54,26 @@
 
                     <div class="form-group">
                         <label for="brand">Marque du produit</label>
-                        <input id="brand" name="brand" type="text" class="form-control" placeholder="ex: La Manivelle">
+                        <input id="brand" name="brand" type="text" class="form-control" placeholder="ex: La Manivelle" />
                     </div>
 
                     <div class="form-group">
                         <label for="type">Type de produit</label>
-                        <input id="type" name="type" type="text" class="form-control"  placeholder="ex: Boisson alcoolisée">
+                        <input id="type" name="type" type="text" class="form-control"  placeholder="ex: Boisson alcoolisée" />
                     </div>
 
                     <div class="form-group">
-                        <label for="price">Prix de la consigne du produit</label>
-                        <input id="price" name="price" type="number" class="form-control" >
+                        <label for="price">Prix de la consigne du produit en euro <span class="text-danger">*</span></label>
+                        <input id="price" name="price" type="number" step="any" class="form-control" placeholder="0.20" required />
                     </div>
 
                     <div class="form-group">
                         <label for="barcode">Numéro de code barre du produit</label>
                         <input id="barcode" name="barcode" type="number" class="form-control"placeholder="47587909U8983">
+                    </div>
+
+                    <div class="form-group">
+                        <p>Votre produit comporte un QR code ? <br />Contactez-nous : <a href="mailto:aline.consigne@gmail.com">aline.consigne@gmail.com</a></p>
                     </div>
 
                    <!-- hidden input with network token -->
@@ -95,9 +104,7 @@
         maxFiles: 1, // nombe max de photo
         }, (error, result) => { 
           if (!error && result && result.event === "success") { 
-            console.log('Done! Here is the image info: ', result.info); 
             var secureUrl = result.info.secure_url
-            console.log(secureUrl)
             var myImage = document.getElementById("myImage")
             myImage.innerHTML = `<img src="${result.info.thumbnail_url}" alt="${result.info.public_id}">`
             document.getElementById("imgurl").value = result.info.secure_url
