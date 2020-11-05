@@ -19,93 +19,126 @@
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+          <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
             <div class="card">
               <div class="card-body">
+                
+                <h1 class="title text-primary h1 mt-2 mb-4">S'enregistrer</h1>
 
-                <h1 class="title text-primary h1">S'enregistrer</h1>
+                <% if (locals.alert != undefined) {%>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="alert alert-danger" role="alert">
+                        <% if (locals.alert == 'user-exist') {%>
+                          Un utilisateur avec cet email est déjà enregistré.
+                        <% } %>
+                        <% if (locals.alert == 'network-exist') {%>
+                          Une entreprise avec ce nom est déjà enregistré.
+                        <% } %>
+                        <% if (locals.alert == 'passwords-unmatch') {%>
+                          Les mots de passe doivent être identiques.
+                        <% } %>
+                        <% if (locals.alert == 'alert') {%>
+                          Ooops, quelque chose s'est mal passé...
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
 
-              <form action="/network/sign-up" method="POST">
 
-                <div class="form-group">
-                  <label for="exampleInputBusinessname">Nom de l'entreprise</label>
-                  <input name="businessnameFromFront" type="text" class="form-control" placeholder="ex : looper" require />
-                </div>
+              <form action="/network/sign-up" method="POST" oninput='passwordConfirmedFromFront.setCustomValidity(passwordConfirmedFromFront.value != passwordFromFront.value ? "Les mots de passe doivent être identiques." : "")'>
 
-                <!-- logo   -->
-                <div class="form-group">
-                  <div id='myImage'><img src="/images/placeholder-image.jpg" height="100" alt="Votre logo"></div>
-                  <label for="">Logo de l'entreprise</label><br />
-                  <a id="upload_widget" class="btn btn-sm btn-outline-primary">Séléctionner une photo</a>
-                  <input id="imgurl" name="imageFromFront" type="hidden" class="form-control" value="" />
-                </div>                  
-
-                <div class="form-group">
-                  <label for="exampleInputPhone">Téléphone</label>
-                  <input name="phoneFromFront" type="text" class="form-control" placeholder="ex : +33145424941" require />
-                </div>
-
-
+                <!-- PERSO -->
+                <fieldset class="">
+                  <legend>Vos infos</legend>
                   <div class="form-group">
-                    <label for="exampleInputAdress">Adresse</label>
-                    <input name="adressFromFront" type="text" class="form-control" placeholder="ex : 121 rue Réaumur" require />
+                    <label for="exampleInputFirstname">Votre prénom <span class="text-danger">*</span></label>
+                    <input name="firstnameFromFront" type="text" class="form-control" placeholder="ex : Alain" required />
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputZipcode">Code postal</label>
-                    <input name="zipcodeFromFront" type="text" class="form-control" placeholder="ex : 75002" require />
+                    <label for="exampleInputLastname">Votre nom <span class="text-danger">*</span></label>
+                    <input name="lastnameFromFront" type="text" class="form-control" placeholder="ex : Wang" required />
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputCity">Ville</label>
-                    <input name="cityFromFront" type="text" class="form-control" placeholder="ex : Paris" require />
+                    <label for="exampleInputEmail1">Votre e-mail <span class="text-danger">*</span></label>
+                    <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp" placeholder="ex : exemple@email.com" required />
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputWebsite">Site internet</label>
-                    <input name="websiteFromFront" type="text" class="form-control" placeholder="ex : http://exemple.com" />
+                    <label for="exampleInputPassword1">Choisissez un mot de passe <span class="text-danger">*</span></label>
+                    <input name="passwordFromFront" type="password" class="form-control"  placeholder="votre mot de passe" required />
                   </div>
 
                   <div class="form-group">
-                    <label for="refoundtypeFromFront">Type de consigne</label>
-                    <select class="form-control" id="refoundtypeFromFront" name="refoundtypeFromFront">
-                      <option>Bouteilles en verre</option>
-                      <option>Boîtes repas</option>
-                      <option>Bocaux en verre</option>
-                      <option>Mug café</option>
-                    </select>
+                    <label for="exampleInputPassword1">Confirmez votre mot de passe <span class="text-danger">*</span></label>
+                    <input name="passwordConfirmedFromFront" type="password" class="form-control"  placeholder="confirmez votre mot de passe" required />
                   </div>
+                </fieldset>
+                <!-- END PERSO -->
 
+                <!-- NETWORK INFO -->
+                <fieldset class="">
+                  <legend>Votre réseau de consigne</legend>
                   <div class="form-group">
-                    <label for="exampleInputZoneaction">Zone d'action</label>
-                    <input name="zoneactionFromFront" type="text" class="form-control"  placeholder="ex : Bordeaux" require />
+                    <label for="exampleInputBusinessname">Nom de l'entreprise <span class="text-danger">*</span></label>
+                    <input name="businessnameFromFront" type="text" class="form-control" placeholder="ex : looper" required />
                   </div>
-
+  
+                  <!-- logo   -->
                   <div class="form-group">
-                    <label for="exampleInputFirstname">Votre prénom</label>
-                    <input name="firstnameFromFront" type="text" class="form-control" placeholder="ex : Alain" require />
-                  </div>
-
+                    <div id='myImage'><img src="https://res.cloudinary.com/alineconsigne/image/upload/v1597671122/website/placeholder-image_eoeppy.png" height="100" alt="Votre logo"></div>
+                    <label for="">Logo de l'entreprise</label><br />
+                    <a id="upload_widget" class="btn btn-sm btn-outline-primary">Séléctionner une photo</a>
+                    <input id="imgurl" name="imageFromFront" type="hidden" class="form-control" value="" />
+                  </div>                  
+  
                   <div class="form-group">
-                    <label for="exampleInputLastname">Votre nom</label>
-                    <input name="lastnameFromFront" type="text" class="form-control" placeholder="ex : Wang" require />
+                    <label for="exampleInputPhone">Téléphone <span class="text-danger">*</span></label>
+                    <input name="phoneFromFront" type="text" class="form-control" placeholder="ex : +33145424941" required />
                   </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Votre e-mail</label>
-                    <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp" placeholder="ex : exemple@email.com" require />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Choisissez un mot de passe</label>
-                    <input name="passwordFromFront" type="password" class="form-control"  placeholder="votre mot de passe" require />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Confirmez votre mot de passe</label>
-                    <input name="passwordConfirmedFromFront" type="password" class="form-control"  placeholder="confirmez votre mot de passe" require />
-                  </div>
-
+  
+  
+                    <div class="form-group">
+                      <label for="exampleInputAdress">Adresse <span class="text-danger">*</span></label>
+                      <input name="adressFromFront" type="text" class="form-control" placeholder="ex : 121 rue Réaumur" required />
+                    </div>
+  
+                    <div class="form-group">
+                      <label for="exampleInputZipcode">Code postal <span class="text-danger">*</span></label>
+                      <input name="zipcodeFromFront" type="text" class="form-control" placeholder="ex : 75002" required />
+                    </div>
+  
+                    <div class="form-group">
+                      <label for="exampleInputCity">Ville <span class="text-danger">*</span></label>
+                      <input name="cityFromFront" type="text" class="form-control" placeholder="ex : Paris" required />
+                    </div>
+  
+                    <div class="form-group">
+                      <label for="exampleInputWebsite">Site internet</label>
+                      <input name="websiteFromFront" type="text" class="form-control" placeholder="ex : http://exemple.com" />
+                    </div>
+  
+                    <div class="form-group">
+                      <label for="refoundtypeFromFront">Type de consigne <span class="text-danger">*</span></label>
+                      <select class="form-control custom-select" id="refoundtypeFromFront" name="refoundtypeFromFront" required>
+                        <option selected disabled value>Choisissez dans la liste...</option>
+                        <option>Bouteilles en verre</option>
+                        <option>Boîtes repas</option>
+                        <option>Bocaux en verre</option>
+                        <option>Mug café</option>
+                        <option>Autre</option>
+                      </select>
+                    </div>
+  
+                    <div class="form-group">
+                      <label for="exampleInputZoneaction">Zone d'action <span class="text-danger">*</span></label>
+                      <input name="zoneactionFromFront" type="text" class="form-control" placeholder="ex : Agglomération bordelaise" required />
+                    </div>
+                </fieldset>
+                <!-- END NETWORK INFO -->
                 
                   <p class="text-center"><button type="submit" class="btn btn-primary">Inscrire le réseau</button></p>
 

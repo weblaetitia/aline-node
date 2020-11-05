@@ -62,14 +62,23 @@ if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length 
 
 /* POST sign-up */
 router.post('/sign-up', async function(req,res,next){
-// check if network alredy exist
-  var networkExist = await NetworkModel.findOne({
+  // check if user allready exist
+  var userExist = await NetworkModel.findOne({
     email: req.body.emailFromFront 
   })
-  if (networkExist != null) {
-    res.render('form/signUp', {status: 'signup-failed'})
-    console.log('Network with this email already exists')
-    
+  // check if network allreadyexist
+  var networkExist = await NetworkModel.findOne({
+    businessName: req.body.businessnameFromFront 
+  })
+  if (req.body.passwordFromFront != req.body.passwordConfirmedFromFront) {
+    res.render('form/signUp', {alert: 'passwords-unmatch'})
+  }
+  if (userExist != null) {
+    res.render('form/signUp', {alert: 'user-exist'})
+    console.log('User with this email allready exists')
+  } else if (networkExist) {
+    res.render('form/signUp', {alert: 'network-exist'})
+    console.log('Network with this name allready exists')
   } else {
     // encrypt password
     var networkSalt = uid2(32)
@@ -99,7 +108,7 @@ router.post('/sign-up', async function(req,res,next){
       req.session.businessName = networkSaved.businessName
       res.render('form/feedChoice', {token: req.session.token, businessName: req.session.businessName})
       } else {
-        res.render('form/signUp', {status: 'signup-failed'})
+        res.render('form/signUp', {alert: 'alert'})
         console.log('ooops something went wrong')
       }
     }

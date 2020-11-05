@@ -12,11 +12,10 @@ var ProductSchema = mongoose.Schema({
 });
 
 var NetworkSchema = mongoose.Schema({
-
     firstName : String,
     lastName : String,
     businessName : String,
-    phone: Number,
+    phone: String,
     adress : String,
     zipCode: Number,
     city : String,

@@ -8953,6 +8953,19 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(213, 239, 232, 0.5);
 }
 
+fieldset {
+  padding: 1em;
+  margin: 0 0 3em;
+  border: #D5EFE8 1px solid;
+  border-radius: 0.5rem;
+}
+fieldset legend {
+  width: inherit;
+  padding: 0 0.5em;
+  position: relative;
+  bottom: 0.3rem;
+}
+
 .cover-container {
   min-height: 100vh;
 }

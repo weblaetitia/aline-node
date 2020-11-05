@@ -96,6 +96,8 @@ body {
   font-weight: 300;
   font-size: 0.9rem;
 }
+
+// Forms
 .form-control {
   border-radius: 1.5rem;
   &:focus {
@@ -103,6 +105,18 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(213, 239, 232, 0.5);
   }
 }
+fieldset {
+  padding: 1em;
+  margin: 0 0 3em;
+  border: $mint-light 1px solid;
+  border-radius: .5rem;
+  legend {
+    width: inherit;
+    padding: 0 0.5em;
+    position: relative;
+    bottom: 0.3rem;
+  }
+  }
 
 // main container
 .cover-container {
