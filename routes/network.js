@@ -31,8 +31,8 @@ router.get('/check-token', async function(req, res, next) {
 router.post('/sign-in', async function(req,res,next){
 // Check if all inputs are field
 if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length == 0)) {
-  res.render('form/signIn', {status: 'loginfailed'})
-  console.log('veuillez remplir tous les champs')
+  res.render('form/signIn', {alert: 'empty-field'})
+  // console.log('veuillez remplir tous les champs')
 } else {
   // all fields are provided now check if user exist
   var myrequest = await NetworkModel.find({
@@ -47,14 +47,14 @@ if ((req.body.emailFromFront.length == 0) || (req.body.passwordFromFront.length 
       res.render('form/feedChoice', {token: req.session.token, businessName: req.session.businessName})
     } else {
       // unsuccess
-      res.render('form/signIn', {status: 'login-failed'})
-      console.log('wrong email or password')
+      res.render('form/signIn', {alert: 'login-failed'})
+      // console.log('wrong email or password')
     }
 
   } else {
     // unsuccess
-    res.render('form/signIn', {status: 'loginfailed'})
-    console.log('wrong email or password')
+    res.render('form/signIn', {alert: 'login-failed'})
+    // console.log('wrong email or password')
   }
 }
 })
@@ -75,10 +75,10 @@ router.post('/sign-up', async function(req,res,next){
   }
   if (userExist != null) {
     res.render('form/signUp', {alert: 'user-exist'})
-    console.log('User with this email allready exists')
+    // console.log('User with this email allready exists')
   } else if (networkExist) {
     res.render('form/signUp', {alert: 'network-exist'})
-    console.log('Network with this name allready exists')
+    // console.log('Network with this name allready exists')
   } else {
     // encrypt password
     var networkSalt = uid2(32)
@@ -109,7 +109,7 @@ router.post('/sign-up', async function(req,res,next){
       res.render('form/feedChoice', {token: req.session.token, businessName: req.session.businessName})
       } else {
         res.render('form/signUp', {alert: 'alert'})
-        console.log('ooops something went wrong')
+        // console.log('ooops something went wrong')
       }
     }
   })
