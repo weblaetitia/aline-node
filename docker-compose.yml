@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes: 
+      - aline-pgdata:/var/lib/postgresql/data
+
+volumes:
+  aline-pgdata:
