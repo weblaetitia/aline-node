@@ -7,6 +7,9 @@
 # start postgres
 docker-compose up --build
 
+# create table
+./node_modules/.bin/knex migrate:make nom_de_la_table
+
 # migrate DB
 ./node_modules/.bin/knex migrate:latest
 

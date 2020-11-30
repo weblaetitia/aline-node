@@ -6,10 +6,11 @@ exports.up = async function (knex) {
     table.string("type").notNull();
     table.string("firstname").notNull();
     table.string("lastname").notNull();
+    table.string("phone_number");
     table.string("email").notNull();
+    table.string("password").notNull();
     table.string("token").notNull();
     table.string("salt").notNull();
-    table.string("phone_number");
     table.timestamp("created_at").notNullable().defaultTo(knex.fn.now());
     table.timestamp("last_login");
   });
