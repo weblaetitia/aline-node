@@ -5,14 +5,18 @@ const nodemailer = require("nodemailer");
 if(!process.env.DB_INFO){
   require('dotenv').config()
 }
-const gmailPassword = process.env.GMAIL_PASSWORD
+const emailProvider = process.env.EMAIL_PROVIDER
+const myEmail = process.env.EMAIL_ADDRESS
+const emailPass = process.env.EMAIL_PASSWORD
 
 // nodemailer config
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: emailProvider,
+  port: 587,
+  secure: false, // true for 465, false for other ports
   auth: {
-    user: 'aline.consigne@gmail.com',
-    pass: gmailPassword
+    user: myEmail, 
+    pass: emailPass, 
   }
 })
 
@@ -67,7 +71,7 @@ router.post('/subscription', async function(req, res, next) {
 
     // envoyer un email
     var mailOptions = {
-      from: '"Application Aline" <aline.consigne@gmail.com>',
+      from: `"Application Aline" <${myEmail}>`,
       to: req.body.emailFromFront,
       subject: 'Nous sommes en contact',
       text: `Merci pour l'intéret que vous portez à l'application Aline ! Soyez patient... Aline est encore en cours de développement. Vous pouvez nous suivre sur les réseaux sociaux : https://www.facebook.com/alineconsigne, https://twitter.com/aline_consigne, https://www.instagram.com/alineconsigne`,
@@ -76,16 +80,36 @@ router.post('/subscription', async function(req, res, next) {
             <p>Vous pouvez nous suivre sur les réseaux sociaux :</p>
             <ul>
               <li>Facebook : <a href="https://www.facebook.com/alineconsigne">https://www.facebook.com/alineconsigne</a></li>
-              <li>Twitter :  <a href="https://twitter.com/aline_consigne">https://twitter.com/aline_consigne</a></li>
-              <li>Instagram :  <a href="https://www.instagram.com/alineconsigne">https://www.instagram.com/alineconsigne</a></li>
+              <li>Twitter : <a href="https://twitter.com/aline_consigne">https://twitter.com/aline_consigne</a></li>
+              <li>Instagram : <a href="https://www.instagram.com/alineconsigne">https://www.instagram.com/alineconsigne</a></li>
             </ul>
             `
     }
+
+    var mailTwoOptions = {
+      from: `"Application Aline" <${myEmail}>`,
+      to: myEmail,
+      subject: 'Nouvelle inscription',
+      text: `Un nouvel email à été ajouté depuis la page d'accueil : ${req.body.emailFromFront}, le ${newSubSaved.created}`,
+      html: `<h1>Nouveau contact !</h1>
+            <p>Un nouvel email à été ajouté depuis la page d'accueil : ${req.body.emailFromFront} </p>
+            <p>Le ${newSubSaved.created}</p>
+            `
+    }
+
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
         console.log(error);
       } else {
         console.log('Email sent: ' + info.response);
+        // envoyer une confirmation
+        transporter.sendMail(mailTwoOptions, function(error, info){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Confirm sent: ' + info.response);
+          }
+        })
       }
     })
 
