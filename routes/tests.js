@@ -143,12 +143,27 @@ router.post('/add-place', function(req, res, next) {
     }).returning('*').into('places')
     .then(function(data) {
         knex.insert({
-            network_id: data.network_id,
-            place_id: data.id,
+            network_id: data[0].network_id,
+            place_id: data[0].id,
         }).returning('*').into('network_places')
+        .then(function(dataTwo){
+            res.send(dataTwo)
+        })
+    })
+})
+
+/* POST new fav */
+router.post('/add-fav', function(req, res, next) {
+    knex.insert({
+        // l'id est généré par postgres
+        user_id: req.body.user_id,
+        place_id: req.body.place_id,
+    }).returning('*').into('user_places')
+    .then(function(data) {
         res.send(data)
     })
 })
+
 
 
 
