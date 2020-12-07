@@ -113,9 +113,7 @@ router.post('/add-network', function(req, res, next) {
 /* POST new place */
 router.post('/add-place', function(req, res, next) {
     
-    // opening hours
-    const opening = ["Lundi: 09:30 – 12:30, 14:30 – 18:30","Mardi: 09:30 – 12:30, 14:30 – 18:30","Mercredi: 09:30 – 12:30, 14:30 – 18:30","Jeudi: 09:30 – 12:30, 14:30 – 18:30","Vendredi: 09:30 – 12:30, 14:30 – 18:30","Samedi: 09:30 – 12:30, 14:30 – 18:30","Dimanche: Fermé"]
-     // generate keywords with network name, product name, brand name
+    // generate keywords with network name, product name, brand name
      var keywords = [];
      var nameSplit = req.body.name.toLowerCase().split(' ')
      var citySplit = req.body.city.toLowerCase().split(' ')
@@ -125,7 +123,7 @@ router.post('/add-place', function(req, res, next) {
 
     knex.insert({
         // l'id est généré par postgres
-        network_id: req.body.network_id,
+        // network_id: req.body.network_id, // NON car un établissement peut appartenir à plusieurs réseaux
         name: req.body.name,
         phone: req.body.phone,
         address: req.body.address,
@@ -138,18 +136,38 @@ router.post('/add-place', function(req, res, next) {
         services: services, // array
         google_place_id: req.body.google_place_id,
         image_url: req.body.image_url,
-        opening_hours: opening, // array
+        opening_hours: req.body.opening_hours, // array
         keywords: keywords, // array
     }).returning('*').into('places')
     .then(function(data) {
         knex.insert({
-            network_id: data[0].network_id,
+            network_id: req.body.network_id,
             place_id: data[0].id,
         }).returning('*').into('network_places')
         .then(function(dataTwo){
-            res.send(dataTwo)
+            const datas = req.body.product_id.map(id => {
+                return {
+                    place_id: dataTwo[0].place_id,
+                    product_id : id
+                }
+            })
+            knex.insert(datas).returning('*').into('product_places')
+            .then(function(dataTwo){
+                res.send(dataTwo)
+            })
         })
     })
+    .then(function() {
+        
+    })
+    // manque : 
+    // dans la table de jonction
+    // boucler sur les id de produits envoyé par le front [produit1, produit2, produit3]
+    // enregistrer dans la table product_places :
+    // { product_id = req.body.produit[n],
+    // place_id = data[0].id }
+    // 
+    // changer product_places en place_products ?
 })
 
 /* POST new fav */
@@ -163,8 +181,6 @@ router.post('/add-fav', function(req, res, next) {
         res.send(data)
     })
 })
-
-
 
 
 /* ------------------------------------------- */
