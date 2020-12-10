@@ -26,7 +26,7 @@ var FavSchema = mongoose.Schema({
     services: String,
     google_place_id: String,
     placeImg: String,
-    openingHours : String,
+    openingHours : Array,
     keywords: Array,
     products: [ProductSchema]
 });

@@ -12,6 +12,7 @@ var networkRouter = require('./routes/network');
 var mapRouter = require('./routes/map');
 var searchRouter = require('./routes/search');
 var testsRouter = require('./routes/tests');
+var optimRouter = require('./routes/optim');
 
 var mongoose = require('./models/connection')
 
@@ -44,6 +45,7 @@ app.use('/network', networkRouter);
 app.use('/map', mapRouter);
 app.use('/search', searchRouter);
 app.use('/tests', testsRouter);
+app.use('/optim', optimRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
