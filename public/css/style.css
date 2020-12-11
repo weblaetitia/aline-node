@@ -218,6 +218,7 @@ caption {
 
 th {
   text-align: inherit;
+  text-align: -webkit-match-parent;
 }
 
 label {
@@ -3526,6 +3527,7 @@ input[type=button].btn-block {
   display: block;
   min-height: 1.5rem;
   padding-left: 1.5rem;
+  color-adjust: exact;
 }
 
 .custom-control-inline {
@@ -4599,6 +4601,7 @@ input[type=button].btn-block {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 2;
   padding: 0.75rem 1.25rem;
   color: inherit;
 }
@@ -8575,7 +8578,7 @@ a.text-secondary:hover, a.text-secondary:focus {
 
 .text-break {
   word-break: break-word !important;
-  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .text-reset {
@@ -8599,7 +8602,7 @@ body {
 
 .title {
   font-family: "Capriola", "Source Sans Pro", "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  letter-spacing: -0.7;
+  letter-spacing: -0.065rem;
 }
 
 .slogan {
