@@ -24,12 +24,6 @@ var transporter = nodemailer.createTransport({
 
 const SubscriptionModel = require('../models/subscriptionModel');
 
-/* DEV MODE a efacer en prod !!!  */
-router.get('/dev-log', function(req, res, next) {
-  req.session.token = "TYWgwwiZEy0fzZKUpYwfFtaXxShh4DZB"
-  req.session.businessName = "Looper"
-  res.render('form/feedChoice', {token: req.session.token, businessName: req.session.businessName});
-});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -44,6 +38,11 @@ router.get('/sign-in', function(req, res, next) {
 /* GET signUp page. */
 router.get('/sign-up', function(req, res, next) {
   res.render('form/signUp');
+});
+
+/* GET mobile privacy page. */
+router.get('/mobile-app-privacy', function(req, res, next) {
+  res.render('mobile-privacy');
 });
 
 /* get email from home-page  */
