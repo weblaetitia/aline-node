@@ -8617,6 +8617,10 @@ body {
   line-height: 1.75rem;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
 .intro-text-two {
   font-weight: bold;
   font-size: 1.2rem;
