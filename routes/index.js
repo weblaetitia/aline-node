@@ -45,6 +45,11 @@ router.get('/mobile-app-privacy', function(req, res, next) {
   res.render('mobile-privacy');
 });
 
+/* GET support-app page. */
+router.get('/support-app', function(req, res, next) {
+  res.render('support-app');
+})
+
 /* get email from home-page  */
 router.post('/subscription', async function(req, res, next) {
   // verifier si le champ est rempli
