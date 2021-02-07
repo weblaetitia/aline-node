@@ -91,24 +91,21 @@
           <div class="col-12 p-4 d-flex flex-column align-items-center justify-content-center my-5">
             <p class="text-primary text-center intro-text-two">Aline est en cours de développement, inscrivez-vous pour être informé de la date de sortie de l’application.</p>
 
-                <% if (locals.subscription == undefined || subscription == 'empty' || subscription == 'exist') { %>
-                  <form id="comment_form" action="/captcha" method="POST">
-                    <div class="form-group" style="width: 300px">
-                      <input id="emailFromFront" name="emailFromFront" type="email" class="form-control text-center text-md-left light-input mb-2" aria-describedby="emailHelp" placeholder="exemple@email.com">
-                      <p class="text-center">
-                        <div class="g-recaptcha" data-sitekey="6LccBE4aAAAAAKdyaFV1h3tUjJpbiEqyIDCPoypI" style="height: 100px;"></div>
-                        <button type="submit">Envoyer</button>
-                      </p>
-                      <% if (locals.subscription == 'exist') { %>
-                      <p class="small text-danger mt-n2">Votre adresse email a déjà été enregistrée</p>
-                      <% } else if (locals.subscription == 'empty') { %>
-                      <p class="small text-danger mt-n2">Veuillez entrer une adresse email valide</p>
-                      <% } %>
-                    </div>
-                  </form>
-                  <% } else if (locals.subscription == 'ok') { %>
-                    <p class="font-weight-bold">Bien reçu merci ! Nous vous tiendrons informé.</p>
-                  <% } %>
+            <% if (locals.subscription == undefined || subscription == 'empty' || subscription == 'exist') { %>
+            <form id="newsletterForm">
+              <div class="form-group" style="width: 300px">
+                <input id="emailFromFront" name="emailFromFront" type="email" class="form-control text-center text-md-left light-input mb-2" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                <p class="text-center"><button type="submit" class="btn btn-primary w-100 newsletterForm">Envoyer</button></p>
+                <% if (locals.subscription == 'exist') { %>
+                <p class="small text-danger mt-n2">Votre adresse email a déjà été enregistrée</p>
+                <% } else if (locals.subscription == 'empty') { %>
+                <p class="small text-danger mt-n2">Veuillez entrer une adresse email valide</p>
+                <% } %>
+              </div>
+              <% } else if (locals.subscription == 'ok') { %>
+              <p class="font-weight-bold">Bien reçu merci ! Nous vous tiendrons informé.</p>
+              <% } %>
+            </form>
           </div>
           <!-- end part 3 -->
         </div>
@@ -156,23 +153,41 @@
   <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <!-- RECAPTCHA -->
-  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LccBE4aAAAAAKdyaFV1h3tUjJpbiEqyIDCPoypI"></script>
   <script>
-    $(document).ready(function() {
-      $('#comment_form').submit(function() {
-        $(this).ajaxSubmit({
-          error: function(xhr) {
-            status('Error: ' + xhr.status);
-          },
-         success: function(response) {
-          console.log(response);
-         }
-        });
-        //Very important line, it disable the page refresh.
-        return false;
-      });
-    });
+    document.getElementById('newsletterForm').addEventListener('submit', runVerify)
+    
+    function runVerify(e) {
+      e.preventDefault()
+      runCaptcha()
+    }
+
+    const runCaptcha = () => {
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6LccBE4aAAAAAKdyaFV1h3tUjJpbiEqyIDCPoypI', {action: 'submit'}).then(function(token) {
+          const email = document.querySelector('#emailFromFront').value
+          const captcha = token
+          sendData(email, captcha)
+        })
+      })
+    }
+
+    const sendData = (email, captcha) => {
+      const info = JSON.stringify({email: email, captcha: captcha})
+      fetch('/subscription', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */**',
+          'Content-type': 'application/json'
+        },
+        body: info
+      })
+      .then((res) => res.json())
+      .then((data) => {})
+    }
+
   </script>
+ 
 
   </body>
 </html>
