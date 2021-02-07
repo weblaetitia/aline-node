@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 if(!process.env.DB_INFO){
   require('dotenv').config()
 }
+const reCaptcha = process.env.RECAPTCHA_API_KEY
 const emailProvider = process.env.EMAIL_PROVIDER
 const myEmail = process.env.EMAIL_ADDRESS
 const emailPass = process.env.EMAIL_PASSWORD
@@ -130,5 +131,25 @@ router.post('/subscription', async function(req, res, next) {
   
 
 })
+
+router.post('/captcha', function(req, res) {
+  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
+  {
+    return res.json({"responseError" : "something goes to wrong"})
+  }
+  const secretKey = reCaptcha
+ 
+  const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress
+ 
+  request(verificationURL,function(error,response,body) {
+    body = JSON.parse(body)
+ 
+    if(body.success !== undefined && !body.success) {
+      return res.json({"responseError" : "Failed captcha verification"})
+    }
+    res.json({"responseSuccess" : "Sucess"})
+  })
+})
+ 
 
 module.exports = router;

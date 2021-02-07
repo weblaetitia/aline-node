@@ -86,15 +86,17 @@
         </div>
           <!-- end part 2 -->
           
-          <!-- part 3 -->
+          <!-- part 3 Formulaire newsletter-->
           <div class="row">
           <div class="col-12 p-4 d-flex flex-column align-items-center justify-content-center my-5">
             <p class="text-primary text-center intro-text-two">Aline est en cours de développement, inscrivez-vous pour être informé de la date de sortie de l’application.</p>
 
                 <% if (locals.subscription == undefined || subscription == 'empty' || subscription == 'exist') { %>
-                  <form action="/subscription" method="POST">
+                  <form action="/captcha" method="POST">
                     <div class="form-group" style="width: 300px">
                       <input id="emailFromFront" name="emailFromFront" type="email" class="form-control text-center text-md-left light-input mb-2" aria-describedby="emailHelp" placeholder="exemple@email.com">
+                      <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                      <input type="hidden" name="action" value="validate_captcha">
                       <p class="text-center"><button type="submit" class="btn btn-primary w-100">Envoyer</button></p>
                       <% if (locals.subscription == 'exist') { %>
                       <p class="small text-danger mt-n2">Votre adresse email a déjà été enregistrée</p>
@@ -152,6 +154,19 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <!-- RECAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LccBE4aAAAAAKdyaFV1h3tUjJpbiEqyIDCPoypI"></script>
+<script>
+    grecaptcha.ready(function() {
+    // do request for recaptcha token
+    // response is promise with passed token
+        grecaptcha.execute('your reCAPTCHA site key here', {action:'validate_captcha'})
+                  .then(function(token) {
+            // add token value to form
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script>
 
   </body>
 </html>
