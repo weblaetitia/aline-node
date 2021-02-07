@@ -133,22 +133,22 @@ router.post('/subscription', async function(req, res, next) {
 })
 
 router.post('/captcha', function(req, res) {
-  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
-  {
-    return res.json({"responseError" : "something goes to wrong"})
+  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+    return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
   }
-  const secretKey = reCaptcha
- 
-  const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress
- 
-  request(verificationURL,function(error,response,body) {
-    body = JSON.parse(body)
- 
+  // Put your secret key here.
+  var secretKey = "--paste your secret key here--";
+  // req.connection.remoteAddress will provide IP address of connected user.
+  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+  // Hitting GET request to the URL, Google will respond with success or error scenario.
+  request(verificationUrl,function(error,response,body) {
+    body = JSON.parse(body);
+    // Success will be true or false depending upon captcha validation.
     if(body.success !== undefined && !body.success) {
-      return res.json({"responseError" : "Failed captcha verification"})
+      return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
     }
-    res.json({"responseSuccess" : "Sucess"})
-  })
+    res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+  });
 })
  
 
