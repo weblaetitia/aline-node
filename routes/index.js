@@ -117,8 +117,6 @@ router.post('/subscription', async function(req, res, next) {
         })
       }
     })
-
-
     if (newSubSaved) {
       res.render('index', { subscription: 'ok' })
     } else {
@@ -127,9 +125,6 @@ router.post('/subscription', async function(req, res, next) {
     }
   }
   }
-
-  
-
 })
 
 router.post('/captcha', function(req, res) {
@@ -150,6 +145,26 @@ router.post('/captcha', function(req, res) {
     res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
   });
 })
- 
+
+// Generate a new password
+router.get('/login/identify', function(req, res) {
+  console.log("ouiii")
+  res.render('/login/identify', {alert: 'empty-field'})
+})
+
+router.post('/login/reset', async function(req, res) {
+  if (req.body.email === '') {
+    res.render('/login/identify', {alert: 'empty-field'})
+  } else {
+    // chercher l'email en bdd
+    var email = await UserModel.findOne({
+      email: req.body.email
+    }) 
+    console.log(email)
+    // then envoyer l'email
+    // then recherger /login/identify avec un message de succes
+
+  }
+})
 
 module.exports = router;
