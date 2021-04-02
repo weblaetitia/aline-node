@@ -22,20 +22,26 @@
             <% if (locals.alert != undefined) {%>
               <div class="row">
                 <div class="col-12">
-                  <div class="alert alert-danger" role="alert">
-                    <% if (locals.alert == 'login-failed') {%>
+                  <% if (locals.alert == 'email-not-exist') {%>
+                    <div class="alert alert-danger" role="alert">
                       Mauvais email.
-                    <% } %>
-                    <% if (locals.alert == 'empty-field') {%>
-                      Veuillez remplire un email valide.
-                    <% } %>
-                    <% if (locals.alert == 'alert') {%>
+                    </div>
+                  <% } %>
+                  <% if (locals.alert == 'empty-field') {%>
+                    <div class="alert alert-danger" role="alert">
+                      Veuillez remplir un email valide.
+                    </div>
+                  <% } %>
+                  <% if (locals.alert == 'alert') {%>
+                    <div class="alert alert-danger" role="alert">
                       Ooops, quelque chose s'est mal passé...
-                    <% } %>
-                    <% if (locals.alert == 'alert') {%>
-                      Ooops, quelque chose s'est mal passé...
-                    <% } %>
-                  </div>
+                    </div>
+                  <% } %>
+                  <% if (locals.alert == 'success') {%>
+                    <div class="alert alert-success" role="alert">
+                      Un email vous a été envoyé. Veuillez suivre les instructions pour regénérer votre mot de passe.
+                    </div>
+                  <% } %>
                 </div>
               </div>
             <% } %>

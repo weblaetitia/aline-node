@@ -21,10 +21,8 @@ var transporter = nodemailer.createTransport({
   }
 })
 
-
-
 const SubscriptionModel = require('../models/subscriptionModel');
-
+const UserModel = require('../models/userModel')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -147,22 +145,42 @@ router.post('/captcha', function(req, res) {
 })
 
 // Generate a new password
-router.get('/login/identify', function(req, res) {
-  console.log("ouiii")
-  res.render('/login/identify', {alert: 'empty-field'})
+router.get('/login/identify', function(req, res, next) {
+  res.render('login/identify')
 })
 
-router.post('/login/reset', async function(req, res) {
+router.post('/login/reset', async function(req, res, next) {
+  console.log(req.body)
+
   if (req.body.email === '') {
-    res.render('/login/identify', {alert: 'empty-field'})
+    res.render('login/identify', {alert: 'empty-field'})
   } else {
     // chercher l'email en bdd
     var email = await UserModel.findOne({
       email: req.body.email
     }) 
-    console.log(email)
-    // then envoyer l'email
-    // then recherger /login/identify avec un message de succes
+    if (email == null) {
+      res.render('login/identify', {alert: 'email-not-exist'})
+    } else {
+      const mailOptions = {
+        from: `"Application Aline" <${myEmail}>`,
+        to: req.body.email,
+        subject: 'Regénérer votre mot de passe',
+        text: 'Vous recevez ce message car vous avez demander à regénérer votre mot de passe pour votre compte.\n\n' +
+        'Veuillez suivre ce lien (ou copier dans votre navigateur:\n\n' +
+        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+        'Si vous n\'avez pas demander de regénération de votre mot de passe, veuillez ingnorer cet email, votre mot de passe restera inchangé.\n'
+      }
+  
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      })
+      res.render('login/identify', {alert: 'success'})
+    }
 
   }
 })
