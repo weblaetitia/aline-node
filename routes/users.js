@@ -13,41 +13,6 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-/* POST user */
-/*$$$$$$$$$$$ route de test à supprimer en prod $$$$$$$$$$*/
-/* a utiliser avec postman pour ajouter des utilisateurs */
-router.post('/mobile/adduser', async function(req, res, next) {
-  
-  // chek if user alredy exist
-  var userExist = await UserModel.findOne({
-    email: req.body.email
-  })
-  if (userExist != null) {
-    res.json({
-      succes: false,
-      alert: 'User with this email already exists'
-    })
-  } else {
-    // encrypt password
-    var userSalt = uid2(32)
-    // connexion à la db
-    var newUser = await new UserModel({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: SHA256(req.body.password + userSalt).toString(encBase64),
-      token: uid2(32),
-      salt: userSalt,
-    })
-    var userSaved = await newUser.save()
-    res.json({
-      succes: true,
-      alert: 'New user saved'
-    })
-  }
-})
-/*^^^^^^^^^^^^ route de test à supprimer en prod ^^^^^^^^^^^^*/
-
 
 /* GET token */
 router.get('/mobile/check-token', async function(req, res, next) {
@@ -172,16 +137,6 @@ router.get('/mobile/check-fav/', async function (req, res, next) {
       res.json(true)
     } 
   })
-
-
-
-  // user.favorites.forEach(fav => {
-  //   if (fav._id == req.query.placeid) {
-  //     res.json(true)
-  //   } else {
-  //     res.json(false)
-  //   }
-  // })
 })
 
 /* GET add favorite */
