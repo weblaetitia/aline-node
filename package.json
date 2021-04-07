@@ -22,6 +22,7 @@
     "objection": "^2.2.3",
     "pg": "^8.5.1",
     "sync-request": "^6.1.0",
+    "syncrequest": "^1.4.7",
     "uid2": "0.0.3"
   },
   "devDependencies": {}
