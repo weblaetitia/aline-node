@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const nodemailer = require("nodemailer");
+var SHA256 = require('crypto-js/sha256')
+var encBase64 = require('crypto-js/enc-base64')
+var uid2 = require('uid2')
 
 if(!process.env.DB_INFO){
   require('dotenv').config()
@@ -144,14 +147,13 @@ router.post('/captcha', function(req, res) {
   });
 })
 
-// Generate a new password
+// Ask a new password page
 router.get('/login/identify', function(req, res, next) {
   res.render('login/identify')
 })
 
+// receive password reset request and send an email
 router.post('/login/reset', async function(req, res, next) {
-  console.log(req.body)
-
   if (req.body.email === '') {
     res.render('login/identify', {alert: 'empty-field'})
   } else {
@@ -168,21 +170,63 @@ router.post('/login/reset', async function(req, res, next) {
         subject: 'Regénérer votre mot de passe',
         text: 'Vous recevez ce message car vous avez demander à regénérer votre mot de passe pour votre compte.\n\n' +
         'Veuillez suivre ce lien (ou copier dans votre navigateur:\n\n' +
-        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-        'Si vous n\'avez pas demander de regénération de votre mot de passe, veuillez ingnorer cet email, votre mot de passe restera inchangé.\n'
+        'https://aline.app/reset/' + email.token + '\n\n' +
+        'Si vous n\'avez pas demandé de regénération de votre mot de passe, veuillez ingnorer cet email, votre mot de passe restera inchangé.\n'
       }
-  
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
+          res.render('login/identify', {alert: 'alert'})
         } else {
           console.log('Email sent: ' + info.response);
+          res.render('login/identify', {alert: 'success'})
         }
       })
-      res.render('login/identify', {alert: 'success'})
     }
-
   }
 })
+
+// Display reset password page if token exist
+router.get('/reset/:token', async function(req, res, next) {
+  const user = await UserModel.findOne({
+    token: req.params.token
+  })
+  if (user == null) {
+    res.render('error/basic-error')
+  } 
+  res.render('login/reset', {token: user.token})
+})
+
+// action to reset password
+router.post('/reset/update', async function(req, res, next) {
+  console.log(req.body)
+  if (req.body.password !== req.body.passwordconfirm) {
+    res.render('login/reset', {alert: 'unmatch', token: req.body.token})
+  }
+  if (req.body.password === '' || req.body.passwordconfirm === '' || req.body.email === '') {
+    res.render('login/reset', {alert: 'empty-field', token: req.body.token})
+  }
+  const user = await UserModel.findOne({
+    email: req.body.email,
+    token: req.body.token
+  })
+  if (user == null) {
+    res.render('login/reset', {alert: 'alert', token: req.body.token})
+  } 
+  const newSalt = uid2(32)
+  const newPassword = SHA256(req.body.password + newSalt).toString(encBase64)
+  const newToken = uid2(32)
+  user.salt = newSalt
+  user.token = newToken
+  user.password = newPassword
+  const newUser = await user.save()
+  console.log(newUser)
+  if (newUser == null) {
+    res.render('login/reset', {alert: 'alert', token: req.body.token})
+  }
+  res.render('login/reset', {alert: 'success'})
+})
+
+
 
 module.exports = router;
