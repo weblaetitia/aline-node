@@ -1,12 +1,11 @@
 exports.up = function (knex) {
   return knex.schema.createTable("places", function (table) {
     table.uuid("id").primary().defaultTo(knex.raw("uuid_generate_v4()"));
-    table.uuid("network_id").notNull();
-    table.foreign("network_id").references("networks.id");
     table.string("name").notNull();
     table.string("phone").notNull();
-    table.string("adress").notNull();
-    table.string("zip_code").notNull();
+    table.string("address").notNull();
+    table.string("city").notNull();
+    table.string("zip_code", [5]).notNull(); // max 5 caracteres
     table.float("latitude");
     table.float("longitude");
     table.string("website");
