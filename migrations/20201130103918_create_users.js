@@ -12,7 +12,9 @@ exports.up = async function (knex) {
     table.string("token").notNull();
     table.string("salt").notNull();
     table.timestamp("created_at").notNullable().defaultTo(knex.fn.now());
-    table.timestamp("last_login");
+    table.timestamp("updated_at").defaultTo(knex.fn.now());
+    table.timestamp("last_login_at").defaultTo(knex.fn.now());
+    table.timestamp("request_password_change_at").defaultTo(knex.fn.now());
   });
 };
 

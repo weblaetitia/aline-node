@@ -44,6 +44,7 @@ router.post('/add-user', function(req, res, next) {
     var datetime = new Date()
     knex.insert({
         // l'id est généré par postgres
+        id: req.body.id,
         type: req.body.type,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -54,7 +55,7 @@ router.post('/add-user', function(req, res, next) {
         salt: userSalt,
         created_at: datetime,
         // last_login: ""
-    }).returning('*').into('users')
+    }).returning('*').into('user_temps')
     .then(function(data) {
         res.send(data)
     })
