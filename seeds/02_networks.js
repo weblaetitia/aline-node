@@ -1,5 +1,4 @@
 exports.seed = async (knex) => {
-  // Deletes ALL existing entries
   const netwoks = await knex('networks').del()
   const network_user = await knex('users').where({type: 'network_user'}).first()
   if (network_user) {
